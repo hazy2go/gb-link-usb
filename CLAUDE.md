@@ -11,6 +11,7 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
 - Never cut or modify the **MGB-004 adapter** or the spare DMG-04 (printer setup).
 
 ## Where things stand (2026-10-16)
+- **PCB rev A ready to order** (2026-10-16): `hw/rev-a/`, DRC 0 errors/0 warnings, order files + hold points in `hw/rev-a/fab/ORDER.md` (L1 inductor: 4 in JLC stock). Rebuild: `pcb_build.py` -> `pcb_route.py hand` -> `pcb_gnd.py` -> `pcb_route.py 60` (KiCad Python), then `hw/tools/make_fab.sh`. Firmware for it: `-DGBLINK_BOARD=revA` (GP12/13/14, DIR GP11, LED GP21).
 - **Web page live:** https://hazy2go.github.io/gb-link-usb/ (GitHub Pages, deployed by `.github/workflows/pages.yml` on push to web/).
 - **SODAX on Game Boy works on hardware** (2026-10-16): firmware bridge mode + `rom/sodax.gb` + `tools/sodax-bridge.mjs` (docs/SODAX.md). Release v0.2.0.
 - **Public repo, MIT license** (firmware/firstlight/ GPL-3.0). Release **v0.1.0** has the printer firmware .uf2. README has user-facing setup; keep it in sync when behaviour changes.
@@ -27,7 +28,7 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
 3. **Our firmware** in `firmware/` (Pico SDK, C): PIO link driver (slave mode first, for the printer), TinyUSB WebUSB + CDC.
 4. ~~**Printer emulator**~~ works (first print 2026-10-15); still to test: more games, web page live. following mofosyne's emulator and Pan Docs (`docs/PROTOCOL.md`); web page in `web/` renders received tiles to PNG. Test with Pokémon Pikachu.
 5. Raw bridge mode + online link mode.
-6. Own PCB in `hw/` (KiCad), same rigor as the WiFi cart (ERC/DRC, JLC parts/stock check, assembled by JLC).
+6. Own PCB in `hw/` (KiCad): rev A designed and checked; Hazy orders (hold points in ORDER.md), then bring-up with `-DGBLINK_BOARD=revA`.
 
 ## Notes
 - Prior-art code is GPL-3 (stacksmashing, mofosyne). If we copy from it, our firmware is GPL-3 too.

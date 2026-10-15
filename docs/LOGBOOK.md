@@ -65,3 +65,4 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 
 ## 2026-10-15 Breadboard layout
 - Drew the stage-1 layout (`docs/breadboard.html`): Pico in c/h rows 3-22, shifter LV in d / HV in g rows 26-31, every jumper by hole. Power rails not used. Shifter pin order assumed (LV1 LV2 LV GND LV3 LV4): follow the module labels (verify on our module).
+- Checked the Pico pins in the drawing against the official Pico 2 W pinout (raspberrypi.com pico2w-pinout.svg): 1 GP0, 2 GP1, 3 GND, 4 GP2, 36 3V3(OUT), 38 GND, 40 VBUS, USB at top. All match. Docs: Pico 2 W pinout "is the same as for Raspberry Pi Pico W and Pico WH".

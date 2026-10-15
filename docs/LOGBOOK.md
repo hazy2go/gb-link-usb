@@ -29,3 +29,19 @@ Every decision, check and result, in order. Dated headings, short "why". Correct
 - Pico SDK **2.3.1** (latest tag) in `~/pico/pico-sdk`, submodules incl. TinyUSB and cyw43-driver. ninja from brew; picotool was already in brew.
 - `~/.zshrc`: `PICO_SDK_PATH`, `PICO_TOOLCHAIN_PATH`, toolchain on `PATH`.
 - Check: built a test program for `PICO_BOARD=pico2_w` (USB stdio + onboard LED blink), `hello.uf2` produced, 0 errors. Not flashed yet (no Pico here).
+
+## 2026-10-15 Cut DMG-04: pin mapping (multimeter, continuity)
+Checked by Hazy with a multimeter, plug half we use, pins numbered looking into the plug (PROTOCOL.md diagram):
+
+| Pin | Signal | Wire |
+|---|---|---|
+| 1 | 5 V | no contact in the plug |
+| 2 | SOUT | red |
+| 3 | SIN | orange |
+| 4 | SD | no contact in the plug |
+| 5 | SCK | green |
+| 6 | GND | blue |
+| shell | | bare shield (beeps to the metal shell) |
+
+- Pin names are as seen from the Game Boy end this plug goes into: red carries the Game Boy's SOUT (data from the GB), orange goes to the GB's SIN (data to the GB) (verify on first light; swapping in software is fine per mofosyne).
+- Not checked yet: whether the shell/shield is connected to pin 6 (GND). Not needed: blue is GND. Other cable half not mapped.

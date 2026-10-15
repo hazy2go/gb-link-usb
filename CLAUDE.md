@@ -11,7 +11,7 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
 - Never cut or modify the **MGB-004 adapter** or the spare DMG-04 (printer setup).
 
 ## Where things stand (2026-10-15)
-- One DMG-04 cut (orange/red/blue/green wires), pin mapping not done yet. Web printer decoder in `web/` works on test data (7 tests pass), not yet on real printer data.
+- One DMG-04 cut and mapped: red = SOUT (2), orange = SIN (3), green = SCK (5), blue = GND (6), shield = shell (LOGBOOK). Web printer decoder in `web/` works on test data (7 tests pass), not yet on real printer data.
 - Hardware on hand: DMG, EverDrive, Pokémon Pikachu + printer (small socket), 2x DMG-04, MGB-004.
 - Toolchain on the Mac: Arm GCC 15.3 in `~/pico/arm-gnu-toolchain-15.3.rel2`, Pico SDK 2.3.1 in `~/pico/pico-sdk`, env vars in `~/.zshrc`. Build with `-DPICO_BOARD=pico2_w`.
 - Ordered, not arrived: Pico 2 WH, breadboard kit, BSS138 level shifters (loose pins).

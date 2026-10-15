@@ -44,4 +44,4 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 | shell | | bare shield (beeps to the metal shell) |
 
 - Pin names are as seen from the Game Boy end this plug goes into: red carries the Game Boy's SOUT (data from the GB), orange goes to the GB's SIN (data to the GB) (verify on first light; swapping in software is fine per mofosyne).
-- Not checked yet: whether the shell/shield is connected to pin 6 (GND). Not needed: blue is GND. Other cable half not mapped.
+- Shield vs blue (pin 6): **no continuity** (Hazy, multimeter). So the shield/shell is not tied to GND in this cable half; it floats. Leave it unconnected on the breadboard (insulated). Other cable half not mapped.

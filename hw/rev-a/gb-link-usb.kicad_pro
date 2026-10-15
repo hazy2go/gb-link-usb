@@ -515,7 +515,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "RPI-RP2350A-MINIMAL_R4-S1.kicad_pro",
+    "filename": "gb-link-usb.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -905,8 +905,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "RPI-RP2350A-MINIMAL_R4-S1.kicad_sch",
-        "name": "RPI-RP2350A-MINIMAL_R4-S1",
+        "filename": "gb-link-usb.kicad_sch",
+        "name": "gb-link-usb",
         "uuid": "94683f5c-9cd9-448e-be96-9792537b5cb8"
       }
     ],

@@ -1,7 +1,13 @@
 ; Game Boy link port, clock SLAVE: the Game Boy drives SCK (printer mode).
 ; SCK idles high. Our bit goes out after SCK falls; the GB's bit is sampled
-; when SCK rises (same convention the first-light test proved, LOGBOOK 2026-10-15).
-; MSB first, 8 bits per byte via autopull/autopush.
+; after SCK rises (Game Boy programming manual: change on falling, read on
+; rising; same as the first-light test, LOGBOOK 2026-10-15). MSB first, 8 bits
+; per byte via autopull/autopush.
+;
+; Glitch filter: an edge only counts if SCK still has the new level FILTER
+; cycles later. Without it, our own data edges coupled onto SCK through the
+; cable and were counted as extra clocks (LOGBOOK 2026-10-15). The state
+; machine runs at 10 MHz, so [15] = 1.6 us; a GB half-bit is ~61 us.
 ;
 ; jmp pin  = SCK (from the GB)
 ; in base  = data in  (GB SOUT)
@@ -11,10 +17,16 @@
 .wrap_target
 wait_fall:
     jmp pin wait_fall      ; SCK high: keep waiting
+    nop [15]
+    jmp pin wait_fall      ; high again: glitch, ignore
     out pins, 1            ; SCK fell: put our next bit on the line
 wait_rise:
-    jmp pin rose
+    jmp pin check_rise
     jmp wait_rise
+check_rise:
+    nop [15]
+    jmp pin rose
+    jmp wait_rise          ; low again: glitch, ignore
 rose:
     in pins, 1             ; SCK rose: sample the GB's bit
 .wrap
@@ -30,14 +42,19 @@ static inline void gb_link_slave_init(PIO pio, uint sm, uint offset, uint pin_sc
     sm_config_set_out_pins(&c, pin_out, 1);
     sm_config_set_in_shift(&c, false, true, 8);    // shift left = MSB first, autopush at 8
     sm_config_set_out_shift(&c, false, true, 8);   // shift left = MSB first, autopull at 8
+    sm_config_set_clkdiv(&c, (float)clock_get_hz(clk_sys) / 10e6f);   // 10 MHz
 
     pio_gpio_init(pio, pin_out);
+    // Gentle edges on our output: less crosstalk onto SCK in the cable.
+    gpio_set_slew_rate(pin_out, GPIO_SLEW_RATE_SLOW);
+    gpio_set_drive_strength(pin_out, GPIO_DRIVE_STRENGTH_2MA);
     gpio_init(pin_sck); gpio_set_dir(pin_sck, GPIO_IN);
     gpio_init(pin_in);  gpio_set_dir(pin_in, GPIO_IN);
     // RP2350: default pull-downs + erratum E9 can hold weakly driven inputs mid-rail.
     // Pull-ups also give a defined idle level with the GB unplugged.
     gpio_pull_up(pin_sck);
     gpio_pull_up(pin_in);
+    gpio_set_input_hysteresis_enabled(pin_sck, true);
 
     pio_sm_set_pins_with_mask(pio, sm, 1u << pin_out, 1u << pin_out);   // idle high
     pio_sm_set_consecutive_pindirs(pio, sm, pin_out, 1, true);

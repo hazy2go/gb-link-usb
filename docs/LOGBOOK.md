@@ -128,3 +128,12 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Host test `make -C firmware/test`: all pass. Status after PRINT: 04, 04, 06 x20, 04, 00.
 - Firmware builds for pico2_w, 0 warnings. Web: 8/8 tests; page gets Connect Pico (Web Serial) + Save capture. Tools: `tools/printcap.py`, `tools/render.mjs` (PNG from capture; checked on a synthetic capture: 160x144 PNG).
 - Next: flash, print from Pokémon Pikachu.
+
+## 2026-10-15 Printer emulator: crosstalk on SCK found and fixed
+- First Pikachu try: game shows a printer error. Capture: INIT received correctly (88 33 01 00 00 00 01 00 00 00), retried every ~4 s.
+- `rom/printtest.gb` (ours): GB as clock master sends INIT + STATUS and shows the printer's replies. Result: all 00, no 0x81. Capture of the same run: every STATUS arrived **shifted by 2 bits** (22 0C C3 C0 ... = 88 33 0F 00 ... >> 2).
+- Debug build answering 0xA5 to everything (`-DDEBUG_FIXED_REPLY=0xA5`): GB saw `08 42 10 84 21` repeating (a 1 every 5 bits), changing over time. So the TX path reaches the GB but our bit stream runs out of step with the GB's clock.
+- Diagnosis: our data-out edges (orange) couple onto SCK (green) in the cable/breadboard; the PIO, polling SCK at 150 MHz with no filter, counted each spike as a clock. 0x81 has two 0-to-1 edges = 2 extra bits = the 2-bit shift, and the 1s were skipped within nanoseconds, so the GB read 00.
+- Fix (firmware only): PIO glitch filter (an SCK edge counts only if the level still holds 1.6 us later; SM at 10 MHz; GB half-bit ~61 us), data-out pin slew SLOW + 2 mA drive, Schmitt trigger on SCK.
+- Result, printtest.gb: INIT replies `00 x8, 81 00`, STATUS replies `00 x8, 81 00`. Correct (photo from Hazy).
+- Note for the PCB: keep SCK away from SOUT/SIN or add a ground between them; the filter stays anyway.

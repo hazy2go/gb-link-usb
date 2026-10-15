@@ -22,6 +22,11 @@
 // PIO to a byte boundary (the GB pauses far less than this inside a packet).
 #define IDLE_RESYNC_US 200000
 
+// Debug: answer this byte to everything instead of the printer replies (0 = off).
+#ifndef DEBUG_FIXED_REPLY
+#define DEBUG_FIXED_REPLY 0
+#endif
+
 static PIO pio;
 static uint sm, offset;
 static queue_t rx_queue;            // bytes from the GB, core 1 -> core 0
@@ -33,8 +38,8 @@ static void link_start(void) {
     pio_sm_restart(pio, sm);
     pio_sm_exec(pio, sm, pio_encode_jmp(offset));
     // Replies run two bytes ahead (printer.h): prime the first two.
-    pio_sm_put(pio, sm, 0);
-    pio_sm_put(pio, sm, 0);
+    pio_sm_put(pio, sm, (uint32_t)DEBUG_FIXED_REPLY << 24);
+    pio_sm_put(pio, sm, (uint32_t)DEBUG_FIXED_REPLY << 24);
     pio_sm_set_enabled(pio, sm, true);
 }
 
@@ -49,6 +54,7 @@ static void core1_main(void) {
         if (!pio_sm_is_rx_fifo_empty(pio, sm)) {
             uint8_t b = (uint8_t)pio_sm_get(pio, sm);
             uint8_t reply = printer_rx(&printer, b);
+            if (DEBUG_FIXED_REPLY) reply = DEBUG_FIXED_REPLY;
             pio_sm_put(pio, sm, (uint32_t)reply << 24);   // out shifts from bit 31
             queue_try_add(&rx_queue, &b);                  // drop if the PC is not reading
             packets = printer.packets;

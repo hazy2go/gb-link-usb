@@ -97,3 +97,11 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Loopback through the shifter (GB unplugged, jumper HV2 row to HV3 row): sent 00 01 55 AA 0F F0 80 7E 3C, got all **FF**.
 - Loopback on the Pico directly (jumper pin 2 row to pin 4 row, no shifter): got **00 01 55 AA 0F F0 80 7E 3C**, exact. So Pico, PIO, firmware, USB and the test script are good.
 - Cable already passed continuity; ROM reacts to the external clock (GB counter moved when the clock got through). Fault is the shifter's data channels: press-fit header contacts (most likely). Next: solder the headers, repeat the shifter loopback, then the GB test.
+
+## 2026-10-15 Decision: test without the level shifter (Pico 2 only)
+- No soldering iron on hand, so the shifter can't be fixed today.
+- RP2350 datasheet (RP-008373-DS-3): GPIO0-2 are "Digital IO (FT)". FT pins "will tolerate voltages up to 5.5 V, provided IOVDD is powered to 3.3 V" and draw very little current "whilst it is below 3.63 V and IOVDD is 0 V". Table 1683: VIH (FT) at IOVDD 3.3 V: min 2 V, max 5.5 V, "IOVDD must be powered to tolerate input voltages above 3.63V". VIL max 0.8 V.
+- So the DMG's 5 V outputs can go straight into GP0-2 **while the Pico is powered**. Rule: Pico USB in before the Game Boy is switched on; Game Boy off before USB out. (RP2040 Picos do not have this; it only holds for RP2350.)
+- Other direction: Pico drives 3.3 V highs into the DMG's SCK/SIN inputs. Whether the DMG reads 3.3 V as high reliably: not checked (verify). Can't damage anything; worst case it is not recognised.
+- Answers PLAN.md open question "Does the RP2350 tolerate 5 V on its inputs?": yes, when powered (datasheet).
+- Wire order: back to the measured map (red = plug pin 2 = GB SOUT to GP1, orange = pin 3 = GB SIN to GP2), because the earlier swap test was invalid (the shifter passed nothing either way).

@@ -3,10 +3,9 @@
 	(generator "extract_libs")
 	(layer "F.Cu")
 	(property "Reference" "R1"
-		(at 1.6 0 0)
+		(at 1.6 0 90)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "557a9cdc-2238-4b85-9862-31181f5220a4")
 		(effects
 			(font
 				(size 0.8 0.5)
@@ -16,11 +15,10 @@
 		)
 	)
 	(property "Value" "10k"
-		(at 0 1 270)
+		(at 0 1 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "669a0c87-c587-4321-b0e1-bb4d76441120")
 		(effects
 			(font
 				(size 0.8 0.5)
@@ -30,11 +28,10 @@
 		)
 	)
 	(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Resistors\\Chip\\M1005\\YAGEO_RC0402FR-07.autogen\\datasheets"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "4fd5a494-edf2-4437-85f1-e9f9d199491e")
 		(effects
 			(font
 				(size 1 1)
@@ -43,11 +40,10 @@
 		)
 	)
 	(property "Description" "Resistor, Chip, 10kR, M1005, 63mW, 1%"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "96b96ee2-f67c-496f-8c89-3df42d1cba6c")
 		(effects
 			(font
 				(size 1 1)
@@ -56,11 +52,10 @@
 		)
 	)
 	(property "power" "63mW"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "e93ba44a-8a92-4913-af90-b7721d4bbabd")
 		(effects
 			(font
 				(size 1 1)
@@ -69,11 +64,10 @@
 		)
 	)
 	(property "tolerance" "1%"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "a5b781cc-6e59-4f18-bbe6-8a13e1e0ebc3")
 		(effects
 			(font
 				(size 1 1)
@@ -82,11 +76,10 @@
 		)
 	)
 	(property "package" "M1005"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "04509276-d574-42e3-85f1-c989d454b21e")
 		(effects
 			(font
 				(size 1 1)
@@ -95,11 +88,10 @@
 		)
 	)
 	(property "part_uid" "RP-019A1P-53DHSX"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "197ed58a-b764-4eed-90e6-92508256dc21")
 		(effects
 			(font
 				(size 1 1)
@@ -108,11 +100,10 @@
 		)
 	)
 	(property "status" "OK"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "5e682a25-98be-40f9-b83c-3f0294fb3811")
 		(effects
 			(font
 				(size 1 1)
@@ -121,11 +112,10 @@
 		)
 	)
 	(property "manufacturer" "Yageo"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "a2506df9-e6db-456e-aaff-6d4179cd17ee")
 		(effects
 			(font
 				(size 1 1)
@@ -134,11 +124,10 @@
 		)
 	)
 	(property "manufacturer_pn" "RC0402FR-0710KL"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "47912d00-9c1c-4887-b3b1-47beb819efa0")
 		(effects
 			(font
 				(size 1 1)
@@ -147,11 +136,10 @@
 		)
 	)
 	(property "packaging" "7 inch dia. paper taping reel"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "7bbac90c-54d1-404f-a07e-bf83bf804cc2")
 		(effects
 			(font
 				(size 1 1)
@@ -160,11 +148,10 @@
 		)
 	)
 	(property "packaging_qty" "10000"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "c3be8f02-ce73-4862-9d10-47b4f57ba0d9")
 		(effects
 			(font
 				(size 1 1)
@@ -173,11 +160,10 @@
 		)
 	)
 	(property "lcsc_pn" "C60490"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "bf6efcc2-165c-41ce-82d1-e072eac6caae")
 		(effects
 			(font
 				(size 1 1)
@@ -186,11 +172,10 @@
 		)
 	)
 	(property "temp_coefficient" "100ppm/degC"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "0bc83b31-99b3-4a59-b730-77d34371097a")
 		(effects
 			(font
 				(size 1 1)
@@ -199,11 +184,10 @@
 		)
 	)
 	(property "voltage" "50V"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "f76ce39c-c0eb-4c0a-991b-f39b6d02e9df")
 		(effects
 			(font
 				(size 1 1)
@@ -212,11 +196,10 @@
 		)
 	)
 	(property "size" "1x0.5x0.35mm"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "2c91d231-b38a-44b3-a4e4-317eb5a9eb20")
 		(effects
 			(font
 				(size 1 1)
@@ -225,11 +208,10 @@
 		)
 	)
 	(property "resistance" "10k"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "eea55c35-055e-489c-8e90-56a9cb8b275a")
 		(effects
 			(font
 				(size 1 1)
@@ -238,11 +220,10 @@
 		)
 	)
 	(property "z_height_max" "0.4mm"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "fbb9d86e-0825-428e-855f-98673e7161a2")
 		(effects
 			(font
 				(size 1 1)
@@ -251,11 +232,10 @@
 		)
 	)
 	(property "operating_temp_min" "-55C"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "6d8e2a58-7044-411f-99d5-48ba926a31db")
 		(effects
 			(font
 				(size 1 1)
@@ -264,11 +244,10 @@
 		)
 	)
 	(property "operating_temp_max" "+155C"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "09d28bd7-989e-4bde-abe3-ea4c2d872777")
 		(effects
 			(font
 				(size 1 1)
@@ -277,11 +256,10 @@
 		)
 	)
 	(property "material" "Thick Film"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "61f5afaa-456f-41b9-9ca1-7089e8a6ec08")
 		(effects
 			(font
 				(size 1 1)
@@ -290,11 +268,10 @@
 		)
 	)
 	(property "current" ""
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "215fd7a3-1819-4f65-b76f-41aba3a6370f")
 		(effects
 			(font
 				(size 1 1)
@@ -303,11 +280,10 @@
 		)
 	)
 	(property "z_height_nom" "0.35mm"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "57ef3bb8-6df9-47eb-88ea-ee02844413ad")
 		(effects
 			(font
 				(size 1 1)
@@ -316,12 +292,6 @@
 		)
 	)
 	(property ki_fp_filters "RPI_COMPILED:generic_resc1005x35")
-	(units
-		(unit
-			(name "A")
-			(pins "1" "2")
-		)
-	)
 	(attr smd dnp)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_rect
@@ -333,7 +303,6 @@
 		)
 		(fill no)
 		(layer "F.CrtYd")
-		(uuid "f1089971-d8aa-42a0-8e28-2cc8a21e29e6")
 	)
 	(fp_rect
 		(start -0.5 -0.25)
@@ -344,7 +313,6 @@
 		)
 		(fill no)
 		(layer "F.Fab")
-		(uuid "69317b54-9952-4754-89d6-3e50d4ce70e3")
 	)
 	(fp_rect
 		(start -0.25 -0.25)
@@ -355,13 +323,11 @@
 		)
 		(fill no)
 		(layer "F.Fab")
-		(uuid "cc9768d2-b418-4e8a-9e1e-efb2b9861794")
 	)
 	(fp_text user "${REFERENCE}"
-		(at 0 0 270)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "9db1ad9d-5c98-42d0-b9f3-b8a30e05f3aa")
 		(effects
 			(font
 				(size 0.8 0.5)
@@ -370,20 +336,16 @@
 		)
 	)
 	(pad "1" smd rect
-		(at -0.475 0 270)
+		(at -0.475 0)
 		(size 0.55 0.55)
 		(layers "F.Cu" "F.Mask" "F.Paste")
-		(net "+3V3")
 		(pintype "passive")
-		(uuid "306df823-3f0c-4ba4-9f91-6b0224474c49")
 	)
 	(pad "2" smd rect
-		(at 0.475 0 270)
+		(at 0.475 0)
 		(size 0.55 0.55)
 		(layers "F.Cu" "F.Mask" "F.Paste")
-		(net "/FLASH_SS")
 		(pintype "passive")
-		(uuid "66b15175-6f8d-42b2-a69b-81cb6b6c1f4a")
 	)
 	(embedded_fonts no)
 	(model "kicad-embed://generic_resc1005x35.step"

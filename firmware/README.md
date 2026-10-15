@@ -15,7 +15,10 @@ Our own firmware (Pico SDK 2.3.1, C). The first-light build of stacksmashing's f
 ## Reply timing (why the printer works two bytes ahead)
 PIO autopull loads the reply for the next byte from the TX FIFO as soon as the current byte's last bit is out, before the CPU has seen the current byte. So the TX FIFO always holds one queued reply, primed with two zeros, and `printer_rx()` returns the reply for the byte **after next**. This is enough: the replies that matter (0x81 and the status, in the dummy bytes) are decided when the checksum arrives, which is two bytes before them.
 
-## Pins (docs/breadboard.html, no level shifter on the Pico 2)
+## Pins
+Set per board in `src/board.h`, chosen at build time (see Build).
+
+**Breadboard** (Pico 2 W, docs/breadboard.html, no level shifter):
 | GPIO | Signal | Cable |
 |---|---|---|
 | GP0 | SCK in | green, plug 5 |
@@ -25,9 +28,19 @@ PIO autopull loads the reply for the next byte from the TX FIFO as soon as the c
 
 Inputs have pull-ups enabled (RP2350 erratum E9 and a defined idle level). Pico on USB before the Game Boy is switched on.
 
+**PCB rev A** (hw/rev-a, docs/PCB.md; 74LVC1T45 translators, any power order):
+| GPIO | Signal |
+|---|---|
+| GP12 | SCK (U102; direction set by GP11) |
+| GP13 | data in (GB SOUT, U103) |
+| GP14 | data out (GB SIN, U104) |
+| GP11 | SCK direction: held low = Game Boy drives the clock |
+| GP21 | status LED |
+
 ## Build and flash
 ```sh
-cmake -S firmware -B firmware/build -G Ninja && ninja -C firmware/build   # -> firmware/build/gb_link_usb.uf2
+cmake -S firmware -B firmware/build -G Ninja && ninja -C firmware/build   # breadboard -> firmware/build/gb_link_usb.uf2
+cmake -S firmware -B firmware/build-revA -G Ninja -DGBLINK_BOARD=revA && ninja -C firmware/build-revA   # PCB rev A
 ```
 Needs `PICO_SDK_PATH` and the Arm toolchain (see CLAUDE.md). Flash: hold BOOTSEL while plugging in and copy the .uf2, or `picotool reboot -f -u` while this firmware runs (USB reset interface) and then copy.
 

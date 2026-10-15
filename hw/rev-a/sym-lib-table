@@ -1,0 +1,6 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "RPI - BOM Directives")(type "KiCad")(uri "${KIPRJMOD}/RPI - BOM Directives.kicad_sym")(options "")(descr "Raspberry Pi minimal design symbols (MIT)"))
+	(lib (name "RPI - Power")(type "KiCad")(uri "${KIPRJMOD}/RPI - Power.kicad_sym")(options "")(descr "Raspberry Pi minimal design symbols (MIT)"))
+	(lib (name "RPI_DB")(type "KiCad")(uri "${KIPRJMOD}/RPI_DB.kicad_sym")(options "")(descr "Raspberry Pi minimal design symbols (MIT)"))
+)

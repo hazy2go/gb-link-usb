@@ -138,7 +138,7 @@ def main(netlist_path, out_path, root_uuid, sheet_uuid, project):
             gy = row_top[i // per_row] + 12.7 + ext[i][1]   # top pin 12.7 mm below the row top (lib y is up)
             sx, sy = round(gx / 2.54) * 2.54, round(gy / 2.54) * 2.54
             inst = ['symbol', ['lib_id', Str(lib_id)], ['at', round(sx, 2), round(sy, 2), 0], ['unit', unit],
-                    ['exclude_from_sim', 'no'], ['in_bom', 'yes'], ['on_board', 'yes'], ['dnp', 'no'], ['uuid', SU(part['ref'], unit)],
+                    ['exclude_from_sim', 'no'], ['in_bom', 'yes' if part.get('in_bom', True) else 'no'], ['on_board', 'yes'], ['dnp', 'no'], ['uuid', SU(part['ref'], unit)],
                     prop('Reference', part['ref'], sx, sy - 12, False),
                     prop('Value', part['value'], sx, sy + 12, False),
                     prop('Footprint', part.get('footprint', ''), sx, sy, True),

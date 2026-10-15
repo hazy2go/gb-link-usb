@@ -8329,16 +8329,37 @@
 		(at 101.6 215.9)
 		(uuid "1448d87e-2941-5cf6-bbff-f3033d0abdfe")
 	)
-	(no_connect
-		(at 101.6 200.66)
+	(label "LINK_SI"
+		(at 101.6 200.66 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify left)
+		)
 		(uuid "035903c2-adf8-5d0d-a76b-c18724ccc00d")
 	)
-	(no_connect
-		(at 76.2 215.9)
+	(label "LINK_SO"
+		(at 76.2 215.9 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify right)
+		)
 		(uuid "86119666-f576-5207-840f-93373702f488")
 	)
-	(no_connect
-		(at 76.2 200.66)
+	(label "LINK_SCK"
+		(at 76.2 200.66 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify right)
+		)
 		(uuid "ee5b8929-ae42-55fd-97ec-1102e6a7c2ee")
 	)
 	(symbol
@@ -8611,7 +8632,7 @@
 		(at 152.4 205.74 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "ea50d5bf-87c8-50e9-bd3a-d2e0bbe48e06")

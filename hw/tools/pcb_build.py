@@ -53,6 +53,8 @@ PLACE = {
 }
 
 
+SILK_PADS = ['SH', 'SCK', 'GND', 'SO', 'SI']   # J102 pads 1-5 (link.json): shield, plug 5, plug 6, plug 2, plug 3
+
 KEEP = []   # every object we create and hand to the board: Python must not garbage-collect it
 
 
@@ -73,8 +75,10 @@ def schematic():
         sp = c.find('sheetpath')
         fields = {f.get('name'): (f.text or '') for f in c.iter('field')}
         tstamps = [t.text for t in c.iter('tstamps')] or [c.findtext('tstamp', '')]
+        props = {pp.get('name') for pp in c.iter('property')}
         comps[c.get('ref')] = dict(value=c.findtext('value', ''), footprint=c.findtext('footprint', ''),
-                                   sheet=sp.get('tstamps'), sym=tstamps[0], fields=fields)
+                                   sheet=sp.get('tstamps'), sym=tstamps[0], fields=fields,
+                                   exclude_bom='exclude_from_bom' in props)
     pin_net = {}
     for n in root.iter('net'):
         name = n.get('name')
@@ -237,6 +241,10 @@ def reshape_big_zones(board):
                     for x, y in ((xa, Y0 + inset), (xb, Y0 + inset), (xb, Y1 - inset), (xa, Y1 - inset)):
                         strip.Append(mm(x), mm(y))
                     o.BooleanAdd(strip)
+            if z.GetNetname() == 'GND':
+                # Raspberry Pi's GND pour stops above our cable pads; a trace along that edge can seal off a
+                # pocket of pour (seen: C104/J102 GND island). Run the pour down to the board edge.
+                o.BooleanAdd(rect)
 
 
 def step_dangling(gone):
@@ -349,8 +357,11 @@ def step_finish():
         fp.SetFPIDAsString(c['footprint'])
         fp.SetPath(pcbnew.KIID_PATH(c['sheet'].rstrip('/') + '/' + c['sym']))
         for fname in ('LCSC', 'Datasheet', 'Description'):
-            if c['fields'].get(fname):
+            if fname in c['fields']:                    # parity compares these with the symbol, empty or not
                 fp.SetField(fname, c['fields'][fname])
+                f = fp.GetField(fname)
+                f.SetVisible(False); f.SetLayer(pcbnew.F_Fab)
+        fp.SetExcludedFromBOM(c['exclude_bom'])
         x, y, rot, side = PLACE[ref]
         board.Add(fp); KEEP.append(fp)
         if side == 'B':
@@ -369,6 +380,23 @@ def step_finish():
     for pad in on_board['J101'].Pads():          # USB-C VBUS pads (tiny) and shield (at the edge): solid to their pours
         if pad.GetNetname() == 'VBUS' or pad.GetNumber() == 'SH':
             pad.SetLocalZoneConnection(pcbnew.ZONE_CONNECTION_FULL)
+
+    # silkscreen: designators moved to the fab layer (on a board this dense they only overlap); a few useful labels instead
+    for fp in board.GetFootprints():
+        fp.Reference().SetLayer(pcbnew.F_Fab if fp.GetLayer() == pcbnew.F_Cu else pcbnew.B_Fab)
+
+    def silk(text, x, y, size=0.8, bold=False, width=None):
+        t = pcbnew.PCB_TEXT(board)
+        t.SetText(text); t.SetLayer(pcbnew.F_SilkS); t.SetPosition(pt(x, y))
+        t.SetTextSize(pcbnew.VECTOR2I(mm(width or size), mm(size))); t.SetTextThickness(mm(0.15))
+        t.SetBold(bold)
+        board.Add(t); KEEP.append(t)
+    jx, jy = PLACE['J102'][0], PLACE['J102'][1]
+    for i, lab in enumerate(SILK_PADS):          # cable pad names, between the pads and the relief holes
+        silk(lab, jx + 4 * i, jy + 2.6, 0.8, False, 0.5)   # narrow: fits the relief channel
+    silk('gb-link-usb', 110.2, 121.0, 1.0, True)
+    silk('rev A', 110.2, 122.8, 0.8)
+    silk('LED', PLACE['D101'][0], PLACE['D101'][1] - 1.9, 0.8)
 
     # 5. pours + outline, 6. lock the kept routing
     reshape_big_zones(board)

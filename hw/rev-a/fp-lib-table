@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "RPI_COMPILED")(type "KiCad")(uri "${KIPRJMOD}/RPI_COMPILED.pretty")(options "")(descr "Raspberry Pi RP2350A minimal design footprints (MIT)"))
+)

@@ -1,0 +1,28 @@
+# CLAUDE.md: handoff for agents working on this repo
+
+Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.md` (link port and printer protocol) and `docs/LOGBOOK.md` (decisions).
+
+## Rules (from the owner, Hazy)
+- Repo: `hazy2go/gb-link-usb`. With `gh`, always pass `--repo hazy2go/gb-link-usb`.
+- Log every decision, check and result in `docs/LOGBOOK.md` (dated heading, short why). Corrections are written as corrections.
+- Don't claim anything without evidence: test on hardware, quote the datasheet or Pan Docs. Mark unverified facts "(verify)".
+- Hazy reads replies on Discord: short and plain, no long dashes as punctuation.
+- Never spend money or place orders; buying is Hazy's job.
+- Never cut or modify the **MGB-004 adapter** or the spare DMG-04 (printer setup).
+
+## Where things stand (2026-10-15)
+- Planning only. Nothing built, no code yet.
+- Hardware on hand: DMG, EverDrive, Pokémon Pikachu + printer (small socket), 2x DMG-04, MGB-004.
+- Ordered, not arrived: Pico 2 WH, breadboard kit, BSS138 level shifters (loose pins).
+
+## To do (in order)
+1. **When parts arrive:** cut one DMG-04, map wires to pins (record in LOGBOOK), wire through the level shifter (PLAN.md stage 1).
+2. **First light:** build and flash stacksmashing/gb-link-firmware unchanged on the Pico 2 to prove wiring; a test ROM on the EverDrive sends bytes, the PC receives them.
+3. **Our firmware** in `firmware/` (Pico SDK, C): PIO link driver (slave mode first, for the printer), TinyUSB WebUSB + CDC.
+4. **Printer emulator** following mofosyne's emulator and Pan Docs (`docs/PROTOCOL.md`); web page in `web/` renders received tiles to PNG. Test with Pokémon Pikachu.
+5. Raw bridge mode + online link mode.
+6. Own PCB in `hw/` (KiCad), same rigor as the WiFi cart (ERC/DRC, JLC parts/stock check, assembled by JLC).
+
+## Notes
+- Prior-art code is GPL-3 (stacksmashing, mofosyne). If we copy from it, our firmware is GPL-3 too.
+- WiFi cart repo for reference on process and tools: `~/projects/wifi-game-boy-cartridge` (its CLAUDE.md).

@@ -1,8 +1,11 @@
-linktest.gb: linktest.asm
-	rgbasm -o linktest.o linktest.asm
-	rgblink -o linktest.gb linktest.o
-	rgbfix -v -p 0xFF -t LINKTEST linktest.gb
+ROMS = linktest.gb printtest.gb
+all: $(ROMS)
+
+%.gb: %.asm
+	rgbasm -o $*.o $<
+	rgblink -o $@ $*.o
+	rgbfix -v -p 0xFF -t $(shell echo $* | tr a-z A-Z | cut -c1-11) $@
 
 clean:
-	rm -f linktest.o linktest.gb
-.PHONY: clean
+	rm -f *.o *.gb
+.PHONY: all clean

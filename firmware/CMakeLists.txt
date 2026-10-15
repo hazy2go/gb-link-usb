@@ -13,3 +13,8 @@ pico_enable_stdio_usb(gb_link_usb 1)
 pico_enable_stdio_uart(gb_link_usb 0)
 pico_set_program_name(gb_link_usb "gb-link-usb printer")
 pico_add_extra_outputs(gb_link_usb)
+
+# Debug: -DDEBUG_FIXED_REPLY=0xA5 answers that byte to everything (tests the TX path).
+if(DEBUG_FIXED_REPLY)
+  target_compile_definitions(gb_link_usb PRIVATE DEBUG_FIXED_REPLY=${DEBUG_FIXED_REPLY})
+endif()

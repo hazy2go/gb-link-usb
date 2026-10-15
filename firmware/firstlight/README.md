@@ -2,7 +2,12 @@
 
 Upstream firmware (GPL-3, commit 36aac15, last push 2022) used only to prove the wiring. Not our firmware.
 
-It no longer builds on Pico SDK 2.3.1 (TinyUSB renamed the vendor control callback), so `tinyusb-api.patch` makes the one needed change.
+`tinyusb-api.patch` makes three small changes for Pico SDK 2.3.1 / current TinyUSB:
+1. Vendor control callback renamed (`tud_vendor_control_xfer_cb`), else it doesn't compile.
+2. `tud_vendor_write_flush()` after each write: current TinyUSB buffers vendor TX until 64 bytes or a flush, so 1-byte replies would never reach the PC.
+3. Upstream bug: the CDC handler read from the vendor stream (`tud_vendor_read`) instead of `tud_cdc_read`, so the serial port never worked. Fixed so we can test from a terminal without libusb.
+
+Quirk left as is: the CDC echo adds 0x0A after any 0x0D byte (`tools/linktest.py` avoids it).
 
 ```sh
 git clone https://github.com/stacksmashing/gb-link-firmware.git && cd gb-link-firmware
@@ -16,3 +21,7 @@ Pins (from upstream main.c / pio/spi.pio): the Pico is clock **master**.
 - GPIO2 = data out -> GB SIN
 
 Each byte the PC sends (WebUSB or CDC) is clocked out to the Game Boy, and the byte received at the same time is sent back. Clock: clkdiv 4058.838, 4 PIO cycles per bit; at the RP2350's 150 MHz that is about 9.2 kHz (upstream tuned it for 125 MHz, about 7.7 kHz) (verify with a scope or by GB behaviour).
+
+## Test
+1. `rom/linktest.gb` on the EverDrive (`cd rom && make`). The GB is the clock slave and answers each byte with (last byte received + 1), first answer 0x42. Screen: last byte and a counter.
+2. Flash `gbusb.uf2`, run `python3 tools/linktest.py`. PASS = both directions and the clock work.

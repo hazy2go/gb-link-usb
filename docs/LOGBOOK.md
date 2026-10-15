@@ -57,3 +57,8 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - BOOTSEL drive "RP2350" appears (INFO_UF2: UF2 Bootloader v1.0, RP2350). picotool sees chip RP2350 QFN60.
 - `picotool load` failed at 13% (`picoboot::connection_error`), cause unknown (cable/macOS?). Copying the .uf2 onto the drive works.
 - Test program (USB serial + LED): prints "hello from pico 2 w" twice a second on /dev/cu.usbmodem11101. Toolchain + board confirmed end to end.
+
+## 2026-10-15 First-light software ready (not run on hardware yet)
+- Correction to the earlier entry: the first-light firmware needed **two more** changes, not just the rename. Current TinyUSB buffers vendor (WebUSB) TX until 64 bytes or a flush, so the 1-byte replies would never be sent; added `tud_vendor_write_flush()`. Upstream `cdc_task` read the vendor stream instead of CDC (upstream bug), fixed so the plain serial port works. Patch and reasons in `firmware/firstlight/`.
+- `rom/linktest.gb` (RGBDS 1.0.4, ours): GB as clock slave, replies last+1 (first 0x42), shows last byte + counter. Checked in PyBoy (headless): boots, draws "00 / 0000", waits with SC bit 7 set. Serial not exercised in the emulator.
+- `tools/linktest.py`: sends 6 bytes over CDC, checks replies, hints at the likely fault (no reply / all FF / wrong).

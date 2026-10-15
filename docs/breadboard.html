@@ -1,0 +1,203 @@
+<title>GB Link Breadboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: board diagram on the left, wiring steps on the right; stacks on phones. */
+:root {
+  --bg: #eef0ea; --fg: #1d2420; --muted: #5d6a62; --line: #cfd5cc; --panel: #f8f9f5; --accent: #2f6f4f;
+  --board: #f3efe4; --board-edge: #d9d2bf; --hole: #6b665a; --rail-red: #d0453b; --rail-blue: #3a62c9;
+  --pcb-pico: #1f6b45; --pcb-shift: #1d4f9a; --pin: #d8b45a; --silk: #f4f7f2;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif; --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161a17; --fg: #e3e8e2; --muted: #98a59c; --line: #2d3530; --panel: #1e2420; --accent: #7fc39c; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #161a17; --fg: #e3e8e2; --muted: #98a59c; --line: #2d3530; --panel: #1e2420; --accent: #7fc39c; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--font-body); }
+.wrap { max-width: 1060px; margin: 0 auto; padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font-size: 24px; font-weight: 600; margin: 0 0 4px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0 0 24px; max-width: 65ch; }
+.grid { display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 760px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+figure { margin: 0; overflow-x: auto; }
+svg { display: block; max-width: 100%; height: auto; }
+svg .wire { transition: opacity .15s; }
+svg.focus .wire { opacity: .12; }
+svg.focus .wire.on { opacity: 1; }
+ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
+ol > li { counter-increment: s; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; min-width: 0; }
+ol > li h2 { font-size: 15px; font-weight: 600; margin: 0 0 6px; display: flex; gap: 8px; align-items: baseline; }
+ol > li h2::before { content: counter(s); font: 500 12px var(--font-mono); color: var(--accent); }
+ol > li p { margin: 0 0 6px; color: var(--muted); font-size: 14px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+td { padding: 3px 6px 3px 0; vertical-align: middle; }
+td.h { font-family: var(--font-mono); white-space: nowrap; color: var(--muted); }
+tr[data-w] { cursor: default; }
+tr[data-w]:hover td, tr[data-w]:focus td { color: var(--fg); }
+tr[data-w]:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+.sw { display: inline-block; width: 22px; height: 6px; border-radius: 3px; box-shadow: 0 0 0 1px var(--muted); vertical-align: middle; margin-right: 6px; }
+.warn { border-color: var(--rail-red); }
+.warn h2::before { color: var(--rail-red); }
+code { font-family: var(--font-mono); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { svg .wire { transition: none; } }
+</style>
+
+<div class="wrap">
+  <h1>GB Link Breadboard</h1>
+  <p class="sub">Pico 2 W, BSS138 level shifter and the cut DMG-04, using the pin map we measured. Hover a wire in the list to highlight it. Hole names are column letter + row number, e.g. <code>j3</code>.</p>
+
+  <div class="grid">
+    <figure><svg id="bb" role="img" aria-label="Breadboard wiring diagram"></svg></figure>
+
+    <ol id="steps">
+      <li>
+        <h2>Pico</h2>
+        <p>USB end at the top. Left pins in column <b>c</b>, right pins in column <b>h</b>, rows 3 to 22. That leaves columns a, b and i, j free for jumpers.</p>
+      </li>
+      <li>
+        <h2>Level shifter</h2>
+        <p>Rows 26 to 31, straddling the gap: LV pins in column <b>d</b>, HV pins in column <b>g</b>. Pin order differs between modules: follow the printed labels, keep LV on the left and HV on the right.</p>
+      </li>
+      <li>
+        <h2>Power</h2>
+        <table>
+          <tr data-w="vbus" tabindex="0"><td><span class="sw" style="background:#d6336c"></span>VBUS (pin 40) to HV</td><td class="h">j3 → j28</td></tr>
+          <tr data-w="v33" tabindex="0"><td><span class="sw" style="background:#e8b500"></span>3V3 OUT (pin 36) to LV</td><td class="h">i7 → c28</td></tr>
+          <tr data-w="gndr" tabindex="0"><td><span class="sw" style="background:#222"></span>GND (pin 38) to HV GND</td><td class="h">j5 → j29</td></tr>
+          <tr data-w="gndl" tabindex="0"><td><span class="sw" style="background:#222"></span>GND (pin 3) to LV GND</td><td class="h">a5 → a29</td></tr>
+        </table>
+      </li>
+      <li>
+        <h2>Signals</h2>
+        <table>
+          <tr data-w="gp0" tabindex="0"><td><span class="sw" style="background:#8a4fd8"></span>GP0 (pin 1) to LV1</td><td class="h">a3 → a26</td></tr>
+          <tr data-w="gp1" tabindex="0"><td><span class="sw" style="background:#1aa3a3"></span>GP1 (pin 2) to LV2</td><td class="h">b4 → b27</td></tr>
+          <tr data-w="gp2" tabindex="0"><td><span class="sw" style="background:#9a6a3c"></span>GP2 (pin 4) to LV3</td><td class="h">b6 → b30</td></tr>
+        </table>
+      </li>
+      <li>
+        <h2>Link cable</h2>
+        <table>
+          <tr data-w="green" tabindex="0"><td><span class="sw" style="background:#2e9e44"></span>green, clock (SCK)</td><td class="h">→ i26 (HV1)</td></tr>
+          <tr data-w="red" tabindex="0"><td><span class="sw" style="background:#d93025"></span>red, data from GB</td><td class="h">→ i27 (HV2)</td></tr>
+          <tr data-w="blue" tabindex="0"><td><span class="sw" style="background:#2b63d9"></span>blue, GND</td><td class="h">→ i29 (GND row)</td></tr>
+          <tr data-w="orange" tabindex="0"><td><span class="sw" style="background:#f08a1c"></span>orange, data to GB</td><td class="h">→ i30 (HV3)</td></tr>
+        </table>
+        <p style="margin-top:8px">Shield: twisted and taped, not connected.</p>
+      </li>
+      <li class="warn">
+        <h2>Before USB goes in</h2>
+        <p>Nothing from the Game Boy side may touch row 7 or row 28 left (3.3 V). Power rails are not used. Send a photo first, then plug in.</p>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<script>
+(() => {
+  const P = 16;                       // hole pitch in px (2.54 mm)
+  const COLS = { a: 0, b: 1, c: 2, d: 3, e: 4, f: 7, g: 8, h: 9, i: 10, j: 11 }; // e→f spans the 3-pitch gap
+  const ROWS = 34;
+  const ox = 5.5 * P, oy = 3 * P;     // origin of hole a1
+  const X = (c) => ox + (typeof c === 'number' ? c : COLS[c]) * P;
+  const Y = (r) => oy + (r - 1) * P;
+  const W = ox + 16.5 * P, H = oy + ROWS * P + 4 * P;
+  const svg = document.getElementById('bb');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width', W); svg.setAttribute('height', H);
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const el = (tag, attrs, parent = svg) => {
+    const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    parent.appendChild(e); return e;
+  };
+  const text = (s, x, y, attrs = {}, parent = svg) => { const t = el('text', { x, y, ...attrs }, parent); t.textContent = s; return t; };
+  const mono = css('--font-mono');
+
+  // board
+  el('rect', { x: ox - 4.5 * P, y: oy - 1.6 * P, width: 20 * P, height: (ROWS + 2.2) * P, rx: 8, fill: css('--board'), stroke: css('--board-edge'), 'stroke-width': 2 });
+  el('rect', { x: X(4) + 0.6 * P, y: oy - 1.2 * P, width: 1.8 * P, height: (ROWS + 1.4) * P, fill: css('--board-edge'), opacity: .55 });
+  // power rails (unused)
+  for (const [c0, side] of [[-3.5, 'l'], [13.5, 'r']]) {
+    el('line', { x1: X(c0) - 0.5 * P, y1: oy - P, x2: X(c0) - 0.5 * P, y2: Y(ROWS) + 0.6 * P, stroke: side === 'l' ? css('--rail-red') : css('--rail-blue'), 'stroke-width': 1.5, opacity: .7 });
+    el('line', { x1: X(c0 + 1) + 0.5 * P, y1: oy - P, x2: X(c0 + 1) + 0.5 * P, y2: Y(ROWS) + 0.6 * P, stroke: side === 'l' ? css('--rail-blue') : css('--rail-red'), 'stroke-width': 1.5, opacity: .7 });
+    for (let r = 1; r <= ROWS; r++) if (r % 6) for (const c of [c0, c0 + 1]) el('rect', { x: X(c) - 2.5, y: Y(r) - 2.5, width: 5, height: 5, rx: 1, fill: css('--hole'), opacity: .35 });
+  }
+  // holes + labels
+  for (const [name, c] of Object.entries(COLS)) {
+    text(name, X(c), oy - 0.75 * P, { 'text-anchor': 'middle', 'font-size': 9, 'font-family': mono, fill: css('--hole') });
+    for (let r = 1; r <= ROWS; r++) el('rect', { x: X(c) - 2.5, y: Y(r) - 2.5, width: 5, height: 5, rx: 1, fill: css('--hole') });
+  }
+  for (let r = 1; r <= ROWS; r++) if (r === 1 || r % 5 === 0 || [3, 7, 26, 31].includes(r))
+    text(r, X(-0.6), Y(r) + 3, { 'text-anchor': 'end', 'font-size': 8, 'font-family': mono, fill: css('--hole') });
+
+  // Pico 2 W: pins c3..c22 (1-20), h3..h22 (40-21)
+  const silk = css('--silk');
+  el('rect', { x: X('c') - 0.65 * P, y: Y(3) - 0.9 * P, width: X('h') - X('c') + 1.3 * P, height: 20 * P + 0.8 * P, rx: 4, fill: css('--pcb-pico') });
+  el('rect', { x: (X('c') + X('h')) / 2 - 0.85 * P, y: Y(3) - 1.6 * P, width: 1.7 * P, height: 1.3 * P, rx: 2, fill: '#c9ced3', stroke: '#8d949b' });
+  text('USB', (X('c') + X('h')) / 2, Y(3) - 2.0 * P, { 'text-anchor': 'middle', 'font-size': 9, 'font-family': mono, fill: css('--hole') });
+  el('rect', { x: (X('c') + X('h')) / 2 - 1.6 * P, y: Y(9), width: 3.2 * P, height: 3.2 * P, rx: 2, fill: '#2a2f33' });
+  el('rect', { x: (X('c') + X('h')) / 2 - 2 * P, y: Y(15), width: 4 * P, height: 4.5 * P, rx: 2, fill: '#b9bec4' });
+  text('Pico 2 W', (X('c') + X('h')) / 2, Y(21), { 'text-anchor': 'middle', 'font-size': 10, 'font-weight': 600, fill: silk, 'font-family': css('--font-body') });
+  for (let i = 0; i < 20; i++) {
+    for (const c of ['c', 'h']) el('rect', { x: X(c) - 3.5, y: Y(3 + i) - 3.5, width: 7, height: 7, rx: 1.5, fill: css('--pin') });
+  }
+  const picoL = { 3: 'GP0  1', 4: 'GP1  2', 5: 'GND  3', 6: 'GP2  4' };
+  const picoR = { 3: '40 VBUS', 5: '38 GND', 7: '36 3V3' };
+  for (const [r, s] of Object.entries(picoL)) text(s, X('c') + 7, Y(+r) + 3, { 'font-size': 8, 'font-family': mono, fill: silk });
+  for (const [r, s] of Object.entries(picoR)) text(s, X('h') - 7, Y(+r) + 3, { 'text-anchor': 'end', 'font-size': 8, 'font-family': mono, fill: silk });
+
+  // level shifter: LV pins d26..d31, HV pins g26..g31
+  el('rect', { x: X('d') - 0.7 * P, y: Y(26) - 0.8 * P, width: X('g') - X('d') + 1.4 * P, height: 6.6 * P, rx: 3, fill: css('--pcb-shift') });
+  const lv = ['LV1', 'LV2', 'LV', 'GND', 'LV3', 'LV4'], hv = ['HV1', 'HV2', 'HV', 'GND', 'HV3', 'HV4'];
+  lv.forEach((s, i) => {
+    el('rect', { x: X('d') - 3.5, y: Y(26 + i) - 3.5, width: 7, height: 7, rx: 1.5, fill: css('--pin') });
+    el('rect', { x: X('g') - 3.5, y: Y(26 + i) - 3.5, width: 7, height: 7, rx: 1.5, fill: css('--pin') });
+    text(s, X('d') + 7, Y(26 + i) + 3, { 'font-size': 7.5, 'font-family': mono, fill: silk });
+    text(hv[i], X('g') - 7, Y(26 + i) + 3, { 'text-anchor': 'end', 'font-size': 7.5, 'font-family': mono, fill: silk });
+  });
+
+  // wires: arc between two holes, bow = sideways bulge in px (negative = left)
+  const hole = (s) => ({ x: X(s[0]), y: Y(+s.slice(1)) });
+  function wire(id, color, from, to, bow, label) {
+    const g = el('g', { class: 'wire', 'data-w': id });
+    const a = typeof from === 'string' ? hole(from) : from, b = hole(to);
+    const mx = (a.x + b.x) / 2 + bow, my = (a.y + b.y) / 2;
+    const d = `M${a.x},${a.y} Q${mx},${my} ${b.x},${b.y}`;
+    el('path', { d, fill: 'none', stroke: '#00000055', 'stroke-width': 6.5, 'stroke-linecap': 'round' }, g);
+    el('path', { d, fill: 'none', stroke: color, 'stroke-width': 4.5, 'stroke-linecap': 'round' }, g);
+    for (const p of [a, b]) el('circle', { cx: p.x, cy: p.y, r: 3, fill: color, stroke: '#0008', 'stroke-width': 1 }, g);
+    const t = el('title', {}, g); t.textContent = label;
+  }
+  wire('gp0', '#8a4fd8', 'a3', 'a26', -3.6 * P, 'GP0 to LV1');
+  wire('gndl', '#222222', 'a5', 'a29', -2.6 * P, 'GND to LV GND');
+  wire('gp1', '#1aa3a3', 'b4', 'b27', -1.9 * P, 'GP1 to LV2');
+  wire('gp2', '#9a6a3c', 'b6', 'b30', -1.2 * P, 'GP2 to LV3');
+  wire('v33', '#e8b500', 'i7', 'c28', -1.0 * P, '3V3 OUT to LV');
+  wire('vbus', '#d6336c', 'j3', 'j28', 3.2 * P, 'VBUS to HV');
+  wire('gndr', '#222222', 'j5', 'j29', 2.2 * P, 'GND to HV GND');
+
+  // link cable from the bottom right
+  const jx = X('j') + 2.6 * P, jy = H - 0.6 * P;
+  el('rect', { x: jx - 9, y: jy - 2.6 * P, width: 18, height: 2.6 * P + 10, rx: 6, fill: '#3b3f44' });
+  text('to Game Boy', jx - 14, jy - 0.6 * P, { 'text-anchor': 'end', 'font-size': 9, 'font-family': mono, fill: css('--hole') });
+  const cable = [['green', '#2e9e44', 'i26', -5], ['red', '#d93025', 'i27', -2], ['blue', '#2b63d9', 'i29', 2], ['orange', '#f08a1c', 'i30', 5]];
+  for (const [id, c, to, dx] of cable) wire(id, c, { x: jx + dx, y: jy - 2.4 * P }, to, 1.4 * P, `${id} wire to ${to}`);
+
+  // hover a row in the list -> highlight its wire
+  const setFocus = (id) => {
+    svg.classList.toggle('focus', !!id);
+    svg.querySelectorAll('.wire').forEach((w) => w.classList.toggle('on', w.dataset.w === id));
+  };
+  document.querySelectorAll('tr[data-w]').forEach((tr) => {
+    tr.addEventListener('mouseenter', () => setFocus(tr.dataset.w));
+    tr.addEventListener('focus', () => setFocus(tr.dataset.w));
+    tr.addEventListener('mouseleave', () => setFocus(null));
+    tr.addEventListener('blur', () => setFocus(null));
+  });
+  svg.querySelectorAll('.wire').forEach((w) => {
+    w.addEventListener('mouseenter', () => setFocus(w.dataset.w));
+    w.addEventListener('mouseleave', () => setFocus(null));
+  });
+})();
+</script>

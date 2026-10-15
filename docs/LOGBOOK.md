@@ -62,3 +62,6 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Correction to the earlier entry: the first-light firmware needed **two more** changes, not just the rename. Current TinyUSB buffers vendor (WebUSB) TX until 64 bytes or a flush, so the 1-byte replies would never be sent; added `tud_vendor_write_flush()`. Upstream `cdc_task` read the vendor stream instead of CDC (upstream bug), fixed so the plain serial port works. Patch and reasons in `firmware/firstlight/`.
 - `rom/linktest.gb` (RGBDS 1.0.4, ours): GB as clock slave, replies last+1 (first 0x42), shows last byte + counter. Checked in PyBoy (headless): boots, draws "00 / 0000", waits with SC bit 7 set. Serial not exercised in the emulator.
 - `tools/linktest.py`: sends 6 bytes over CDC, checks replies, hints at the likely fault (no reply / all FF / wrong).
+
+## 2026-10-15 Breadboard layout
+- Drew the stage-1 layout (`docs/breadboard.html`): Pico in c/h rows 3-22, shifter LV in d / HV in g rows 26-31, every jumper by hole. Power rails not used. Shifter pin order assumed (LV1 LV2 LV GND LV3 LV4): follow the module labels (verify on our module).

@@ -91,3 +91,9 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Pressing/wiggling the module during bursts: GB counter moves (0005, later 000A, 000B), so the clock gets through when the module makes contact. GB always shows last byte FF; the Pico never received anything but FF (61,584 and 119,211 bytes sent, 0 non-FF replies).
 - Swapped red/orange (red to HV3, orange to HV2) on the theory that the data lines were crossed: no change, still FF both ways. So the swap theory is not confirmed; current wiring after the swap: red = HV3, orange = HV2 (verify which is right once contacts are solid).
 - Conclusion: press-fit headers make every channel unreliable. Next: solder the shifter headers, re-run continuity incl. module pads, then re-test both wire orders.
+
+## 2026-10-15 Loopback tests isolate the fault: the shifter
+- Shifter pins bent to wedge them (not soldered). linktest still all FF.
+- Loopback through the shifter (GB unplugged, jumper HV2 row to HV3 row): sent 00 01 55 AA 0F F0 80 7E 3C, got all **FF**.
+- Loopback on the Pico directly (jumper pin 2 row to pin 4 row, no shifter): got **00 01 55 AA 0F F0 80 7E 3C**, exact. So Pico, PIO, firmware, USB and the test script are good.
+- Cable already passed continuity; ROM reacts to the external clock (GB counter moved when the clock got through). Fault is the shifter's data channels: press-fit header contacts (most likely). Next: solder the headers, repeat the shifter loopback, then the GB test.

@@ -1,8 +1,16 @@
 diff --git a/main.c b/main.c
-index dc6753f..e796a79 100644
+index dc6753f..b8c52be 100644
 --- a/main.c
 +++ b/main.c
-@@ -127,6 +127,7 @@ void echo_all(uint8_t buf[], uint32_t count)
+@@ -89,6 +89,7 @@ int main(void)
+ {
+   uint cpha1_prog_offs = pio_add_program(spi.pio, &spi_cpha1_program);
+   pio_spi_init(spi.pio, spi.sm, cpha1_prog_offs, 8, 4058.838, 1, 1, PIN_SCK, PIN_SOUT, PIN_SIN);
++  gpio_pull_up(PIN_SIN); // gb-link-usb patch: RP2350 default pull-down + E9 leakage holds the input near 2 V with the shifter's 10k pull-up
+ 
+   tusb_init();
+ 
+@@ -127,6 +128,7 @@ void echo_all(uint8_t buf[], uint32_t count)
    if ( web_serial_connected )
    {
      tud_vendor_write(buf, count);
@@ -10,7 +18,7 @@ index dc6753f..e796a79 100644
    }
  
    // echo to cdc
-@@ -178,8 +179,10 @@ void tud_resume_cb(void)
+@@ -178,8 +180,10 @@ void tud_resume_cb(void)
  //--------------------------------------------------------------------+
  
  // Invoked when received VENDOR control request
@@ -22,7 +30,7 @@ index dc6753f..e796a79 100644
    switch (request->bRequest)
    {
      case VENDOR_REQUEST_WEBUSB:
-@@ -229,7 +232,7 @@ bool tud_vendor_control_request_cb(uint8_t rhport, tusb_control_request_t const
+@@ -229,7 +233,7 @@ bool tud_vendor_control_request_cb(uint8_t rhport, tusb_control_request_t const
  }
  
  // Invoked when DATA Stage of VENDOR's request is complete
@@ -31,7 +39,7 @@ index dc6753f..e796a79 100644
  {
    (void) rhport;
    (void) request;
-@@ -271,7 +274,7 @@ void cdc_task(void)
+@@ -271,7 +275,7 @@ void cdc_task(void)
      {
        
        uint8_t buf[1];

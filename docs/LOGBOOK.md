@@ -168,3 +168,9 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - ROM `rom/sodax.gb` (ours): splash with the official SODAX lockup (icon-project/sodax-sdks docs/sodax-lockup-light.svg, MIT; brand rule: don't recreate the logo), bold 8x16 price, change + range tabs, 128x48 chart (shaded area, dotted grid, 2 px line, end marker), solver quote box, page dots, inverted bars. Updates copy a VRAM slice per VBlank (no blank flash). Font: generated 5x7, bold without closing 1 px gaps (fixed "W" looking like "V").
 - Emulator tests (PyBoy): splash; live BTC/SODA payloads injected into WRAM render correctly; a test build feeds a live ETH frame (with junk before it) through `ParseByte`: renders. **That test found a real bug**: the length check rejected frames >= 256 bytes (ours are 278); fixed. Also fixed: big price top half copied with source/destination swapped.
 - `tools/sodax-bridge.mjs` + `SODAX Bridge.command`; `--dry` prints all 9 live screens. Docs: docs/SODAX.md.
+
+## 2026-10-16 SODAX on real hardware: works
+- First tries: ROM stuck on the splash / "LOADING". Bridge stats showed ~1000 bytes/s arriving from the Game Boy and screens being sent. A5 test (bridge mode + printtest.gb): rows full of A5, so bridge mode and Pico-to-GB work.
+- Debug build with link counters on row 1, freshly copied to the EverDrive: screens render, buttons switch coin/range/refresh (Hazy: "all works"). Root cause of the earlier failure not confirmed; most likely the EverDrive had a ROM from before the length-check fix.
+- SODAX API: one HTTP 520 and some timeouts seen; bridge now retries with timeouts and reuses the last good data.
+- Footer "A:NEW" renamed "A:LOAD" (Hazy didn't know what NEW meant). Debug row only in -D DEBUG builds.

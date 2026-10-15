@@ -5,6 +5,7 @@
 //
 // Usage: node tools/sodax-bridge.mjs          (needs the Pico with gb-link-usb firmware)
 //        node tools/sodax-bridge.mjs --dry    (no Pico: fetch and print screens)
+//        node tools/sodax-bridge.mjs --verbose (also log link traffic every 5 s)
 import { closeSync, existsSync, read, writeSync } from 'node:fs';
 import { COINS, RANGES, frame, loadScreen } from './sodax.mjs';
 import { findPort, openRaw } from './pico.mjs';
@@ -29,6 +30,9 @@ if (process.argv.includes('--dry')) {
 }
 
 let fd = null, port = null, busy = false, pending = null, timer = null;
+let rxBytes = 0, rxCmds = '';
+const VERBOSE = process.argv.includes('--verbose');
+if (VERBOSE) setInterval(() => { log(`link: ${rxBytes} bytes from the Game Boy in 5 s${rxCmds ? `, commands ${rxCmds}` : ''}`); rxBytes = 0; rxCmds = ''; }, 5000);
 
 function writeAll(buf) {
   let off = 0;
@@ -87,7 +91,8 @@ function connect() {
       if (fd === null) return;
       if (err && err.code !== 'EAGAIN') return lost(err.code || err.message);
       if (n > 0) {
-        for (let i = 0; i < n; i++) if (chunk[i]) onCommand(chunk[i]);   // 0 = idle poll
+        rxBytes += n;
+        for (let i = 0; i < n; i++) if (chunk[i]) { rxCmds += String.fromCharCode(chunk[i]); onCommand(chunk[i]); }   // 0 = idle poll
         return setImmediate(poll);
       }
       if (Date.now() - lastCheck > 1000) {

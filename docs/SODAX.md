@@ -19,7 +19,7 @@ Live crypto prices and real swap quotes from [SODAX](https://sodax.com) on an or
 |---|---|
 | Left / Right (or Up / Down) | previous / next coin |
 | B | range: 24H, 7D, 30D |
-| A or Start | refresh now |
+| A or Start | load fresh data now (the footer says A:LOAD) |
 
 The screen also refreshes every 30 s. Coins: BTC, ETH, SOL, SODA, SUI, HYPE, AVAX, XLM, POL.
 

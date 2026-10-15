@@ -11,6 +11,7 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
 - Never cut or modify the **MGB-004 adapter** or the spare DMG-04 (printer setup).
 
 ## Where things stand (2026-10-16)
+- **SODAX on Game Boy works on hardware** (2026-10-16): firmware bridge mode + `rom/sodax.gb` + `tools/sodax-bridge.mjs` (docs/SODAX.md). Release v0.2.0.
 - **Public repo, MIT license** (firmware/firstlight/ GPL-3.0). Release **v0.1.0** has the printer firmware .uf2. README has user-facing setup; keep it in sync when behaviour changes.
 - **Printer emulator works:** `firmware/` (our code) prints from the Game Boy to a PNG (first print 2026-10-15, LOGBOOK). Capture: `python3 tools/printcap.py`, render: `node tools/render.mjs`, or the web page (Web Serial). Test ROMs in `rom/` (linktest, printtest).
 - **First light done:** Mac <-> Pico 2 W <-> DMG works both ways (1000 bytes, 0 errors). Direct wiring, no shifter (RP2350 GPIOs are 5 V tolerant while powered; Pico on USB before the GB). Wiring: green GP0, red GP1, orange GP2, blue GND. First-light firmware = stacksmashing + patch in `firmware/firstlight/`.

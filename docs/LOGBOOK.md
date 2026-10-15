@@ -174,3 +174,7 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Debug build with link counters on row 1, freshly copied to the EverDrive: screens render, buttons switch coin/range/refresh (Hazy: "all works"). Root cause of the earlier failure not confirmed; most likely the EverDrive had a ROM from before the length-check fix.
 - SODAX API: one HTTP 520 and some timeouts seen; bridge now retries with timeouts and reuses the last good data.
 - Footer "A:NEW" renamed "A:LOAD" (Hazy didn't know what NEW meant). Debug row only in -D DEBUG builds.
+
+## 2026-10-16 v0.2.0 release
+- README: SODAX section with screenshots (re-rendered with the A:LOAD footer), troubleshooting row, layout, roadmap (general PC link done).
+- Release v0.2.0: gb_link_usb.uf2 (printer + bridge mode), sodax.gb, printtest.gb, linktest.gb, SHA256SUMS. Clean builds; host tests and decoder tests pass.

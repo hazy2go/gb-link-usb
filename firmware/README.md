@@ -2,7 +2,11 @@
 
 Our own firmware (Pico SDK 2.3.1, C). The first-light build of stacksmashing's firmware lives in `firstlight/` and is not part of this.
 
-## What it does
+## Modes
+- **Printer** (default): emulates the Game Boy Printer, described below.
+- **Bridge**: the PC sends `ESC GBBRIDGE`; from then on the PC's bytes are the Game Boy's poll replies and the Game Boy's bytes go to the PC. Ends when the PC closes the port. Used by SODAX on the Game Boy (docs/SODAX.md).
+
+## What it does (printer mode)
 - The Game Boy is the clock master (printer mode). PIO program `src/gb_link.pio` is a clock **slave**: our bit goes out when SCK falls, the GB's bit is sampled when SCK rises, MSB first.
 - `src/printer.c` answers like a Game Boy Printer: 0x00 to every byte, then `0x81` and the status byte in the two dummy bytes. Status sequence after PRINT: full, busy+full for 20 polls, full, idle (same behaviour as mofosyne's game-tested emulator; our code).
 - Every byte from the Game Boy is streamed raw to the PC over USB serial (CDC). The PC decodes packets into images (`web/`, `tools/`).

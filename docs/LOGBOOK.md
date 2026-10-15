@@ -157,3 +157,7 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 
 ## 2026-10-16 README polish
 - New README layout (hero banner, badges, quick start with wiring diagram and breadboard render, printing, troubleshooting, how it works, layout, development, roadmap). Images in docs/img: hero.svg and wiring.svg (drawn), breadboard.png and web-app.png (screenshots of our pages), sample-print.png (a test image sent through the full printer protocol and decoded by our code; labelled as such). The first real print is not used: it shows people, and the repo is public. Preview checked with GitHub's Markdown renderer.
+
+## 2026-10-16 MIT license, release v0.1.0
+- Hazy chose MIT for our code; firmware/firstlight/ stays GPL-3.0 (patch of stacksmashing's firmware), noted in LICENSE and README.
+- Release v0.1.0: gb_link_usb.uf2 built clean from this commit (Pico SDK 2.3.1, Arm GCC 15.3, pico2_w), host tests and decoder tests pass before tagging.

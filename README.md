@@ -15,6 +15,7 @@
   <img alt="Pico SDK 2.3.1" src="https://img.shields.io/badge/Pico%20SDK-2.3.1-5d6a62">
   <img alt="Printer emulator: working" src="https://img.shields.io/badge/printer%20emulator-working-3a8a5c">
   <img alt="Tested on DMG" src="https://img.shields.io/badge/tested%20on-DMG-8e1b4e">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
 </p>
 
 <p align="center">
@@ -182,4 +183,4 @@ Sister project: [WiFi Game Boy Cartridge](https://github.com/hazy2go/wifi-game-b
 
 ## License
 
-Not licensed yet. Until a license is added, all rights are reserved. `firmware/firstlight/` patches GPL-3.0 code and falls under GPL-3.0.
+[MIT](LICENSE). Exception: `firmware/firstlight/` patches GPL-3.0 code and is GPL-3.0.

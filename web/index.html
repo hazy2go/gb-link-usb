@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GB Printer</title>
+<style>
+  :root { --bg: #f4f1e8; --fg: #222; --muted: #777; --card: #fff; --line: #ddd; --accent: #8b956d; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1b1c1a; --fg: #e8e6df; --muted: #999; --card: #262724; --line: #3a3b37; --accent: #9bab6f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 system-ui, sans-serif; }
+  main { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  p.sub { color: var(--muted); margin: 0 0 20px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  button, label.btn { background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 12px; font: inherit; cursor: pointer; }
+  button:hover, label.btn:hover { border-color: var(--accent); }
+  textarea { width: 100%; height: 110px; background: var(--card); color: var(--fg); border: 1px solid var(--line);
+    border-radius: 6px; padding: 8px; font: 12px ui-monospace, monospace; }
+  #log { color: var(--muted); font: 12px ui-monospace, monospace; white-space: pre-wrap; margin: 8px 0 20px; }
+  #gallery { display: flex; flex-wrap: wrap; gap: 16px; }
+  figure { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+  figure img { display: block; image-rendering: pixelated; width: 320px; max-width: 100%; }
+  figcaption { font-size: 12px; color: var(--muted); margin-top: 6px; display: flex; justify-content: space-between; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Game Boy Printer</h1>
+  <p class="sub">Decodes printer packets into PNGs. Paste a hex dump, open a log file, or try the demo. Live input over WebUSB comes with the firmware.</p>
+
+  <div class="bar">
+    <button id="decode">Decode</button>
+    <label class="btn">Open file<input id="file" type="file" hidden></label>
+    <button id="demo">Demo print</button>
+    <button id="clear">Clear</button>
+  </div>
+  <textarea id="hex" placeholder="88 33 01 00 00 00 01 00 00 00 ..."></textarea>
+  <div id="log"></div>
+  <div id="gallery"></div>
+</main>
+
+<script type="module">
+import { CMD, parsePackets, assembleImages, toRGBA, makePacket, parseHex } from './gbprinter.js';
+
+const $ = (id) => document.getElementById(id);
+
+function show(bytes) {
+  const packets = parsePackets(bytes);
+  const { images, warnings } = assembleImages(packets);
+  const counts = {};
+  for (const p of packets) counts[p.name] = (counts[p.name] || 0) + 1;
+  $('log').textContent = [
+    `${bytes.length} bytes, ${packets.length} packets: ${Object.entries(counts).map(([k, v]) => `${k} x${v}`).join(', ') || 'none'}`,
+    `${images.length} image(s)`,
+    ...warnings,
+  ].join('\n');
+  for (const img of images) {
+    const c = document.createElement('canvas');
+    c.width = img.width; c.height = img.height;
+    c.getContext('2d').putImageData(new ImageData(toRGBA(img), img.width, img.height), 0, 0);
+    const url = c.toDataURL('image/png');
+    const fig = document.createElement('figure');
+    const name = `gbprint-${new Date().toISOString().replace(/[:.]/g, '-')}.png`;
+    fig.innerHTML = `<img alt="print"><figcaption><span>${img.width}×${img.height}</span><a download="${name}">PNG</a></figcaption>`;
+    fig.querySelector('img').src = url;
+    fig.querySelector('a').href = url;
+    $('gallery').prepend(fig);
+  }
+}
+
+$('decode').onclick = () => show(parseHex($('hex').value));
+
+$('file').onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const buf = new Uint8Array(await f.arrayBuffer());
+  // Text log (hex dump) or raw binary capture? Binary has control bytes, text doesn't.
+  const isText = !buf.slice(0, 4096).some((b) => b < 9 || (b > 13 && b < 32));
+  show(isText ? parseHex(new TextDecoder().decode(buf)) : buf);
+  e.target.value = '';
+};
+
+$('clear').onclick = () => { $('gallery').innerHTML = ''; $('log').textContent = ''; $('hex').value = ''; };
+
+// Demo: a 160x144 test pattern sent the way the GB Camera does (9 DATA packets, raw).
+$('demo').onclick = () => {
+  const tiles = [];
+  for (let ty = 0; ty < 18; ty++) {
+    for (let tx = 0; tx < 20; tx++) {
+      for (let y = 0; y < 8; y++) {
+        const shade = ((tx >> 2) + ty) & 3;          // diagonal bands of 4 shades
+        const edge = (tx === 0 || tx === 19 || ty === 0 || ty === 17) && (y === 0 || y === 7);
+        const lo = edge ? 0xff : (shade & 1 ? 0xff : 0x00);
+        const hi = edge ? 0xff : (shade & 2 ? 0xff : 0x00);
+        tiles.push(lo, hi);
+      }
+    }
+  }
+  const raw = [...makePacket(CMD.INIT)];
+  for (let i = 0; i < 9; i++) raw.push(...makePacket(CMD.DATA, tiles.slice(i * 640, (i + 1) * 640)));
+  raw.push(...makePacket(CMD.DATA));
+  raw.push(...makePacket(CMD.PRINT, [1, 0x13, 0xe4, 0x40]));
+  $('hex').value = raw.map((b) => b.toString(16).padStart(2, '0')).join(' ');
+  show(Uint8Array.from(raw));
+};
+if (location.hash === '#demo') $('demo').onclick();
+</script>
+</body>
+</html>

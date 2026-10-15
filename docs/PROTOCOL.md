@@ -43,6 +43,11 @@ Packet sent by the Game Boy:
 - **DATA** carries image tiles: 2 bpp Game Boy tiles, 160 px wide (20 tiles). A full DATA packet is 640 bytes (2 tile rows); an empty DATA packet marks the end of data.
 - **PRINT** carries 4 bytes: sheets, margins, palette, exposure.
 - **STATUS** is polled; the status bits tell the game "printing", "done", errors. The emulator has to report realistic status values or some games stall.
+- **Compression (RLE)**, used by some games (e.g. Pokémon TCG), not by the GB Camera. Pan Docs does not document it ("Some sort of RLE?"). Scheme from mofosyne's decoder (`GameBoyPrinterDecoderC/gbp_pkt.cpp`, checked 2026-10-15): control byte < 0x80 means copy the next control+1 bytes as they are; >= 0x80 means repeat the next byte (control - 0x80) + 2 times.
+- **Tile format** (Pan Docs "Tile Data"): 16 bytes per tile, 2 bytes per pixel row; first byte = low bit of the color index, second = high bit; bit 7 = leftmost pixel. Tiles arrive 20 per row in send order.
+- **Palette byte** (PRINT byte 3): Pan Docs only says "typically $E4". Assumed: bits 1-0 = shade for color 0 ... bits 7-6 = shade for color 3, shade 0 = white (verify). Treating 0x00 as 0xE4 (verify).
+- **Checksum** (Pan Docs): "a sum of every byte sent except the magic bytes and obviously, the checksum itself."
+- **Joining strips:** games like Pokémon Pikachu print one picture as several PRINT commands. The decoder joins strips until a PRINT has a non-zero feed after (low nibble of margins) (verify on real prints).
 - Exact status values and timing per game: follow mofosyne's emulator, which is tested against every official printer game (verify against Pan Docs).
 
 ## PC side

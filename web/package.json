@@ -1,0 +1,9 @@
+{
+  "name": "gb-link-usb-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test gbprinter.test.mjs",
+    "serve": "python3 -m http.server 8000"
+  }
+}

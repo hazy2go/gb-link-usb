@@ -66,6 +66,16 @@ test('strips join until a PRINT with feed after; compressed DATA works', () => {
   assert.deepEqual(images.map((i) => i.height), [32, 16]);
 });
 
+test('bad-checksum DATA is skipped, the resent copy is used', () => {
+  const tile = new Array(640).fill(0xff);
+  const bad = makePacket(CMD.DATA, tile);
+  bad[10] ^= 0x01;
+  const raw = [...makePacket(CMD.INIT), ...bad, ...makePacket(CMD.DATA, tile), ...makePacket(CMD.PRINT, [1, 0x13, 0xe4, 0x40])];
+  const { images, warnings } = assembleImages(parsePackets(Uint8Array.from(raw)));
+  assert.equal(images[0].height, 16);
+  assert.equal(warnings.length, 1);
+});
+
 test('hex dump parse skips comments and JSON lines', () => {
   assert.deepEqual([...parseHex('# log\n{"command":"INIT"}\n88 33 01\n00,00:00\n')], [0x88, 0x33, 0x01, 0x00, 0x00, 0x00]);
 });

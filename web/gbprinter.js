@@ -110,7 +110,9 @@ export function assembleImages(packets) {
   };
 
   for (const p of packets) {
-    if (!p.checksumOk) warnings.push(`${p.name} packet with bad checksum (used anyway)`);
+    // Our emulator reports bad checksums to the game, which then resends the
+    // packet, so a bad packet is skipped rather than used.
+    if (!p.checksumOk) { warnings.push(`${p.name} packet with bad checksum (skipped)`); continue; }
     if (p.command === CMD.INIT) {
       buffer = [];
     } else if (p.command === CMD.DATA) {

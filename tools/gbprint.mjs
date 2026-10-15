@@ -5,12 +5,13 @@
 //
 // Usage: node tools/gbprint.mjs [--out <folder>] [--file <capture.bin>]
 //   --file decodes a saved capture instead of the Pico (for testing).
-import { execFileSync, spawn } from 'node:child_process';
-import { closeSync, constants, existsSync, mkdirSync, openSync, read, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
+import { spawn } from 'node:child_process';
+import { closeSync, existsSync, mkdirSync, read, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { parsePackets, assembleImages } from '../web/gbprinter.js';
 import { printToPng } from './png.mjs';
+import { findPort, openRaw } from './pico.mjs';
 
 const arg = (name) => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : null; };
 const OUT = arg('--out') || join(homedir(), 'Pictures', 'GameBoy Prints');
@@ -62,20 +63,6 @@ if (file) {
   process.exit(0);
 }
 
-// Only ever open the Pico (Raspberry Pi USB vendor ID 0x2E8A), never another serial device.
-const PICO_VID = 0x2e8a;
-function findPort() {
-  try {
-    const tree = execFileSync('ioreg', ['-r', '-c', 'IOUSBHostDevice', '-l', '-w0'], { encoding: 'utf8', maxBuffer: 64 << 20 });
-    for (const dev of tree.split(/^\+-o /m)) {
-      if (!dev.includes(`"idVendor" = ${PICO_VID}`)) continue;
-      const m = dev.match(/"IOCalloutDevice" = "([^"]+)"/);
-      if (m) return m[1];
-    }
-  } catch { /* ioreg missing: no port */ }
-  return null;
-}
-
 // Read the port ourselves: open it first and keep it open (so the raw mode set by
 // stty sticks), non-blocking, and treat "no data right now" as waiting, not as
 // end of stream. Unplugging shows up as a read error or the device vanishing.
@@ -84,10 +71,8 @@ function connect() {
   if (!port) { setTimeout(connect, 1000); return; }
   let fd;
   try {
-    fd = openSync(port, constants.O_RDONLY | constants.O_NOCTTY | constants.O_NONBLOCK);
-    execFileSync('stty', ['-f', port, 'raw', '-echo']);
-  } catch (e) {
-    if (fd !== undefined) closeSync(fd);
+    fd = openRaw(port, 'r');
+  } catch {
     setTimeout(connect, 1000); return;
   }
   log(`Pico connected (${port}). Print from the Game Boy.`);

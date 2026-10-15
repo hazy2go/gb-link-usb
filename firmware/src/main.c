@@ -1,9 +1,13 @@
-// gb-link-usb firmware: Game Boy Printer emulator on a Pico 2 W.
+// gb-link-usb firmware for the Pico 2 W. The Game Boy is always the clock master.
 //
-// Core 1 runs the link: PIO receives each byte from the Game Boy, the printer
-// state machine decides the reply, and the byte is queued for USB.
-// Core 0 sends the raw byte stream to the PC over USB CDC and drives the LED.
-// The PC side (web/ page or tools/printcap.py) turns packets into images.
+// Printer mode (default): the Pico answers like a Game Boy Printer; every byte
+// from the Game Boy is streamed to the PC (web/, tools/gbprint.mjs).
+// Bridge mode: the PC sends BRIDGE_MAGIC, then every byte it sends is handed to
+// the Game Boy as the reply to its next poll, and every byte the Game Boy sends
+// goes to the PC (tools/sodax-bridge.mjs + rom/sodax.gb). Bridge mode ends when
+// the PC closes the port.
+//
+// Core 1 runs the link (PIO + reply logic); core 0 does USB and the LED.
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
@@ -27,9 +31,14 @@
 #define DEBUG_FIXED_REPLY 0
 #endif
 
+// The PC sends this to switch to bridge mode.
+static const char BRIDGE_MAGIC[] = "\x1bGBBRIDGE";
+
 static PIO pio;
 static uint sm, offset;
 static queue_t rx_queue;            // bytes from the GB, core 1 -> core 0
+static queue_t tx_queue;            // bridge mode: bytes for the GB, core 0 -> core 1
+static volatile bool bridge;        // false = printer mode
 static volatile uint32_t packets;   // packets seen, for the LED
 
 static void link_start(void) {
@@ -53,7 +62,9 @@ static void core1_main(void) {
     for (;;) {
         if (!pio_sm_is_rx_fifo_empty(pio, sm)) {
             uint8_t b = (uint8_t)pio_sm_get(pio, sm);
-            uint8_t reply = printer_rx(&printer, b);
+            uint8_t reply = 0;
+            if (bridge) queue_try_remove(&tx_queue, &reply);   // 0 when the PC has nothing queued
+            else reply = printer_rx(&printer, b);
             if (DEBUG_FIXED_REPLY) reply = DEBUG_FIXED_REPLY;
             pio_sm_put(pio, sm, (uint32_t)reply << 24);   // out shifts from bit 31
             queue_try_add(&rx_queue, &b);                  // drop if the PC is not reading
@@ -80,13 +91,31 @@ int main(void) {
     gb_link_slave_init(pio, sm, offset, PIN_SCK, PIN_IN, PIN_OUT);
 
     queue_init(&rx_queue, sizeof(uint8_t), 16384);
+    queue_init(&tx_queue, sizeof(uint8_t), 8192);
     multicore_launch_core1(core1_main);
 
     uint32_t seen = 0;
     absolute_time_t led_off = nil_time;
+    size_t magic_pos = 0;
     for (;;) {
         uint8_t b;
         while (queue_try_remove(&rx_queue, &b)) putchar_raw(b);
+
+        // Bytes from the PC: data for the GB in bridge mode, else watch for the magic.
+        int c;
+        while ((c = getchar_timeout_us(0)) >= 0) {
+            if (bridge) {
+                uint8_t d = (uint8_t)c;
+                queue_add_blocking(&tx_queue, &d);
+            } else {
+                magic_pos = (c == BRIDGE_MAGIC[magic_pos]) ? magic_pos + 1 : (c == BRIDGE_MAGIC[0]);
+                if (magic_pos == sizeof BRIDGE_MAGIC - 1) { bridge = true; magic_pos = 0; }
+            }
+        }
+        if (bridge && !stdio_usb_connected()) {        // PC closed the port: back to printer
+            bridge = false;
+            while (queue_try_remove(&tx_queue, &b)) {}
+        }
         if (led) {
             if (packets != seen) {
                 seen = packets;

@@ -1,4 +1,4 @@
-ROMS = linktest.gb printtest.gb
+ROMS = linktest.gb printtest.gb sodax.gb
 all: $(ROMS)
 
 %.gb: %.asm
@@ -9,3 +9,7 @@ all: $(ROMS)
 clean:
 	rm -f *.o *.gb
 .PHONY: all clean
+
+sodax.gb: font.inc
+font.inc: mkfont.py sodax-logo-shades.txt
+	python3 mkfont.py

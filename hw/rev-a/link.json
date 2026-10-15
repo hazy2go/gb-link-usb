@@ -25,7 +25,7 @@
       "ref": "J101",
       "symbol": "Connector:USB_C_Receptacle_USB2.0_16P",
       "value": "TYPE-C-31-M-12",
-      "footprint": "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12",
+      "footprint": "gb-link-usb:USB_C_Receptacle_HRO_TYPE-C-31-M-12_Flush",
       "lcsc": "C165948",
       "pins": {
         "A1": "GND",
@@ -130,7 +130,7 @@
         "5": "GND",
         "6": "VBUS"
       },
-      "why": "Data from the Game Boy (its SOUT) to GP14: DIR tied low = B to A"
+      "why": "Data from the Game Boy (its SOUT) to GP13: DIR tied low = B to A"
     },
     {
       "ref": "U104",
@@ -146,7 +146,7 @@
         "5": "+3V3",
         "6": "VBUS"
       },
-      "why": "Data to the Game Boy (its SIN) from GP15: DIR tied to VCCA = A to B"
+      "why": "Data to the Game Boy (its SIN) from GP14: DIR tied to VCCA = A to B"
     },
     {
       "ref": "C101",
@@ -158,7 +158,7 @@
         "1": "+3V3",
         "2": "GND"
       },
-      "why": "U11 VCCA decoupling"
+      "why": "U102 VCCA decoupling"
     },
     {
       "ref": "C102",
@@ -170,7 +170,7 @@
         "1": "VBUS",
         "2": "GND"
       },
-      "why": "U11 VCCB decoupling"
+      "why": "U102 VCCB decoupling"
     },
     {
       "ref": "C103",
@@ -182,7 +182,7 @@
         "1": "+3V3",
         "2": "GND"
       },
-      "why": "U12 VCCA decoupling"
+      "why": "U103 VCCA decoupling"
     },
     {
       "ref": "C104",
@@ -194,7 +194,7 @@
         "1": "VBUS",
         "2": "GND"
       },
-      "why": "U12 VCCB decoupling"
+      "why": "U103 VCCB decoupling"
     },
     {
       "ref": "C105",
@@ -206,7 +206,7 @@
         "1": "+3V3",
         "2": "GND"
       },
-      "why": "U13 VCCA decoupling"
+      "why": "U104 VCCA decoupling"
     },
     {
       "ref": "C106",
@@ -218,7 +218,7 @@
         "1": "VBUS",
         "2": "GND"
       },
-      "why": "U13 VCCB decoupling"
+      "why": "U104 VCCB decoupling"
     },
     {
       "ref": "R104",
@@ -247,14 +247,14 @@
     {
       "ref": "R106",
       "symbol": "Device:R",
-      "value": "220",
+      "value": "1k",
       "footprint": "Resistor_SMD:R_0402_1005Metric",
-      "lcsc": "C25091",
+      "lcsc": "C11702",
       "pins": {
         "1": "B_SI",
         "2": "LINK_SI"
       },
-      "why": "Series resistor 220R, Game Boy SIN line"
+      "why": "Series resistor 1k, Game Boy SIN line (we drive it). 1k instead of 220R: a powered dongle feeds at most ~4 mA into a switched-off Game Boy's SIN clamp diode instead of ~20 mA (independent review 2026-10-16); sim/link: no overshoot, settles in 223 ns"
     },
     {
       "ref": "R107",

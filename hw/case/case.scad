@@ -9,9 +9,9 @@
 
 part = "both";          // "tray", "lid", "both" (print layout) or "assembly" (preview)
 
-// ---- board (hw/tools/pcb_build.py: X0..X1 83.3..117.5, Y0..Y1 67.0..129.2, corner 1.5) ----
+// ---- board (hw/tools/pcb_build.py: X0..X1 83.3..117.5, Y0..Y1 67.0..130.7, corner 1.5) ----
 B_X0 = 83.3; B_Y0 = 67.0;
-B_W = 34.2; B_L = 62.2; B_T = 1.6; B_R = 1.5;
+B_W = 34.2; B_L = 63.7; B_T = 1.6; B_R = 1.5;
 // KiCad (x, y down) -> board-local case coordinates (x, y up, USB-C end at y = B_L)
 function bx(x) = x - B_X0;
 function by(y) = B_L - (y - B_Y0);
@@ -32,7 +32,7 @@ FLOOR    = 1.2;
 ROOF     = 1.2;
 UNDER    = 2.5;    // under the board: USB-C legs (0.85 mm) and the cable wires through the relief holes
 OVER     = 4.6;    // above the board: tallest part 3.25 mm (height_check.py budget 4.0); also leaves ~0.9 mm of roof over the USB opening
-EXT      = 7.0;    // extra length beyond the board's cable end: wires fan out from the jacket to the pads
+EXT      = 5.5;    // extra length beyond the board's cable end: wires fan out from the jacket to the pads
 LIP      = 0.8;    // lid lip thickness
 FIT      = 0.15;   // lip-to-wall clearance (press fit; 0.2 for a looser printer)
 LIP_UP   = 1.5;    // tray walls rise this far above the board top; the lid lip fills it
@@ -105,8 +105,8 @@ module ledges() {
     in = GAP + LEDGE;
     // right side, full length
     translate([OUT_W - WALL - in, BOARD_OFS[1], FLOOR]) cube([in, B_L, h]);
-    // left side, from the USB end down to by 13 (the cable pads sit at by 10.6, relief holes at by 1.6)
-    translate([WALL, BOARD_OFS[1] + 13, FLOOR]) cube([in, B_L - 13, h]);
+    // left side, from the USB end down to by 14.5 (the cable pads sit at by 12.1, relief holes at by 3.1)
+    translate([WALL, BOARD_OFS[1] + 14.5, FLOOR]) cube([in, B_L - 14.5, h]);
     // USB end, both sides of the receptacle legs (bx 13.8 / 19.6)
     for (x0 = [0, 23]) translate([BOARD_OFS[0] + x0, OUT_L - WALL_USB - GAP_USB - LEDGE, FLOOR]) cube([11, LEDGE + GAP_USB, h]);
 }
@@ -121,7 +121,7 @@ module lip() {
         translate([in0, BOARD_OFS[1], 0]) cube([OUT_W - 2 * in0, B_L, LIP_UP]);
         translate([in0 + LIP, BOARD_OFS[1] - 1, -1]) cube([OUT_W - 2 * in0 - 2 * LIP, B_L + 2, LIP_UP + 2]);
         // left side: stop above the cable pads (as the ledge)
-        translate([in0 - 1, BOARD_OFS[1] - 1, -1]) cube([LIP + 2, 14, LIP_UP + 2]);
+        translate([in0 - 1, BOARD_OFS[1] - 1, -1]) cube([LIP + 2, 15.5, LIP_UP + 2]);
     }
 }
 

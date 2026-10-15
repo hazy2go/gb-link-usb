@@ -8,7 +8,7 @@ import pcbnew
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PCB = os.path.join(HERE, '..', 'rev-a', 'gb-link-usb.kicad_pcb')
-X0, Y0, L = 83.3, 67.0, 62.2          # board outline (pcb_build.py)
+X0, Y0, L = 83.3, 67.0, 63.7          # board outline (pcb_build.py)
 
 
 def write_parts():

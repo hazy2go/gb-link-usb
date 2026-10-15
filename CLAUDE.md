@@ -30,14 +30,15 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
 5. Raw bridge mode + online link mode.
 6. Own PCB in `hw/` (KiCad): rev A designed and checked; Hazy orders (hold points in ORDER.md), then bring-up with `-DGBLINK_BOARD=revA`.
    **Before ordering rev A** (Hazy; details in `hw/rev-a/fab/ORDER.md`):
-   - [ ] L1 inductor AOTA-B201610S3R3-101-T: JLC has 4, 5 boards need ~10. Order 2-3 boards, use JLC global sourcing, or wait. No substitute (RPi requires the polarity-marked part).
-   - [ ] In JLC's placement preview: L1 dot sits on the board's silk dot (JLC's footprint marks disagree, verify).
+   - [ ] L1 inductor AOTA-B201610S3R3-101-T: JLC has 9 (2026-10-16), 5 boards need 10. Order 4 boards, use JLC global sourcing, or wait. No substitute (RPi requires the polarity-marked part).
+   - [ ] In JLC's placement preview: L1 dot on pad 1 (+1V1, west pad) = the board's silk dot; add the order note "L1 polarity dot to pad 1" (JLC's footprint marks disagree).
    - [ ] In the preview: D101 LED cathode on the GND pad; pin 1 of U1, U3, U101-U105; J101 USB-C flush with the edge.
    - [ ] At upload: JLC accepts 0.25 mm vias on 2 layers (verify).
-   - [ ] Cable: wire gauge fits the 0.5 mm pad holes (verify on the cable).
+   - [ ] Cable: wire gauge fits the 0.5 mm pad holes, jacket diameter for the case (`CABLE_D` in hw/case/case.scad).
 7. **Gerber check + case:** independent Gerber render done (hw/rev-a/img/gerber_render.png); case in `hw/case/`.
 8. **Online link mode** (two Game Boys over the internet): firmware clock-master mode (rev A drives SCK via GP11 = DIR high), relay server, page/tool.
 9. **Breadboard regression:** plug in the Pico 2 W, flash the default build (board.h refactor), print once to confirm nothing changed.
+11. **Rev B ideas** (from the independent review, not blocking): put the TPD4E05U06 right at the cable pads (TI: as close to the connector as possible); firmware glitch filter (1.6 us) is longer than a GBC fast-mode half-bit (~1 us), so fast transfers need a shorter filter.
 10. **Real print through the web page** (Pokémon Pikachu), so the web decoder is proven on real printer data, not only test data.
 
 ## Notes

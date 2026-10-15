@@ -242,3 +242,17 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Tray + lid, 38.0 x 72.5 x 11.1 mm. Board clamped between a tray ledge (long edges; left one stops before the cable pads, USB end split around the receptacle legs) and a lid lip on the outer 0.65 mm of the top edges (closest part C19 at 0.81 mm). USB-C opening 12.6 x 6.6 mm; first version left a 0.07 mm roof sliver over it, so the inner height went 4.0 -> 4.6 mm (~0.9 mm roof left). Cable jacket pinched on the split line (wall + inner rib). Flex tabs with nubs over BOOTSEL/RUN (RUN's tab hinges away from the LED hole), floor posts under both buttons.
 - `check_fit.py`: board + 58 part boxes vs tray and lid: 0.0 mm3. Mutation test (lid 1.6 mm lower): 23.8 mm3 FAIL, so the check works.
 - Open (verify): cable diameter (`CABLE_D` 4.0), plug overmold size, a real print.
+
+## 2026-10-16 PCB rev A: independent review and fixes
+A fresh agent reviewed schematic, board, firmware pins and fab files against the datasheets without our notes (read-only). Result: no wiring defect; findings and what we did:
+1. L1 stock (known): JLC now has 9 (was 4). 4 boards fit; 5 need 10 with attrition. ORDER.md updated.
+2. L1 orientation (known): JLC's silk and document dots sit at pad 2, only a tiny polarity-layer marker at pad 1; our silk dot is on pad 1 (+1V1). ORDER.md: order note "L1 polarity dot to pad 1" and check in the preview.
+3. **New, fixed:** a powered dongle could push ~20 mA into a switched-off Game Boy's SIN clamp diode through R106 220R (TI Ioff covers only our side unpowered). **R106 -> 1k** (C11702, basic, already in the BOM): ~4 mA max; sim/link: no overshoot, settles in 223 ns.
+4. **New, fixed:** cable relief holes left 0.6 mm of FR4 to the board edge. **Board 62.2 -> 63.7 mm long** (2.1 mm behind the holes). Case: same outside size (EXT 7 -> 5.5), ledge/lip stop moved; fit check 0.0 mm3 again.
+5. **New, fixed:** J101's front (fab body 3.65 mm from its origin) sat 0.35 mm behind the edge. Moved to y 70.65 = flush. Side effects fixed: its front silk lines crossed the edge -> project footprint `gb-link-usb:USB_C_Receptacle_HRO_TYPE-C-31-M-12_Flush` (KiCad's, minus the 3 front silk lines; no lib-mismatch warning); a router B.Cu trace sealed a GND pour pocket around J101's GND via -> B.Cu track keepout left of the receptacle (vias allowed; the first, wider keepout blocked VBUS and was narrowed). Via tidy now counts track ends anywhere on the via and fill coverage per layer (removed a dangling +3V3 via; first version removed a needed VBUS via because of exact-centre matching, fixed).
+6. ESD chip 9-17 mm from the cable pads (TI: as close as possible): kept for rev A (220R + 100 pF behind it), rev B idea in CLAUDE.md.
+7. Unpowered dongle gets ~100 uA from an idle Game Boy through R107/R108 into VBUS: accepted (small, Ioff parts).
+8. 0.25 mm vias: still to confirm at JLC upload.
+9. Docs: link.json "why" texts said GP14/GP15/U11-13; fixed (nets were right).
+10. Firmware: rev A build now declares the 16 MB flash (PICO_FLASH_SIZE_BYTES); GBC fast mode vs the 1.6 us glitch filter noted for later.
+Rebuild: ERC = RPi baseline, DRC 0 errors / 0 warnings / 0 unconnected, parity 0. Route audit: one detour on B_SI (19 mm for a 4 mm hop, behind 1k at 8 kHz: harmless; a retry routed worse, kept). BOM 27 lines / 57 parts, CPL all matched, heights PASS, case fit PASS, Gerbers re-rendered.

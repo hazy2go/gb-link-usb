@@ -64,7 +64,7 @@ for nick, syms in libs.items():
     open(os.path.join(REV, nick + '.kicad_sym'), 'w').write(dump(out) + '\n')
 print('symbol libs:', {k: len(v) for k, v in libs.items()})
 
-fp_table = '(fp_lib_table\n\t(version 7)\n\t(lib (name "RPI_COMPILED")(type "KiCad")(uri "${KIPRJMOD}/RPI_COMPILED.pretty")(options "")(descr "Raspberry Pi RP2350A minimal design footprints (MIT)"))\n)\n'
+fp_table = '(fp_lib_table\n\t(version 7)\n\t(lib (name "RPI_COMPILED")(type "KiCad")(uri "${KIPRJMOD}/RPI_COMPILED.pretty")(options "")(descr "Raspberry Pi RP2350A minimal design footprints (MIT)"))\n\t(lib (name "gb-link-usb")(type "KiCad")(uri "${KIPRJMOD}/gb-link-usb.pretty")(options "")(descr "Our footprints (USB-C flush variant)"))\n)\n'
 open(os.path.join(REV, 'fp-lib-table'), 'w').write(fp_table)
 rows = ''.join(f'\t(lib (name "{n}")(type "KiCad")(uri "${{KIPRJMOD}}/{n}.kicad_sym")(options "")(descr "Raspberry Pi minimal design symbols (MIT)"))\n' for n in sorted(libs))
 open(os.path.join(REV, 'sym-lib-table'), 'w').write('(sym_lib_table\n\t(version 7)\n' + rows + ')\n')

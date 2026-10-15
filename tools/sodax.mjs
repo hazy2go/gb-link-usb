@@ -33,11 +33,23 @@ export const RANGES = [
 
 export const CHART_W = 128, CHART_H = 48, LINE = 20;
 
-async function getJson(url, init) {
-  const r = await fetch(url, init);
-  const text = await r.text();
-  if (!r.ok) throw new Error(`${r.status} ${text.slice(0, 120)}`);
-  return JSON.parse(text);
+// The API is behind Cloudflare and occasionally times out or returns 5xx (seen: 520),
+// so each request gets a timeout and up to 3 tries.
+async function getJson(url, init = {}) {
+  let last;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt) await new Promise((r) => setTimeout(r, 800 * attempt));
+    try {
+      const r = await fetch(url, { ...init, signal: AbortSignal.timeout(10000) });
+      const text = await r.text();
+      if (r.ok) return JSON.parse(text);
+      last = new Error(`HTTP ${r.status}`);
+      if (r.status < 500) break;               // 4xx: retrying won't help
+    } catch (e) {
+      last = new Error(e.name === 'TimeoutError' ? 'timeout' : e.message);
+    }
+  }
+  throw last;
 }
 
 export async function fetchCandles(symbol, range, now = Math.floor(Date.now() / 1000)) {
@@ -133,9 +145,18 @@ export function frame(payload, type = 0x01) {
 }
 
 // Everything for one screen; a failing quote still shows the chart.
+// If SODAX is briefly unreachable, the last good candles / quote are reused.
+const lastGood = new Map();
 export async function loadScreen(coinIndex, range) {
   const coin = COINS[coinIndex];
-  const [candles, quoteUsdc] = await Promise.all([fetchCandles(coin.symbol, range), fetchQuote(coin).catch(() => null)]);
-  if (!candles.length) throw new Error(`no candles for ${coin.symbol}`);
-  return buildScreen({ coin, range, candles, quoteUsdc, coinIndex, coinCount: COINS.length });
+  const key = `${coin.symbol}/${range.label}`;
+  const [c, q] = await Promise.allSettled([fetchCandles(coin.symbol, range), fetchQuote(coin)]);
+  const prev = lastGood.get(key) || {};
+  const candles = c.status === 'fulfilled' && c.value.length ? c.value : prev.candles;
+  const quoteUsdc = q.status === 'fulfilled' ? q.value : prev.quoteUsdc ?? null;
+  if (!candles) throw new Error(`no candles for ${coin.symbol} (${c.reason?.message || 'empty'})`);
+  lastGood.set(key, { candles, quoteUsdc });
+  const scr = buildScreen({ coin, range, candles, quoteUsdc, coinIndex, coinCount: COINS.length });
+  scr.stale = c.status !== 'fulfilled' || q.status !== 'fulfilled';
+  return scr;
 }

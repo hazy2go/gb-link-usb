@@ -83,3 +83,11 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Cause: RP2350 GPIO default pull-down plus the E9 input leakage erratum (verify exact wording in the RP2350 datasheet errata) holds the node near 2 V against the shifter's 10k pull-up; reads as 0. RP2040 doesn't have this, so upstream never saw it.
 - Fix: `gpio_pull_up(PIN_SIN)` after PIO init (patch item 4). Result: replies **FF FF FF FF FF FF**. Correct for no GB.
 - For our own firmware: enable pull-ups (or disable pull-downs) on every input that goes through the BSS138 shifter.
+
+## 2026-10-15 First light with the Game Boy: clock intermittent, data FF both ways
+- GB running `linktest.gb`, cable in the GB link port, Pico on first-light firmware (with pull-up fix).
+- `tools/linktest.py`: all FF. GB screen stayed 00 / 0000: no clock reached the GB.
+- Clock burst (bytes sent nonstop): Pico pin 1 (GP0) ~1.9 V average (clock leaves the Pico), LV1 3.3 V, HV1 steady 5 V (nothing passes the module). Continuity pin 1 to LV1 pin and pin 4 to LV3 pin: OK. So: LV1 header pin not contacting the module pad (press-fit), same as HV1/HV4 earlier.
+- Pressing/wiggling the module during bursts: GB counter moves (0005, later 000A, 000B), so the clock gets through when the module makes contact. GB always shows last byte FF; the Pico never received anything but FF (61,584 and 119,211 bytes sent, 0 non-FF replies).
+- Swapped red/orange (red to HV3, orange to HV2) on the theory that the data lines were crossed: no change, still FF both ways. So the swap theory is not confirmed; current wiring after the swap: red = HV3, orange = HV2 (verify which is right once contacts are solid).
+- Conclusion: press-fit headers make every channel unreliable. Next: solder the shifter headers, re-run continuity incl. module pads, then re-test both wire orders.

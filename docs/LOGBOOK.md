@@ -70,3 +70,9 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 ## 2026-10-15 Breadboard wired, continuity checked (power off)
 - Wired per `docs/breadboard.html`. Cable wires joined to male jumpers (wrapped, taped).
 - Continuity (Hazy, multimeter): plug 6 to Pico GND pin 38, plug 5 to HV1, plug 2 to HV2, plug 3 to HV3: all beep. No short between pins 36/40, 36/38, 40/38. Photo not usable, so these checks replace it.
+
+## 2026-10-15 Power-up check (GB not connected)
+- Meter: M-01FB, DC V on 20 V range. Black on Pico pin 38 (GND).
+- Pico pin 40 (VBUS) 4.7 V. Shifter HV first read 2.7 V: VBUS jumper not in the HV row (breadboard row mix-up), fixed: HV 4.8 V. LV ~3.3 V, LV1 ~3.3 V.
+- HV1 (and HV4) read ~2.8 V with HV at 4.8 V: module HV net unpowered, only leakage from the 3.3 V side through the MOSFET body diode (3.3 V - ~0.5 V). Cause: loose press-fit header pins not contacting the module pads. After reseating: HV1 4.8 V.
+- Lesson: press-fit headers are unreliable; solder the shifter headers before relying on it (PLAN.md already said so for permanent use).

@@ -76,7 +76,7 @@ Pins 1 (5 V) and 4 (SD) are usually not in the cable and are not needed. Leave t
     <td>
       <p>Press the Pico into the middle of the breadboard, USB end up. Each cable wire goes into a free hole in the same row as its Pico pin, on the left side of the gap.</p>
       <p>Nothing else is connected: no level shifter, no power wires.</p>
-      <p>Hole-by-hole drawing: <a href="docs/breadboard.html"><code>docs/breadboard.html</code></a> (open it in a browser).</p>
+      <p>Hole-by-hole drawing: <a href="https://hazy2go.github.io/gb-link-usb/breadboard.html">interactive wiring page</a>.</p>
       <blockquote><strong>Power order matters.</strong> Plug the Pico into USB <em>before</em> switching the Game Boy on, and switch the Game Boy off <em>before</em> unplugging the Pico. The RP2350 tolerates 5 V on its pins only while it is powered.</blockquote>
     </td>
   </tr>
@@ -100,11 +100,9 @@ Every print is saved in **Pictures → GameBoy Prints**, at original size and at
 
 ### Any computer: the web page
 
-```sh
-cd web && python3 -m http.server 8000
-```
+Open **<https://hazy2go.github.io/gb-link-usb/>** in Chrome or Edge, click **Connect Pico**, and print. Prints appear on the page with a PNG download link. Nothing to install.
 
-Open <http://localhost:8000> in Chrome or Edge, click **Connect Pico**, and print. Prints appear on the page with a PNG download link.
+<sub>To run it locally instead: `cd web && python3 -m http.server 8000`, then open http://localhost:8000.</sub>
 
 <p align="center">
   <img src="docs/img/web-app.png" alt="The web page after decoding a print: buttons for Connect Pico, Save capture, Decode, Open file, Demo print, and the decoded 160 by 144 image" width="720">

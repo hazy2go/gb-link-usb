@@ -178,3 +178,6 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 ## 2026-10-16 v0.2.0 release
 - README: SODAX section with screenshots (re-rendered with the A:LOAD footer), troubleshooting row, layout, roadmap (general PC link done).
 - Release v0.2.0: gb_link_usb.uf2 (printer + bridge mode), sodax.gb, printtest.gb, linktest.gb, SHA256SUMS. Clean builds; host tests and decoder tests pass.
+
+## 2026-10-16 Web page on GitHub Pages
+- `.github/workflows/pages.yml` runs the decoder tests and publishes web/ + the wiring drawing to https://hazy2go.github.io/gb-link-usb/ on push. First run: success; live page checked in headless Chrome (demo decodes: 12 packets). README points to the live page. Correction: the WiFi cart repo is at ~/wifi-game-boy-cartridge (CLAUDE.md said ~/projects/...).

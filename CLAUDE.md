@@ -10,7 +10,8 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
 - Never spend money or place orders; buying is Hazy's job.
 - Never cut or modify the **MGB-004 adapter** or the spare DMG-04 (printer setup).
 
-## Where things stand (2026-10-15)
+## Where things stand (2026-10-16)
+- **Public repo, MIT license** (firmware/firstlight/ GPL-3.0). Release **v0.1.0** has the printer firmware .uf2. README has user-facing setup; keep it in sync when behaviour changes.
 - **Printer emulator works:** `firmware/` (our code) prints from the Game Boy to a PNG (first print 2026-10-15, LOGBOOK). Capture: `python3 tools/printcap.py`, render: `node tools/render.mjs`, or the web page (Web Serial). Test ROMs in `rom/` (linktest, printtest).
 - **First light done:** Mac <-> Pico 2 W <-> DMG works both ways (1000 bytes, 0 errors). Direct wiring, no shifter (RP2350 GPIOs are 5 V tolerant while powered; Pico on USB before the GB). Wiring: green GP0, red GP1, orange GP2, blue GND. First-light firmware = stacksmashing + patch in `firmware/firstlight/`.
 - One DMG-04 cut and mapped: red = SOUT (2), orange = SIN (3), green = SCK (5), blue = GND (6), shield = shell (LOGBOOK). Web printer decoder in `web/` works on test data (7 tests pass), not yet on real printer data.

@@ -29,6 +29,12 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
 4. ~~**Printer emulator**~~ works (first print 2026-10-15); still to test: more games, web page live. following mofosyne's emulator and Pan Docs (`docs/PROTOCOL.md`); web page in `web/` renders received tiles to PNG. Test with Pokémon Pikachu.
 5. Raw bridge mode + online link mode.
 6. Own PCB in `hw/` (KiCad): rev A designed and checked; Hazy orders (hold points in ORDER.md), then bring-up with `-DGBLINK_BOARD=revA`.
+   **Before ordering rev A** (Hazy; details in `hw/rev-a/fab/ORDER.md`):
+   - [ ] L1 inductor AOTA-B201610S3R3-101-T: JLC has 4, 5 boards need ~10. Order 2-3 boards, use JLC global sourcing, or wait. No substitute (RPi requires the polarity-marked part).
+   - [ ] In JLC's placement preview: L1 dot sits on the board's silk dot (JLC's footprint marks disagree, verify).
+   - [ ] In the preview: D101 LED cathode on the GND pad; pin 1 of U1, U3, U101-U105; J101 USB-C flush with the edge.
+   - [ ] At upload: JLC accepts 0.25 mm vias on 2 layers (verify).
+   - [ ] Cable: wire gauge fits the 0.5 mm pad holes (verify on the cable).
 
 ## Notes
 - Prior-art code is GPL-3 (stacksmashing, mofosyne). If we copy from it, our firmware is GPL-3 too.

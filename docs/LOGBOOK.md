@@ -52,3 +52,8 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Their pins (from source): GPIO0 = SCK (Pico is clock master), GPIO1 = in from GB SOUT, GPIO2 = out to GB SIN.
 - **Decision: shifter HV side powered from Pico VBUS (pin 40, 5 V from USB).** Why: our cable has no 5 V wire (pin 1 empty), and GB VCC must never go to the Pico's 3V3. LV side from Pico 3V3(OUT) (pin 36).
 - Note (verify): with the Pico on USB and the Game Boy off, the shifter's 10k pull-ups feed a little current into the GB's pins. Small (5 V / 10k = 0.5 mA per line), but turn the GB on before plugging the Pico in when possible.
+
+## 2026-10-15 Pico 2 W alive
+- BOOTSEL drive "RP2350" appears (INFO_UF2: UF2 Bootloader v1.0, RP2350). picotool sees chip RP2350 QFN60.
+- `picotool load` failed at 13% (`picoboot::connection_error`), cause unknown (cable/macOS?). Copying the .uf2 onto the drive works.
+- Test program (USB serial + LED): prints "hello from pico 2 w" twice a second on /dev/cu.usbmodem11101. Toolchain + board confirmed end to end.

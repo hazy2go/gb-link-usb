@@ -6,7 +6,7 @@
 // Usage: node tools/gbprint.mjs [--out <folder>] [--file <capture.bin>]
 //   --file decodes a saved capture instead of the Pico (for testing).
 import { execFileSync, spawn } from 'node:child_process';
-import { createReadStream, existsSync, mkdirSync, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
+import { closeSync, constants, existsSync, mkdirSync, openSync, read, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { parsePackets, assembleImages } from '../web/gbprinter.js';
@@ -18,7 +18,7 @@ const IDLE_MS = 30000;   // after this long without data, an unfinished print is
 mkdirSync(join(OUT, 'raw'), { recursive: true });
 
 const stamp = () => new Date().toLocaleTimeString('en-GB');
-const log = (s) => console.log(`${stamp()}  ${s}`);
+const log = (s) => { const line = `${stamp()}  ${s}`; console.log(line); try { appendFileSync(join(OUT, 'gbprint.log'), line + '\n'); } catch { /* ignore */ } };
 const fileStamp = () => { const d = new Date(), p = (n) => String(n).padStart(2, '0');
   return `${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`; };
 
@@ -66,7 +66,7 @@ if (file) {
 const PICO_VID = 0x2e8a;
 function findPort() {
   try {
-    const tree = execFileSync('ioreg', ['-r', '-c', 'IOUSBHostDevice', '-l', '-w0'], { encoding: 'utf8' });
+    const tree = execFileSync('ioreg', ['-r', '-c', 'IOUSBHostDevice', '-l', '-w0'], { encoding: 'utf8', maxBuffer: 64 << 20 });
     for (const dev of tree.split(/^\+-o /m)) {
       if (!dev.includes(`"idVendor" = ${PICO_VID}`)) continue;
       const m = dev.match(/"IOCalloutDevice" = "([^"]+)"/);
@@ -76,22 +76,46 @@ function findPort() {
   return null;
 }
 
+// Read the port ourselves: open it first and keep it open (so the raw mode set by
+// stty sticks), non-blocking, and treat "no data right now" as waiting, not as
+// end of stream. Unplugging shows up as a read error or the device vanishing.
 function connect() {
   const port = findPort();
   if (!port) { setTimeout(connect, 1000); return; }
+  let fd;
   try {
-    execFileSync('stty', ['-f', port, 'raw', '-echo']);   // binary, no line editing
-  } catch { setTimeout(connect, 1000); return; }
+    fd = openSync(port, constants.O_RDONLY | constants.O_NOCTTY | constants.O_NONBLOCK);
+    execFileSync('stty', ['-f', port, 'raw', '-echo']);
+  } catch (e) {
+    if (fd !== undefined) closeSync(fd);
+    setTimeout(connect, 1000); return;
+  }
   log(`Pico connected (${port}). Print from the Game Boy.`);
-  const s = createReadStream(port, { highWaterMark: 1024 });
-  s.on('data', (chunk) => {
-    if (!rawFile) rawFile = join(OUT, 'raw', `capture-${fileStamp()}.bin`);
-    onData(chunk);
-  });
-  const retry = (why) => { log(`Pico disconnected (${why}). Waiting...`); s.destroy(); setTimeout(connect, 1000); };
-  s.on('error', (e) => retry(e.code || e.message));
-  s.on('end', () => retry('end'));
+  const chunk = Buffer.alloc(4096);
+  let lastCheck = Date.now();
+  const lost = (why) => {
+    try { closeSync(fd); } catch { /* already gone */ }
+    log(`Pico disconnected (${why}). Waiting...`);
+    setTimeout(connect, 1000);
+  };
+  const poll = () => {
+    readFile_(fd, chunk, (err, n) => {
+      if (err && err.code !== 'EAGAIN') return lost(err.code || err.message);
+      if (n > 0) {
+        if (!rawFile) rawFile = join(OUT, 'raw', `capture-${fileStamp()}.bin`);
+        onData(chunk.subarray(0, n));
+        return setImmediate(poll);
+      }
+      if (Date.now() - lastCheck > 1000) {        // quiet: is the Pico still there?
+        lastCheck = Date.now();
+        if (!existsSync(port)) return lost('unplugged');
+      }
+      setTimeout(poll, 10);
+    });
+  };
+  poll();
 }
+const readFile_ = (fd, b, cb) => read(fd, b, 0, b.length, null, cb);
 
 console.log(`Game Boy Printer -> PNG\nSaving to: ${OUT}\n`);
 log('Waiting for the Pico...');

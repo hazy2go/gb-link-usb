@@ -143,3 +143,8 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Capture: INIT, 9 x DATA (640 bytes), empty DATA, PRINT (4 bytes), then STATUS polls; 117 packets, 0 checksum errors.
 - `node tools/render.mjs`: one 160x144 image, a Pocket Camera photo with its frame, decoded correctly (palette assumption 0xE4 holds for this print). Saved locally as captures/first-print.png (captures/ is not committed).
 - Firmware, decoder, and status emulation confirmed on real hardware for this game. Still to try: other printer games (compression, multi-part prints), the live web page.
+
+## 2026-10-15 Hands-free print tool for Hazy
+- `GB Printer.command` (double-click) runs `tools/gbprint.mjs`: waits for the Pico, saves each finished print to ~/Pictures/GameBoy Prints as PNG (1x + 4x), plays a sound, survives unplug/replug, keeps raw captures in `raw/`.
+- Decoder marks the last image `open` when no feed-after has closed it yet (multi-part prints), so the tool waits instead of saving half a print; after 30 s quiet it saves whatever is there.
+- PNG encoder moved to `tools/png.mjs` (shared with render.mjs). Checked: `--file` on the first-print capture saves 160x144 + 640x576 PNGs; live run connects to the Pico. Decoder tests 8/8.

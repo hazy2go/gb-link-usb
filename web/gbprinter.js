@@ -99,13 +99,14 @@ export function assembleImages(packets) {
   let buffer = [];
   let strips = [];
 
-  const flush = () => {
+  // open = the last image may still grow (no feed-after yet), e.g. mid-way through a multi-part print
+  const flush = (open = false) => {
     if (!strips.length) return;
     const height = strips.reduce((h, s) => h + s.height, 0);
     const shades = new Uint8Array(WIDTH * height);
     let off = 0;
     for (const s of strips) { shades.set(s.shades, off); off += s.shades.length; }
-    images.push({ width: WIDTH, height, shades });
+    images.push({ width: WIDTH, height, shades, open });
     strips = [];
   };
 
@@ -128,7 +129,7 @@ export function assembleImages(packets) {
       if ((margins & 0x0f) !== 0) flush();
     }
   }
-  flush();
+  flush(true);
   if (buffer.length) warnings.push(`${buffer.length} bytes of DATA never printed`);
   return { images, warnings };
 }

@@ -7,6 +7,15 @@ Sources: Pan Docs (gbdev.io/pandocs: "Serial Data Transfer (Link Cable)" and "Ga
 - Pins (Pan Docs): **1 VCC (5 V)**, **2 SOUT** (serial out), **3 SIN** (serial in), **4 SD** (unused in normal play), **5 SCK** (clock), **6 GND**. Physical layout of the socket, flat side up: 2, 4, 6 on the top row and 1, 3, 5 on the bottom (verify on our plug).
 - The link cable **crosses SOUT and SIN**, so one side's SOUT goes to the other side's SIN.
 - Don't power anything from the link-port VCC; the Pico is powered from USB.
+- Pin numbering at the **cable end** (mofosyne's printer emulator README, matches Pan Docs):
+  ```
+   ___________
+  |  6  4  2  |
+   \_5__3__1_/    (looking into the cable plug)
+  ```
+  1 = 5 V, 2 = SOUT, 3 = SIN, 4 = SD, 5 = SCK (clock), 6 = GND. A 4-wire cable carries 2, 3, 5 and 6.
+- mofosyne: **"SIN and SOUT are crossed inside the cable. Wire colour is not a reliable guide."** If nothing arrives, swap the two data lines (in software is fine). So the only wires that must be identified for sure are **GND and SCK**.
+- Avoid purple GBA link cables (AGB-005): different pinout.
 - **Our cut cable:** wire colors are not standard between cables. Map each wire to a plug pin before wiring (continuity check, multimeter or a Pico test script). Record the mapping in LOGBOOK.
 
 ## Serial transfer

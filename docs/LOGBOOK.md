@@ -118,3 +118,13 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Final working wiring (direct, Pico 2 W only): green (plug 5, SCK) to GP0 / pin 1; red (plug 2, GB SOUT) to GP1 / pin 2; orange (plug 3, GB SIN) to GP2 / pin 4; blue (plug 6) to GND / pin 3; shield unconnected. The measured pin map was right all along.
 - Pico is clock master at ~9.2 kHz (calculated, not measured). Power rule: Pico on USB before the GB is on (RP2350 FT pins need IOVDD for 5 V).
 - Level shifter: parked until the headers can be soldered. Not needed for the RP2350 per datasheet; still wanted on our PCB for ESD/robustness (decide in stage 3).
+
+## 2026-10-15 Printer emulator firmware (built, not yet run on hardware)
+- `firmware/`: our own firmware. Core 1: PIO clock-slave link + printer state machine; core 0: USB CDC raw byte stream + LED. Pico SDK stdio_usb (so `picotool reboot` works without BOOTSEL).
+- **Decision: USB CDC + Web Serial instead of WebUSB.** Why: no custom descriptors or landing-page URL needed, Chrome/Edge read CDC directly, and the same port works from Python. Revisit if we need a non-serial interface.
+- Clock edge for slave mode: same as proven in first light (change on SCK fall, sample on rise). Pan Docs doesn't state the edge.
+- Reply timing: PIO autopull means replies are queued two bytes ahead; printer returns the reply for byte i+2. Dummy replies (0x81, status) are decided at checksum time, exactly two bytes before. Documented in firmware/README.md.
+- Status behaviour follows mofosyne's emulator (read for behaviour, code is ours): checked his gbp_serial_io.cpp (commit 43aa5ca). One difference: we report checksum errors (status bit 0) as a real printer does; mofosyne has that disabled. The web decoder now skips bad-checksum packets (the game resends).
+- Host test `make -C firmware/test`: all pass. Status after PRINT: 04, 04, 06 x20, 04, 00.
+- Firmware builds for pico2_w, 0 warnings. Web: 8/8 tests; page gets Connect Pico (Web Serial) + Save capture. Tools: `tools/printcap.py`, `tools/render.mjs` (PNG from capture; checked on a synthetic capture: 160x144 PNG).
+- Next: flash, print from Pokémon Pikachu.

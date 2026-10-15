@@ -31,9 +31,11 @@
 <body>
 <main>
   <h1>Game Boy Printer</h1>
-  <p class="sub">Decodes printer packets into PNGs. Paste a hex dump, open a log file, or try the demo. Live input over WebUSB comes with the firmware.</p>
+  <p class="sub">Decodes printer packets into PNGs. Connect the Pico (Chrome or Edge) and print from the Game Boy, or paste a hex dump, open a capture file, or try the demo.</p>
 
   <div class="bar">
+    <button id="connect">Connect Pico</button>
+    <button id="save" disabled>Save capture</button>
     <button id="decode">Decode</button>
     <label class="btn">Open file<input id="file" type="file" hidden></label>
     <button id="demo">Demo print</button>
@@ -59,21 +61,62 @@ function show(bytes) {
     `${images.length} image(s)`,
     ...warnings,
   ].join('\n');
-  for (const img of images) {
-    const c = document.createElement('canvas');
-    c.width = img.width; c.height = img.height;
-    c.getContext('2d').putImageData(new ImageData(toRGBA(img), img.width, img.height), 0, 0);
-    const url = c.toDataURL('image/png');
-    const fig = document.createElement('figure');
-    const name = `gbprint-${new Date().toISOString().replace(/[:.]/g, '-')}.png`;
-    fig.innerHTML = `<img alt="print"><figcaption><span>${img.width}×${img.height}</span><a download="${name}">PNG</a></figcaption>`;
-    fig.querySelector('img').src = url;
-    fig.querySelector('a').href = url;
-    $('gallery').prepend(fig);
-  }
+  for (const img of images) addImage(img);
+}
+
+function addImage(img) {
+  const c = document.createElement('canvas');
+  c.width = img.width; c.height = img.height;
+  c.getContext('2d').putImageData(new ImageData(toRGBA(img), img.width, img.height), 0, 0);
+  const url = c.toDataURL('image/png');
+  const fig = document.createElement('figure');
+  const name = `gbprint-${new Date().toISOString().replace(/[:.]/g, '-')}.png`;
+  fig.innerHTML = `<img alt="print"><figcaption><span>${img.width}×${img.height}</span><a download="${name}">PNG</a></figcaption>`;
+  fig.querySelector('img').src = url;
+  fig.querySelector('a').href = url;
+  $('gallery').prepend(fig);
 }
 
 $('decode').onclick = () => show(parseHex($('hex').value));
+
+// Live input: the firmware streams every byte the Game Boy sends over USB serial.
+let live = [], shown = 0;
+$('connect').onclick = async () => {
+  if (!('serial' in navigator)) { $('log').textContent = 'This browser has no Web Serial. Use Chrome or Edge on desktop.'; return; }
+  let port;
+  try {
+    port = await navigator.serial.requestPort({ filters: [{ usbVendorId: 0x2e8a }] }); // Raspberry Pi
+    await port.open({ baudRate: 115200 });
+  } catch (e) { $('log').textContent = `Could not open the Pico: ${e.message}`; return; }
+  $('connect').disabled = true; $('connect').textContent = 'Connected';
+  $('save').disabled = false;
+  live = []; shown = 0;
+  $('log').textContent = 'Connected. Print from the Game Boy.';
+  const reader = port.readable.getReader();
+  try {
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      for (const b of value) live.push(b);
+      const packets = parsePackets(Uint8Array.from(live));
+      const { images, warnings } = assembleImages(packets);
+      for (; shown < images.length; shown++) addImage(images[shown]);
+      $('log').textContent = [`Live: ${live.length} bytes, ${packets.length} packets, ${images.length} print(s)`, ...warnings.slice(-3)].join('\n');
+    }
+  } catch (e) {
+    $('log').textContent = `Pico disconnected (${e.message}). ${live.length} bytes captured.`;
+  } finally {
+    reader.releaseLock();
+    $('connect').disabled = false; $('connect').textContent = 'Connect Pico';
+  }
+};
+
+$('save').onclick = () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([Uint8Array.from(live)], { type: 'application/octet-stream' }));
+  a.download = `gbprinter-capture-${new Date().toISOString().replace(/[:.]/g, '-')}.bin`;
+  a.click();
+};
 
 $('file').onchange = async (e) => {
   const f = e.target.files[0];

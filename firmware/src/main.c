@@ -8,19 +8,18 @@
 // the PC closes the port.
 //
 // Core 1 runs the link (PIO + reply logic); core 0 does USB and the LED.
+// Pins per board: board.h (breadboard or PCB rev A).
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 #include "pico/util/queue.h"
-#include "pico/cyw43_arch.h"
 #include "hardware/pio.h"
 #include "gb_link.pio.h"
 #include "printer.h"
-
-// Wiring (docs/breadboard.html): plug 5 SCK, plug 2 GB SOUT, plug 3 GB SIN.
-#define PIN_SCK  0
-#define PIN_IN   1   // from GB SOUT
-#define PIN_OUT  2   // to GB SIN
+#include "board.h"
+#ifdef LED_CYW43
+#include "pico/cyw43_arch.h"
+#endif
 
 // A gap this long on the link ends any half-received packet and re-aligns the
 // PIO to a byte boundary (the GB pauses far less than this inside a packet).
@@ -40,6 +39,24 @@ static queue_t rx_queue;            // bytes from the GB, core 1 -> core 0
 static queue_t tx_queue;            // bridge mode: bytes for the GB, core 0 -> core 1
 static volatile bool bridge;        // false = printer mode
 static volatile uint32_t packets;   // packets seen, for the LED
+
+static bool led_init(void) {
+#ifdef LED_CYW43
+    return cyw43_arch_init() == 0;
+#else
+    gpio_init(PIN_LED);
+    gpio_set_dir(PIN_LED, GPIO_OUT);
+    return true;
+#endif
+}
+
+static void led_put(bool on) {
+#ifdef LED_CYW43
+    cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, on);
+#else
+    gpio_put(PIN_LED, on);
+#endif
+}
 
 static void link_start(void) {
     pio_sm_set_enabled(pio, sm, false);
@@ -83,7 +100,13 @@ static void core1_main(void) {
 int main(void) {
     stdio_init_all();
     stdio_set_translate_crlf(&stdio_usb, false);   // binary stream
-    bool led = cyw43_arch_init() == 0;
+    bool led = led_init();
+#ifdef PIN_SCK_DIR
+    // The Game Boy is always the clock master here: SCK translator B to A.
+    gpio_init(PIN_SCK_DIR);
+    gpio_put(PIN_SCK_DIR, 0);
+    gpio_set_dir(PIN_SCK_DIR, GPIO_OUT);
+#endif
 
     pio = pio0;
     sm = pio_claim_unused_sm(pio, true);
@@ -119,10 +142,10 @@ int main(void) {
         if (led) {
             if (packets != seen) {
                 seen = packets;
-                cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, true);
+                led_put(true);
                 led_off = make_timeout_time_ms(80);
             } else if (!is_nil_time(led_off) && time_reached(led_off)) {
-                cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, false);
+                led_put(false);
                 led_off = nil_time;
             }
         }

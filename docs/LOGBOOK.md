@@ -223,3 +223,8 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - **Pin audit catch: the LED.** JLC's KT-0805G symbol has pin 1 = A, KiCad's LED has pad 1 = K. Matching pads by number put it backwards (the CPL said rot +180). `make_cpl.py` now renumbers JLC's pads for C2297 (PAD_MAP); D101 now rot 0 with A on A. Other LOOK lines are naming only (checked by hand: USB-C combined pins, NCP1117 1 GND/2 OUT/3 IN/tab OUT, crystal 2/4 GND, LVC1T45 pin 3 = A).
 - L1 orientation: JLC's footprint polarity marker (EasyEDA polarity layer) is at pad 1, like RPi's silk dot, but its silk dot is at pad 2 (verify in JLC's preview). Hold point in ORDER.md.
 - DRC still 0 errors / 0 warnings / parity 0. Files: `hw/rev-a/fab/`.
+
+## 2026-10-16 Firmware: pin map per board
+- `firmware/src/board.h` + cmake `-DGBLINK_BOARD=breadboard|revA` (default breadboard, unchanged pins GP0/1/2, LED via the CYW43).
+- revA: GP12 SCK, GP13 data in, GP14 data out, GP11 = U102 DIR driven low at boot (Game Boy drives SCK; R103 already pulls it low before the firmware runs), LED on GP21. Builds as PICO_BOARD=pico2 (same RP2350A, same ABM8-272-T3 crystal; flash setting 4 MB on a 16 MB chip is fine) without the CYW43 library.
+- Both builds compile with no warnings (Arm GCC 15.3, SDK 2.3.1). Not tested on hardware: the Pico was not connected; rev A can only be tested once boards exist (verify).

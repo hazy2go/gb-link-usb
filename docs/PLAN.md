@@ -30,7 +30,7 @@ Not yet: a multimeter (~¥1,500) would make mapping the cut cable easy.
 - KiCad, checked like the cart (ERC/DRC, JLC parts check), JLC-assembled. 3D-printed case.
 
 ## Open questions
-- Does the RP2350 tolerate 5 V on its inputs? (RP2350 datasheet; we use a level shifter anyway until checked.)
+- Does the RP2350 tolerate 5 V on its inputs? **Yes, while powered**: GPIOs are FT, up to 5.5 V with IOVDD at 3.3 V (RP2350 datasheet, table 1683). Not when unpowered. See LOGBOOK 2026-10-15.
 - Does a 3.3 V high reach the DMG's input threshold reliably? (Level shifter makes this moot.)
 - BSS138 shifters slow down fast edges: fine at 8 kHz, check if we run the external clock fast.
 - License: building on stacksmashing / mofosyne code means GPL-3 for the firmware.

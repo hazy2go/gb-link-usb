@@ -12876,6 +12876,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C97521"
+			(at 72.39 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Serial NOR Flash, QSPI, 3V, 128Mbit, SOIC-8"
 			(at 72.39 135.89 0)
 			(hide yes)
@@ -13272,6 +13283,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C25744"
+			(at 58.42 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Resistor, Chip, 10kR, M1005, 63mW, 1%"
 			(at 58.42 119.38 0)
 			(hide yes)
@@ -13541,6 +13563,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M1005\\MURATA_GRM155R71E104KE14D\\datasheets"
+			(at 90.17 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1525"
 			(at 90.17 133.35 0)
 			(hide yes)
 			(show_name no)
@@ -13962,6 +13995,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C25100"
+			(at 269.24 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Resistor, Chip, 27R, M1005, 63mW, 1%"
 			(at 269.24 66.04 0)
 			(hide yes)
@@ -14231,6 +14275,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Resistors\\Chip\\M1005\\YAGEO_RC0402FR-07.autogen\\datasheets"
+			(at 269.24 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C25100"
 			(at 269.24 74.93 0)
 			(hide yes)
 			(show_name no)
@@ -14674,6 +14729,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C1525"
+			(at 285.75 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Capacitor, MLCC, 100nF, 10%, M1005, 25V, X7R"
 			(at 285.75 36.83 0)
 			(hide yes)
@@ -14921,6 +14987,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M1005\\MURATA_GRM155R71E104KE14D\\datasheets"
+			(at 297.18 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1525"
 			(at 297.18 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -15188,6 +15265,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C1525"
+			(at 308.61 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Capacitor, MLCC, 100nF, 10%, M1005, 25V, X7R"
 			(at 308.61 36.83 0)
 			(hide yes)
@@ -15435,6 +15523,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M1005\\MURATA_GRM155R71E104KE14D\\datasheets"
+			(at 320.04 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1525"
 			(at 320.04 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -15702,6 +15801,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C1525"
+			(at 331.47 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Capacitor, MLCC, 100nF, 10%, M1005, 25V, X7R"
 			(at 331.47 36.83 0)
 			(hide yes)
@@ -15959,6 +16069,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C1525"
+			(at 342.9 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Capacitor, MLCC, 100nF, 10%, M1005, 25V, X7R"
 			(at 342.9 36.83 0)
 			(hide yes)
@@ -16206,6 +16327,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Integrated_Circuits\\Power\\LDO\\ONSEMI_NCP1117ST33T3G\\datasheets"
+			(at 76.2 41.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C26537"
 			(at 76.2 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -16677,6 +16809,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C15850"
+			(at 58.42 52.07 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Capacitor, MLCC, 10uF, 10%, M2012, 16V, X5R"
 			(at 58.42 52.07 0)
 			(hide yes)
@@ -16935,6 +17078,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M2012\\MURATA_GRM21BR61C106KE15L\\datasheets"
+			(at 93.98 52.07 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C15850"
 			(at 93.98 52.07 0)
 			(hide yes)
 			(show_name no)
@@ -17434,6 +17588,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M2012\\MURATA_GRM21BR61C106KE15L\\datasheets"
+			(at 299.72 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C15850"
 			(at 299.72 142.24 0)
 			(hide yes)
 			(show_name no)
@@ -18021,6 +18186,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C1525"
+			(at 228.6 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Capacitor, MLCC, 100nF, 10%, M1005, 25V, X7R"
 			(at 228.6 36.83 0)
 			(hide yes)
@@ -18269,6 +18445,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Resistors\\Chip\\M1005\\YAGEO_RC0402FR-07.autogen\\datasheets"
+			(at 279.4 215.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C11702"
 			(at 279.4 215.9 0)
 			(hide yes)
 			(show_name no)
@@ -18710,6 +18897,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C42411118"
+			(at 207.01 152.4 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "RP2350A MCU, Dual Cortex M33/Hazard3, QFN-60"
 			(at 207.01 152.4 0)
 			(hide yes)
@@ -19089,6 +19287,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C1525"
+			(at 354.33 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Capacitor, MLCC, 100nF, 10%, M1005, 25V, X7R"
 			(at 354.33 36.83 0)
 			(hide yes)
@@ -19391,7 +19600,7 @@
 				)
 			)
 		)
-		(property "Value" "434133025816"
+		(property "Value" "SKRPABE010"
 			(at 264.16 210.82 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19413,6 +19622,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Electromechanical\\Switches\\Tactile\\WURTHELEK_434133025816\\datasheets"
+			(at 264.16 210.82 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C115360"
 			(at 264.16 210.82 0)
 			(hide yes)
 			(show_name no)
@@ -19599,6 +19819,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Resistors\\Chip\\M1005\\YAGEO_RC0402FR-07.autogen\\datasheets"
+			(at 27.94 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C11702"
 			(at 27.94 138.43 0)
 			(hide yes)
 			(show_name no)
@@ -19839,7 +20070,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
@@ -19999,6 +20230,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M1005\\MURATA_GRM155R71E104KE14D\\datasheets"
+			(at 217.17 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1525"
 			(at 217.17 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -20333,6 +20575,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Resistors\\Chip\\M1005\\YAGEO_RC0402FR-07.autogen\\datasheets"
+			(at 273.05 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C25105"
 			(at 273.05 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -20690,6 +20943,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M1005\\MURATA_GRM155R60J475ME47D\\datasheets"
+			(at 246.38 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C23733"
 			(at 246.38 101.6 0)
 			(hide yes)
 			(show_name no)
@@ -21190,6 +21454,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C1548"
+			(at 106.68 224.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Capacitor, MLCC, 15pF, 5%, M1005, 50V, C0G"
 			(at 106.68 224.79 0)
 			(hide yes)
@@ -21438,6 +21713,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M1005\\MURATA_GRM155R60J475ME47D\\datasheets"
+			(at 234.95 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C23733"
 			(at 234.95 101.6 0)
 			(hide yes)
 			(show_name no)
@@ -21774,6 +22060,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M1005\\MURATA_GRM155R60J475ME47D\\datasheets"
+			(at 273.05 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C23733"
 			(at 273.05 124.46 0)
 			(hide yes)
 			(show_name no)
@@ -22186,6 +22483,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Resistors\\Chip\\M1005\\YAGEO_RC0402FR-07.autogen\\datasheets"
+			(at 134.62 224.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C11702"
 			(at 134.62 224.79 0)
 			(hide yes)
 			(show_name no)
@@ -22629,6 +22937,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C1525"
+			(at 205.74 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Capacitor, MLCC, 100nF, 10%, M1005, 25V, X7R"
 			(at 205.74 36.83 0)
 			(hide yes)
@@ -22931,7 +23250,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "434133025816"
+		(property "Value" "SKRPABE010"
 			(at 31.115 165.0999 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22954,6 +23273,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Electromechanical\\Switches\\Tactile\\WURTHELEK_434133025816\\datasheets"
+			(at 22.86 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C115360"
 			(at 22.86 163.83 0)
 			(hide yes)
 			(show_name no)
@@ -23228,6 +23558,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C17168"
+			(at 38.1 128.27 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Description" "Resistor, Chip, 0R, M1005, 63mW, +50mR"
 			(at 38.1 128.27 0)
 			(hide yes)
@@ -23458,7 +23799,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
@@ -23797,7 +24138,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "3.3u"
+		(property "Value" "AOTA-B201610S3R3-101-T"
 			(at 227.33 101.5999 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23820,6 +24161,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Inductors\\Fixed\\M2016\\ABRACON_AOTA-B201610S3R3-101-T\\datasheets"
+			(at 226.06 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C42411119"
 			(at 226.06 101.6 0)
 			(hide yes)
 			(show_name no)
@@ -24053,7 +24405,7 @@
 				)
 			)
 		)
-		(property "Value" "12MHz"
+		(property "Value" "ABM8-272-T3"
 			(at 124.46 219.71 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24075,6 +24427,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Frequency_Timing\\Crystals\\ABRACON_ABM8-272-T3\\datasheets"
+			(at 116.84 217.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C20625731"
 			(at 116.84 217.17 0)
 			(hide yes)
 			(show_name no)
@@ -24454,7 +24817,7 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board no)
 		(in_pos_files yes)
 		(dnp no)
@@ -24659,6 +25022,17 @@
 			)
 		)
 		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Capacitors\\MLCC\\M1005\\MURATA_GRM1555C1H150JA01D\\datasheets"
+			(at 106.68 209.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1548"
 			(at 106.68 209.55 0)
 			(hide yes)
 			(show_name no)

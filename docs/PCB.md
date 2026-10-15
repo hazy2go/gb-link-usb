@@ -32,15 +32,19 @@ Base: `RPI-RP2350A-MINIMAL_R4-S1` (Raspberry Pi Ltd, MIT, from datasheets.raspbe
 |---|---|---|---|---|
 | RP2350A (QFN-60) | MCU | C42411118 | extended | 6,312 |
 | W25Q128JVSIQ (SOIC-8) | 16 MB flash | C97521 | **basic** | 66,988 |
-| X322512MSB4SI 12 MHz | crystal | C9002 | **basic** | 133,413 |
+| ABM8-272-T3 12 MHz | crystal (RPi's pick; X322512MSB4SI C9002 is 20 pF/80 ohm, off RPi's tuning) | C20625731 | extended | 6,216 |
 | SN74LVC1T45DBVR (SOT-23-6) x3 | 5 V translators | C7843 | extended | 348,868 |
 | TYPE-C-31-M-12 | USB-C receptacle (16 pin) | C165948 | extended | 380,560 |
 | USBLC6-2SC6 | USB ESD | C7519 | extended | 31,188 |
 | TPD4E05U06DQAR | link-line ESD (4 ch) | C138714 | extended | 243,275 |
-| AP2112K-3.3 (or the minimal design's NCP1117) | 3.3 V LDO | C51118 | extended | 11,635 |
+| NCP1117ST33T3G (the minimal design's LDO) | 3.3 V LDO | C26537 | extended | 61,140 |
+| AOTA-B201610S3R3-101-T | RP2350 regulator inductor (polarity-marked, RPi requires it) | C42411119 | extended | **4** (hold point) |
+| SKRPABE010 x2 | BOOTSEL/RUN buttons (Wurth 434133025816 out of stock) | C115360 | extended | 33,840 |
 | passives, LED, button | | basic parts where possible | | |
 
 W25Q16JVUXIQ (the small flash) is out of stock (2 pcs); W25Q128JVSIQ is a basic part, so it costs less overall (no extended-part fee).
+
+Order files and hold points: `hw/rev-a/fab/ORDER.md` (2026-10-16).
 
 ## Checks before any order (same rigor as the WiFi cart)
 ERC/DRC clean, parity schematic/board, every pin checked against the JLC part (`pin_audit.py` approach), JLC stock and rotations (`make_bom.py`/`make_cpl.py` approach), 3D/fit check for the case, then Hazy reviews and orders.

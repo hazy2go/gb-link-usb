@@ -161,3 +161,10 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 ## 2026-10-16 MIT license, release v0.1.0
 - Hazy chose MIT for our code; firmware/firstlight/ stays GPL-3.0 (patch of stacksmashing's firmware), noted in LICENSE and README.
 - Release v0.1.0: gb_link_usb.uf2 built clean from this commit (Pico SDK 2.3.1, Arm GCC 15.3, pico2_w), host tests and decoder tests pass before tagging.
+
+## 2026-10-16 SODAX on the Game Boy (built, emulator-tested; hardware test next)
+- Data: endpoints from `@sodax/sdk` 2.2.0 (MIT). Oracle candles `GET api.sodax.com/v1/be/oracle/candles` (138 symbols, intervals 1m/5m/1h/1d) and solver quotes `POST api.sodax.com/v1/intent/quote`, no API key. Hub token addresses + decimals from the solver oracle (chain 146). Checked live: BTC, ETH, SOL, SUI, XLM, AVAX, HYPE, POL, SODA all route to USDC. Python's urllib gets Cloudflare error 1010 (user agent); Node fetch and curl work, so the bridge is Node.
+- Firmware: bridge mode. PC sends `ESC GBBRIDGE`; then PC bytes are the Game Boy's poll replies and Game Boy bytes go to the PC; ends when the PC closes the port. Printer mode stays the default.
+- ROM `rom/sodax.gb` (ours): splash with the official SODAX lockup (icon-project/sodax-sdks docs/sodax-lockup-light.svg, MIT; brand rule: don't recreate the logo), bold 8x16 price, change + range tabs, 128x48 chart (shaded area, dotted grid, 2 px line, end marker), solver quote box, page dots, inverted bars. Updates copy a VRAM slice per VBlank (no blank flash). Font: generated 5x7, bold without closing 1 px gaps (fixed "W" looking like "V").
+- Emulator tests (PyBoy): splash; live BTC/SODA payloads injected into WRAM render correctly; a test build feeds a live ETH frame (with junk before it) through `ParseByte`: renders. **That test found a real bug**: the length check rejected frames >= 256 bytes (ours are 278); fixed. Also fixed: big price top half copied with source/destination swapped.
+- `tools/sodax-bridge.mjs` + `SODAX Bridge.command`; `--dry` prints all 9 live screens. Docs: docs/SODAX.md.

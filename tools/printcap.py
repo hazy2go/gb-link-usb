@@ -4,12 +4,13 @@
 Usage: python3 tools/printcap.py [port]     (Ctrl+C to stop)
 Writes captures/<time>.bin. Render it: node tools/render.mjs captures/<file>.bin
 """
-import glob, os, select, sys, time, tty
+import os, select, sys, time, tty
+from picoport import find_port
 
 NAMES = {0x01: 'INIT', 0x02: 'PRINT', 0x04: 'DATA', 0x08: 'BREAK', 0x0F: 'STATUS'}
-port = sys.argv[1] if len(sys.argv) > 1 else (sorted(glob.glob('/dev/cu.usbmodem*')) or [None])[0]
+port = sys.argv[1] if len(sys.argv) > 1 else find_port(0x2E8A)  # Raspberry Pi (printer firmware)
 if not port:
-    sys.exit('no /dev/cu.usbmodem* port: is the Pico plugged in?')
+    sys.exit('Pico not found: is it plugged in and running the printer firmware?')
 os.makedirs('captures', exist_ok=True)
 path = time.strftime('captures/%Y%m%d-%H%M%S.bin')
 fd = os.open(port, os.O_RDONLY | os.O_NOCTTY)

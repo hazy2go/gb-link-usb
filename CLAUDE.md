@@ -11,6 +11,7 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
 - Never cut or modify the **MGB-004 adapter** or the spare DMG-04 (printer setup).
 
 ## Where things stand (2026-10-16)
+- **Web page live:** https://hazy2go.github.io/gb-link-usb/ (GitHub Pages, deployed by `.github/workflows/pages.yml` on push to web/).
 - **SODAX on Game Boy works on hardware** (2026-10-16): firmware bridge mode + `rom/sodax.gb` + `tools/sodax-bridge.mjs` (docs/SODAX.md). Release v0.2.0.
 - **Public repo, MIT license** (firmware/firstlight/ GPL-3.0). Release **v0.1.0** has the printer firmware .uf2. README has user-facing setup; keep it in sync when behaviour changes.
 - **Printer emulator works:** `firmware/` (our code) prints from the Game Boy to a PNG (first print 2026-10-15, LOGBOOK). Capture: `python3 tools/printcap.py`, render: `node tools/render.mjs`, or the web page (Web Serial). Test ROMs in `rom/` (linktest, printtest).
@@ -30,4 +31,4 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
 
 ## Notes
 - Prior-art code is GPL-3 (stacksmashing, mofosyne). If we copy from it, our firmware is GPL-3 too.
-- WiFi cart repo for reference on process and tools: `~/projects/wifi-game-boy-cartridge` (its CLAUDE.md).
+- WiFi cart repo for reference on process and tools: `~/wifi-game-boy-cartridge` (its CLAUDE.md).

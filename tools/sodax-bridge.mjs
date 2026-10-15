@@ -47,7 +47,7 @@ async function sendScreen(why) {
   try {
     const scr = await loadScreen(coin, RANGES[range]);
     if (fd !== null) writeAll(frame(scr.payload));
-    log(`${COINS[coin].symbol} ${RANGES[range].label} sent (${why}): ${scr.lines[1].trim()}  ${scr.lines[2].slice(0, 9).trim()}  ${scr.lines[6].trim()}`);
+    log(`${COINS[coin].symbol} ${RANGES[range].label} sent (${why}): ${scr.lines[1].trim()}  ${scr.lines[2].slice(0, 9).trim()}  ${scr.lines[6].trim()}${scr.stale ? '  (some data from the last update: SODAX did not answer)' : ''}`);
   } catch (e) {
     log(`SODAX request failed: ${e.message}`);
   }

@@ -2,7 +2,7 @@
 
 The product version of the breadboard: a small USB-C dongle with a built-in Game Boy link cable. No soldering, no cut cables for the user, safe in any power order. Same firmware as the breadboard (plus one direction pin).
 
-Status 2026-10-16: **spec and part choice.** Nothing drawn yet. Never ordered: ordering is Hazy's job.
+Status 2026-10-16: **schematic and board routed, DRC 0 errors.** Next: fab outputs and JLC checks. Pins on the board: GP12 SCK, GP13 data from GB, GP14 data to GB, GP11 SCK direction, GP21 LED (see LOGBOOK). Never ordered: ordering is Hazy's job.
 
 ## Decisions (Hazy, 2026-10-16)
 - **Built-in cable**: a short link cable soldered to the board (half of a cut cable; one cable makes two boards). Big plug = DMG version, small plug = Pocket/Color/Advance version. Same PCB.

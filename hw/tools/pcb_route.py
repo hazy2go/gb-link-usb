@@ -164,22 +164,44 @@ def fill():
     print('zones refilled')
 
 
-def main(passes):
+def drc_open():
+    """Unconnected items + copper errors after routing (kicad-cli DRC on the real board)."""
+    import json, tempfile
+    out = os.path.join(tempfile.mkdtemp(), 'drc.json')
+    subprocess.run(['kicad-cli', 'pcb', 'drc', '--format', 'json', '-o', out, PCB], capture_output=True)
+    d = json.load(open(out))
+    errors = [v for v in d['violations'] if v['severity'] == 'error']
+    return len(d.get('unconnected_items', [])) + len(errors)
+
+
+def main(passes, attempts=6):
+    """Freerouting is not deterministic: route, check with DRC, and retry from the same start until clean."""
     import shutil
     me = [sys.executable, os.path.abspath(__file__)]
     os.makedirs(WORK, exist_ok=True)
-    shutil.copy(PCB, COPY)
-    shutil.copy(PCB, COPY)
-    for step in ('prep', 'prep2', 'export'):
-        subprocess.run(me + [step], check=True)
-    log = open(os.path.join(WORK, 'freerouting.log'), 'w')
-    r = subprocess.run([JAVA, '-jar', JAR, '-de', DSN, '-do', SES, '-mp', str(passes), '--gui.enabled=false'],
+    start = os.path.join(WORK, 'pre-route.kicad_pcb')
+    shutil.copy(PCB, start)
+    best = None
+    for attempt in range(1, attempts + 1):
+        shutil.copy(start, PCB)
+        shutil.copy(PCB, COPY)
+        for step in ('prep', 'prep2', 'export'):
+            subprocess.run(me + [step], check=True, capture_output=True)
+        log = open(os.path.join(WORK, 'freerouting.log'), 'w')
+        subprocess.run([JAVA, '-jar', JAR, '-de', DSN, '-do', SES, '-mp', str(passes), '--gui.enabled=false'],
                        stdout=log, stderr=subprocess.STDOUT)
-    print('freerouting exit', r.returncode, '(log: hw/rev-a/route/freerouting.log)')
-    if not os.path.exists(SES):
-        sys.exit('no SES written')
-    for step in ('importses', 'tidy', 'fill'):
-        subprocess.run(me + [step], check=True)
+        if not os.path.exists(SES):
+            continue
+        for step in ('importses', 'tidy', 'fill'):
+            subprocess.run(me + [step], check=True, capture_output=True)
+        n = drc_open()
+        print(f'attempt {attempt}: {n} open connections / DRC errors')
+        if best is None or n < best[0]:
+            best = (n, open(PCB).read())
+        if n == 0:
+            break
+    open(PCB, 'w').write(best[1])
+    print('kept the best result:', best[0], 'open/errors')
 
 
 if __name__ == '__main__':

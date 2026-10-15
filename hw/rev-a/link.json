@@ -294,11 +294,11 @@
         "3": "GND",
         "8": "GND",
         "6": "NC",
-        "7": "NC",
-        "9": "NC",
-        "10": "NC"
+        "7": "LINK_SI",
+        "9": "LINK_SO",
+        "10": "LINK_SCK"
       },
-      "why": "ESD on the three link lines at the cable entry (5.5 V working voltage, fits 5 V signals)"
+      "why": "ESD on the three link lines at the cable entry (5.5 V working voltage, fits 5 V signals). NC pins 10/9/7 tied to the line on the opposite pad (1/2/4): TI datasheet pin table, 'Not connected; Used for optional straight-through routing. Can be left floating or grounded'."
     },
     {
       "ref": "J102",
@@ -313,7 +313,8 @@
         "4": "LINK_SO",
         "5": "LINK_SI"
       },
-      "why": "Solder pads with strain-relief holes for the built-in cable: 1 shield, 2 SCK (plug pin 5), 3 GND (plug pin 6), 4 Game Boy SOUT (plug pin 2), 5 Game Boy SIN (plug pin 3). Ground sits between SCK and the data lines. Wire size (verify on the cable)."
+      "why": "Solder pads with strain-relief holes for the built-in cable: 1 shield, 2 SCK (plug pin 5), 3 GND (plug pin 6), 4 Game Boy SOUT (plug pin 2), 5 Game Boy SIN (plug pin 3). Ground sits between SCK and the data lines. Wire size (verify on the cable). Not a purchased part: the cable is soldered by hand.",
+      "in_bom": false
     },
     {
       "ref": "D101",

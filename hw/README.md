@@ -1,6 +1,6 @@
 # Hardware: PCB rev A
 
-A small USB-C dongle with the Game Boy link cable soldered on. RP2350A core from Raspberry Pi's minimal design, three 74LVC1T45 translators running the Game Boy side at USB 5 V (safe in any power order), ESD on USB and on the link lines. 34.25 x 62.25 mm, 2 layers, all parts on top, assembled by JLC. Spec and part choice: [`docs/PCB.md`](../docs/PCB.md). **Not ordered yet:** see [`rev-a/fab/ORDER.md`](rev-a/fab/ORDER.md).
+A small USB-C dongle with the Game Boy link cable soldered on. RP2350A core from Raspberry Pi's minimal design, three 74LVC1T45 translators running the Game Boy side at USB 5 V (safe in any power order), ESD on USB and on the link lines. 34.2 x 63.7 mm, 2 layers, all parts on top, assembled by JLC. Spec and part choice: [`docs/PCB.md`](../docs/PCB.md). **Not ordered yet:** see [`rev-a/fab/ORDER.md`](rev-a/fab/ORDER.md).
 
 <p>
   <img src="rev-a/img/iso.png" alt="3D render of the rev A board" width="60%">
@@ -38,9 +38,10 @@ hw/tools/make_fab.sh                # Gerbers, drill, BOM + check, CPL + check, 
 |---|---|---|
 | ERC | kicad-cli | same as Raspberry Pi's untouched design (2 off-grid, 1 power pin pair, 2 regulator pins) |
 | DRC + schematic parity | kicad-cli | 0 errors, 0 warnings, 0 unconnected, parity 0 |
-| Routing tidy-up | `route_audit.py` / `route_clean.py` | no stubs, sharp angles, pointless vias or detours; a few sub-0.05 mm pad-entry jogs left (most in RPi's own routing, kept as drawn) |
+| Routing tidy-up | `route_audit.py` / `route_clean.py` | no stubs, sharp angles or pointless vias (one harmless detour on B_SI); a few sub-0.05 mm pad-entry jogs left (most in RPi's own routing, kept as drawn) |
 | Part heights | `height_check.py` | tallest: USB-C 3.25 mm, buttons 2.5 mm (feeds the case) |
-| Link signals | `sim/link/run_sim.py` | 0 of 72 runs over a limit or glitching with 220R + 100 pF |
+| Link signals | `sim/link/run_sim.py` | 0 of 72 runs over a limit or glitching with 220R + 100 pF (SIN: 1k, also clean) |
+| Independent review | fresh agent, datasheets only | no wiring defect; findings fixed or listed (LOGBOOK 2026-10-16) |
 | BOM vs JLC | `make_bom.py` | all parts exist, match footprint and value; 1 stock FAIL: L1 inductor (hold point) |
 | Placement | `make_cpl.py` | all 57 parts matched pad by pad against JLC's footprints |
 | Pins | `pin_audit.py` | every pin vs JLC's symbol; caught the LED's reversed pad numbering (fixed in the CPL) |

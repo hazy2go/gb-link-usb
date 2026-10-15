@@ -13,6 +13,7 @@ One rising and one falling edge per run, at the receiving pin:
 |---|---|---|
 | first draft: 33R, no cap | 12/18 runs overshoot (up to 5.77 V, clamped by the Game Boy's diodes) | 14/54 runs above the LVC1T45's 6.5 V abs max (up to 8.4 V) |
 | **rev A: 220R, 100 pF at the LVC input** | 0/18, max 5.00 V, settles in 53 ns | 0/54, max 5.00 V, settles in 130 ns |
+| rev A SIN line (R106 = 1k, limits back-feed into a switched-off Game Boy) | 0/18, max 4.99 V, settles in 223 ns | (not on this line) |
 
 No run shows a glitch (threshold re-crossing). 130 ns is far below the PIO glitch filter (1.6 us) and the Game Boy's half-bit (61 us at 8 kHz). Why: 220R plus the LVC1T45's ~20 ohm roughly matches the cable, so our edge arrives clean (source termination). In the other direction the Game Boy's driver and the cable are not ours to fix; 220R with 100 pF is a 22 ns low-pass in front of our input that removes the ringing.
 

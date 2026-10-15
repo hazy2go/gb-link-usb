@@ -109,9 +109,13 @@ def tidy():
         if v.Type() != pcbnew.PCB_VIA_T or v.IsLocked():
             continue
         p = v.GetPosition()
-        layers = {t.GetLayer() for t in tracks if t.GetNetCode() == v.GetNetCode() and (t.GetStart() == p or t.GetEnd() == p)}
-        in_zone = any(z.GetNetCode() == v.GetNetCode() and z.Outline().Contains(p) for z in b.Zones())
-        if len(layers) < 2 and not in_zone:
+        r = v.GetWidth(pcbnew.F_Cu) // 2      # a track end anywhere on the via's copper counts (not only its centre)
+        layers = {t.GetLayer() for t in tracks if t.GetNetCode() == v.GetNetCode()
+                  and min((t.GetStart() - p).EuclideanNorm(), (t.GetEnd() - p).EuclideanNorm()) <= r}
+        for z in b.Zones():                 # a pour of its net, on a layer where the fill actually covers the via
+            if z.GetNetCode() == v.GetNetCode():
+                layers |= {L for L in (pcbnew.F_Cu, pcbnew.B_Cu) if z.IsOnLayer(L) and z.GetFilledPolysList(L).Contains(p)}
+        if len(layers) < 2:
             dead.append(v)
     for v in dead:
         b.Remove(v)
@@ -151,11 +155,14 @@ def prep2():
         (100.7, 82.0, 106.0, 96.4, pcbnew.F_Cu),     # +3V3 pour feeding U1's top +3V3 pins, right of USB D+/D-
         (pcb_build.X0, pcb_build.Y0, pcb_build.X0 + 0.7, pcb_build.Y1, pcbnew.F_Cu),   # keep vias off the left edge
         (pcb_build.X0, pcb_build.Y0, pcb_build.X0 + 0.7, pcb_build.Y1, pcbnew.B_Cu),
+        # bottom under the USB-C receptacle: tracks there cut a pocket out of the GND pour around J101's GND
+        # via and shield pads (seen after moving J101 flush with the edge); vias are fine
+        (94.0, pcb_build.Y0, 98.5, 76.3, pcbnew.B_Cu, 'tracks'),
     ]
-    for xa, ya, xb, yb, layer in nogo:
+    for xa, ya, xb, yb, layer, *what in nogo:
         z = pcbnew.ZONE(b)
         z.SetIsRuleArea(True)
-        z.SetDoNotAllowTracks(True); z.SetDoNotAllowVias(True); z.SetDoNotAllowPads(False)
+        z.SetDoNotAllowTracks(True); z.SetDoNotAllowVias(what != ['tracks']); z.SetDoNotAllowPads(False)
         z.SetDoNotAllowFootprints(False); z.SetDoNotAllowZoneFills(False)
         z.SetLayer(layer)
         o = z.Outline(); o.NewOutline()
@@ -229,7 +236,7 @@ def main(passes, attempts=6):
                        stdout=log, stderr=subprocess.STDOUT)
         if not os.path.exists(SES):
             continue
-        for step in ('importses', 'zero', 'tidy', 'clean', 'fill'):
+        for step in ('importses', 'zero', 'tidy', 'clean', 'fill', 'tidy', 'fill'):
             subprocess.run(me + [step], check=True, capture_output=True)
         n = drc_open()
         print(f'attempt {attempt}: {n} open connections / DRC errors')

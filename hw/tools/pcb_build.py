@@ -28,11 +28,11 @@ OUT = os.path.join(REV, 'gb-link-usb.kicad_pcb')
 KICAD_FP = '/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints'
 
 # Board outline (mm, same frame as the reference: RP2350 centre at 100,100)
-X0, X1, Y0, Y1, CORNER = 83.3, 117.5, 67.0, 129.2, 1.5
+X0, X1, Y0, Y1, CORNER = 83.3, 117.5, 67.0, 130.7, 1.5   # Y1 129.2 -> 130.7: 2.1 mm of board behind the cable relief holes (review)
 
 # Link sheet parts: ref -> (x, y, rotation deg, side)
 PLACE = {
-    'J101': (100.0, 71.0, 180, 'F'),   # USB-C, opening at the top edge
+    'J101': (100.0, 70.65, 180, 'F'),  # USB-C: receptacle front (fab body 3.65 mm from origin) flush with the top edge
     'R101': (94.0, 77.4, 90, 'F'),     # CC1 5.1k
     'R102': (95.0, 77.4, 90, 'F'),     # CC2 5.1k
     'U101': (98.0, 78.7, 90, 'F'),     # USBLC6
@@ -357,7 +357,8 @@ def step_finish():
         if ref not in PLACE:
             sys.exit(f'{ref}: no position in PLACE')
         lib, name = c['footprint'].split(':', 1)
-        fp = pcbnew.FootprintLoad(os.path.join(KICAD_FP, lib + '.pretty'), name)
+        libdir = os.path.join(REV, lib + '.pretty') if lib == 'gb-link-usb' else os.path.join(KICAD_FP, lib + '.pretty')
+        fp = pcbnew.FootprintLoad(libdir, name)
         if fp is None:
             sys.exit(f'{ref}: footprint {c["footprint"]} not found')
         fp.SetReference(ref)

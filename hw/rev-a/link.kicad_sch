@@ -4332,7 +4332,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12"
+		(property "Footprint" "gb-link-usb:USB_C_Receptacle_HRO_TYPE-C-31-M-12_Flush"
 			(at 25.4 58.42 0)
 			(effects
 				(font
@@ -7791,7 +7791,7 @@
 				)
 			)
 		)
-		(property "Value" "220"
+		(property "Value" "1k"
 			(at 279.4 179.64 0)
 			(effects
 				(font
@@ -7826,7 +7826,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25091"
+		(property "LCSC" "C11702"
 			(at 279.4 167.64 0)
 			(effects
 				(font

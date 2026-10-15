@@ -21,7 +21,7 @@ USB-C ──ESD──┬─ D+/D- (27R) ─────────────�
                                       GP25 ── status LED       BOOTSEL button (QSPI_SS)
 ```
 - Pins match the breadboard (GP0 SCK, GP1 data from GB, GP2 data to GB) so the firmware carries over; new: **GP3 = SCK direction** (low = Game Boy drives the clock, printer and bridge modes; high = Pico drives it, first-light style). Default pulled low.
-- Small series resistors (33-100 Ω) on the Game Boy-side outputs to soften edges (the breadboard showed crosstalk from data edges onto SCK); ground trace or pour between SCK and the data lines on the board. The firmware glitch filter stays.
+- Series resistors 220 Ω on the Game Boy side (source termination, `sim/link`) and 100 pF at the two translator inputs (SCK, data from the Game Boy) to soften edges (the breadboard showed crosstalk from data edges onto SCK); ground trace or pour between SCK and the data lines on the board. The firmware glitch filter stays.
 - The link port's own 5 V pin (pin 1) is not used: the board is powered from USB only.
 
 ## Core: Raspberry Pi RP2350A minimal design

@@ -1,4 +1,4 @@
-CPL: 55 parts, missing from board: -, to review in JLC preview: -
+CPL: 57 parts, missing from board: -, to review in JLC preview: -
 
 C1     C15850     generic_capc2012x125                   rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  C0805: 2 pads, fit 0.100 mm, next-best rotation +1.245 mm worse
 C10    C1525      generic_capc1005x50                    rot  -90.0 +   0 = 270.0  shift (-0.000,-0.000) mm  C0402: 2 pads, fit 0.055 mm, next-best rotation +0.579 mm worse
@@ -8,6 +8,8 @@ C103   C1525      C_0402_1005Metric                      rot    0.0 +   0 =   0.
 C104   C1525      C_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  C0402: 2 pads, fit 0.060 mm, next-best rotation +0.578 mm worse
 C105   C1525      C_0402_1005Metric                      rot   90.0 +   0 =  90.0  shift (-0.000,-0.000) mm  C0402: 2 pads, fit 0.060 mm, next-best rotation +0.578 mm worse
 C106   C1525      C_0402_1005Metric                      rot   90.0 +   0 =  90.0  shift (-0.000,-0.000) mm  C0402: 2 pads, fit 0.060 mm, next-best rotation +0.578 mm worse
+C107   C1546      C_0402_1005Metric                      rot  -90.0 +   0 = 270.0  shift (-0.000,-0.000) mm  C0402: 2 pads, fit 0.060 mm, next-best rotation +0.578 mm worse
+C108   C1546      C_0402_1005Metric                      rot  -90.0 +   0 = 270.0  shift (-0.000,-0.000) mm  C0402: 2 pads, fit 0.060 mm, next-best rotation +0.578 mm worse
 C11    C1525      generic_capc1005x50                    rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  C0402: 2 pads, fit 0.055 mm, next-best rotation +0.579 mm worse
 C12    C1525      generic_capc1005x50                    rot   90.0 +   0 =  90.0  shift (-0.000,-0.000) mm  C0402: 2 pads, fit 0.055 mm, next-best rotation +0.579 mm worse
 C13    C1525      generic_capc1005x50                    rot  180.0 +   0 = 180.0  shift (-0.000,-0.000) mm  C0402: 2 pads, fit 0.055 mm, next-best rotation +0.579 mm worse
@@ -32,9 +34,9 @@ R10    C17168     generic_resc1005x35                    rot    0.0 +   0 =   0.
 R101   C25905     R_0402_1005Metric                      rot   90.0 +   0 =  90.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
 R102   C25905     R_0402_1005Metric                      rot   90.0 +   0 =  90.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
 R103   C25741     R_0402_1005Metric                      rot   90.0 +   0 =  90.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
-R104   C25105     R_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
-R105   C25105     R_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
-R106   C25105     R_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
+R104   C25091     R_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
+R105   C25091     R_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
+R106   C25091     R_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
 R107   C25741     R_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
 R108   C25741     R_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse
 R109   C25076     R_0402_1005Metric                      rot    0.0 +   0 =   0.0  shift (-0.000,-0.000) mm  R0402: 2 pads, fit 0.077 mm, next-best rotation +0.592 mm worse

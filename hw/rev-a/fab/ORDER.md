@@ -12,7 +12,7 @@
 |---|---|
 | `gb-link-usb-revA-gerbers.zip` | Gerber file (9 layers + PTH/NPTH Excellon drill, mm, absolute origin) |
 | `gb-link-usb-BOM-JLC.csv` | BOM (Comment, Designator, Footprint, LCSC Part #); R1 is DNP (RPi's optional part), the cable pads J102 are not a part |
-| `gb-link-usb-CPL-JLC.csv` | CPL (Designator, Mid X, Mid Y, Layer, Rotation); all 55 parts on top |
+| `gb-link-usb-CPL-JLC.csv` | CPL (Designator, Mid X, Mid Y, Layer, Rotation); all 57 parts on top |
 | `bom_check.txt` | live JLC check: part exists, package matches footprint, value matches, stock for 5 boards |
 | `cpl_check.txt` | rotation/offset per part, derived pad by pad from the footprint JLC places |
 | `pin_audit.txt` | every pin vs JLC's symbol for the part; the LOOK lines are naming only (checked by hand, LOGBOOK), except the LED, handled in the CPL |
@@ -39,6 +39,8 @@ Regenerate everything: `hw/tools/make_fab.sh` (after the board pipeline and a cl
 | Qty | 5 (or fewer, see hold point 1) |
 | Confirm parts placement | **Yes** |
 
+Also checked before this order: routing tidy-up, part heights, link-line simulation (`sim/link`), independent Gerber render (`hw/rev-a/img/gerber_render.png`). See `hw/README.md`.
+
 ## Check in JLC's placement preview
 - U1 RP2350A pin 1, U3 flash pin 1, U101-U105 (SOT-23-6, USON-10) pin 1
 - D101 LED: cathode on the GND pad (CPL renumbers JLC's A/K pads, LOGBOOK)
@@ -46,4 +48,4 @@ Regenerate everything: `hw/tools/make_fab.sh` (after the board pipeline and a cl
 - J101 USB-C sits flush with the board edge (CPL shifts it 1.57 mm to JLC's origin)
 
 ## Parts summary
-55 placed parts, 25 BOM lines, 10 extended parts (feeder fee each). Changes vs Raspberry Pi's minimal design: crystal ABM8-272-T3 (their pick, kept); buttons Alps SKRPABE010 (Wurth 434133025816 out of stock, same 4.2 x 3.2 mm J-lead footprint and 1.6 N).
+57 placed parts, 26 BOM lines, 10 extended parts (feeder fee each). Changes vs Raspberry Pi's minimal design: crystal ABM8-272-T3 (their pick, kept); buttons Alps SKRPABE010 (Wurth 434133025816 out of stock, same 4.2 x 3.2 mm J-lead footprint and 1.6 N).

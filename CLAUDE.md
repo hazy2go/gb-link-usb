@@ -35,6 +35,10 @@ Read this first, then `docs/PLAN.md` (stages, parts, inventory), `docs/PROTOCOL.
    - [ ] In the preview: D101 LED cathode on the GND pad; pin 1 of U1, U3, U101-U105; J101 USB-C flush with the edge.
    - [ ] At upload: JLC accepts 0.25 mm vias on 2 layers (verify).
    - [ ] Cable: wire gauge fits the 0.5 mm pad holes (verify on the cable).
+7. **Gerber check + case:** independent Gerber render done (hw/rev-a/img/gerber_render.png); case in `hw/case/`.
+8. **Online link mode** (two Game Boys over the internet): firmware clock-master mode (rev A drives SCK via GP11 = DIR high), relay server, page/tool.
+9. **Breadboard regression:** plug in the Pico 2 W, flash the default build (board.h refactor), print once to confirm nothing changed.
+10. **Real print through the web page** (Pokémon Pikachu), so the web decoder is proven on real printer data, not only test data.
 
 ## Notes
 - Prior-art code is GPL-3 (stacksmashing, mofosyne). If we copy from it, our firmware is GPL-3 too.

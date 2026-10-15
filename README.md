@@ -170,7 +170,9 @@ web/              decoder library + web page (Web Serial)
 tools/            gbprint.mjs (Mac print tool), sodax-bridge.mjs + sodax.mjs (SODAX data),
                   render.mjs, printcap.py, linktest.py
 rom/              Game Boy ROMs (RGBDS): sodax.gb, linktest.gb, printtest.gb; mkfont.py makes the font
-docs/             PROTOCOL.md, PLAN.md, LOGBOOK.md, breadboard drawing, images
+hw/              own PCB (KiCad, rev A ready to order), case, scripted build + checks
+sim/link/        ngspice simulation of the link lines
+docs/             PROTOCOL.md, PLAN.md, PCB.md, LOGBOOK.md, breadboard drawing, images
 GB Printer.command    double-click launcher for the Mac print tool
 SODAX Bridge.command  double-click launcher for SODAX on the Game Boy
 ```
@@ -199,7 +201,7 @@ node tools/sodax-bridge.mjs --dry   # print live SODAX screens without hardware
 - [ ] More printer games tested (compressed and multi-part prints)
 - [x] General PC link: live SODAX market data on the Game Boy (bridge mode)
 - [ ] Online link play between two Game Boys
-- [ ] Own small PCB with USB-C and a case, so nobody has to cut a cable
+- [ ] Own small PCB with USB-C and a case, so nobody has to cut a cable: rev A designed and checked ([hw/](hw/README.md)), not ordered yet
 
 ## Credits
 

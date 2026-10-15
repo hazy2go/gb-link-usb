@@ -7595,7 +7595,7 @@
 				)
 			)
 		)
-		(property "Value" "33"
+		(property "Value" "220"
 			(at 152.4 179.64 0)
 			(effects
 				(font
@@ -7630,7 +7630,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25105"
+		(property "LCSC" "C25091"
 			(at 152.4 167.64 0)
 			(effects
 				(font
@@ -7693,7 +7693,7 @@
 				)
 			)
 		)
-		(property "Value" "33"
+		(property "Value" "220"
 			(at 215.9 179.64 0)
 			(effects
 				(font
@@ -7728,7 +7728,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25105"
+		(property "LCSC" "C25091"
 			(at 215.9 167.64 0)
 			(effects
 				(font
@@ -7791,7 +7791,7 @@
 				)
 			)
 		)
-		(property "Value" "33"
+		(property "Value" "220"
 			(at 279.4 179.64 0)
 			(effects
 				(font
@@ -7826,7 +7826,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25105"
+		(property "LCSC" "C25091"
 			(at 279.4 167.64 0)
 			(effects
 				(font
@@ -8156,30 +8156,8 @@
 			)
 		)
 	)
-	(label "LINK_SCK"
-		(at 76.2 205.74 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.0 1.0)
-			)
-			(justify right)
-		)
-		(uuid "4de052da-e94e-51e7-82d4-00efbaaa7acf")
-	)
-	(label "LINK_SO"
-		(at 76.2 210.82 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.0 1.0)
-			)
-			(justify right)
-		)
-		(uuid "3e4027ea-6862-515d-8e71-49e5cf83ff4c")
-	)
-	(label "LINK_SI"
-		(at 101.6 205.74 0)
+	(label "B_SCK"
+		(at 88.9 199.39 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8187,23 +8165,19 @@
 			)
 			(justify left)
 		)
-		(uuid "e6235aab-3096-5ca9-b005-289a025a3700")
-	)
-	(no_connect
-		(at 101.6 210.82)
-		(uuid "cb8768d4-02be-5f0b-a434-2578a6702fa5")
+		(uuid "4de052da-e94e-51e7-82d4-00efbaaa7acf")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 88.9 220.98 0)
+		(at 88.9 207.01 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "690c5e37-9c39-5b02-8036-faf12761c939")
+		(uuid "3e4027ea-6862-515d-8e71-49e5cf83ff4c")
 		(property "Reference" "#PWR02040"
-			(at 88.9 225.98 0)
+			(at 88.9 212.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8212,7 +8186,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 88.9 223.98 0)
+			(at 88.9 210.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8221,7 +8195,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 88.9 220.98 0)
+			(at 88.9 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8230,7 +8204,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 220.98 0)
+			(at 88.9 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8239,7 +8213,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 88.9 220.98 0)
+			(at 88.9 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8248,7 +8222,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "fa841e0c-b6ac-57a2-86e7-d64c44ca99fb")
+			(uuid "ed3d53df-10b1-5a64-afda-b7f64b0c9170")
 		)
 		(instances
 			(project "gb-link-usb"
@@ -8260,34 +8234,32 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 88.9 220.98 0)
+		(lib_id "Device:C")
+		(at 88.9 203.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "bbd2993b-234b-5468-8ee9-3998e4328e97")
-		(property "Reference" "#PWR02041"
-			(at 88.9 225.98 0)
+		(uuid "b765722f-2ece-57f5-9700-0f54383b06c5")
+		(property "Reference" "C107"
+			(at 88.9 191.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 88.9 223.98 0)
+		(property "Value" "100p"
+			(at 88.9 215.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
 			)
 		)
-		(property "Footprint" ""
-			(at 88.9 220.98 0)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 88.9 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8296,7 +8268,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 220.98 0)
+			(at 88.9 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8305,7 +8277,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 88.9 220.98 0)
+			(at 88.9 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8313,109 +8285,8 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "195e73e9-e619-5429-8364-3de63cea6cee")
-		)
-		(instances
-			(project "gb-link-usb"
-				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
-					(reference "#PWR02041")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(no_connect
-		(at 101.6 215.9)
-		(uuid "1448d87e-2941-5cf6-bbff-f3033d0abdfe")
-	)
-	(label "LINK_SI"
-		(at 101.6 200.66 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.0 1.0)
-			)
-			(justify left)
-		)
-		(uuid "035903c2-adf8-5d0d-a76b-c18724ccc00d")
-	)
-	(label "LINK_SO"
-		(at 76.2 215.9 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.0 1.0)
-			)
-			(justify right)
-		)
-		(uuid "86119666-f576-5207-840f-93373702f488")
-	)
-	(label "LINK_SCK"
-		(at 76.2 200.66 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.0 1.0)
-			)
-			(justify right)
-		)
-		(uuid "ee5b8929-ae42-55fd-97ec-1102e6a7c2ee")
-	)
-	(symbol
-		(lib_id "Power_Protection:TPD4E05U06DQA")
-		(at 88.9 208.28 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fe162511-3937-510b-9176-215840603974")
-		(property "Reference" "U105"
-			(at 88.9 196.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "TPD4E05U06DQAR"
-			(at 88.9 220.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm"
-			(at 88.9 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 88.9 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 88.9 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C138714"
-			(at 88.9 208.28 0)
+		(property "LCSC" "C1546"
+			(at 88.9 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8429,29 +8300,464 @@
 		(pin "2"
 			(uuid "c8547e67-b143-5f43-81e7-360e35509f7e")
 		)
+		(instances
+			(project "gb-link-usb"
+				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
+					(reference "C107")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "B_SO"
+		(at 152.4 199.39 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify left)
+		)
+		(uuid "8fbff3c6-0674-56f5-bc19-55516476a454")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 152.4 207.01 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2814a25f-50ab-5f0c-808b-aa0c8ef79bae")
+		(property "Reference" "#PWR02041"
+			(at 152.4 212.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 152.4 210.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 152.4 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "690c5e37-9c39-5b02-8036-faf12761c939")
+		)
+		(instances
+			(project "gb-link-usb"
+				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
+					(reference "#PWR02041")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 152.4 203.2 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e350ed41-13c8-5a7b-a1ec-7ab516135820")
+		(property "Reference" "C108"
+			(at 152.4 191.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100p"
+			(at 152.4 215.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 152.4 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 152.4 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C1546"
+			(at 152.4 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e6235aab-3096-5ca9-b005-289a025a3700")
+		)
+		(pin "2"
+			(uuid "cb8768d4-02be-5f0b-a434-2578a6702fa5")
+		)
+		(instances
+			(project "gb-link-usb"
+				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
+					(reference "C108")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "LINK_SCK"
+		(at 203.2 205.74 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify right)
+		)
+		(uuid "efd426e2-3d1c-53f1-8532-35f204b6ae4d")
+	)
+	(label "LINK_SO"
+		(at 203.2 210.82 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify right)
+		)
+		(uuid "195e73e9-e619-5429-8364-3de63cea6cee")
+	)
+	(label "LINK_SI"
+		(at 228.6 205.74 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify left)
+		)
+		(uuid "1448d87e-2941-5cf6-bbff-f3033d0abdfe")
+	)
+	(no_connect
+		(at 228.6 210.82)
+		(uuid "035903c2-adf8-5d0d-a76b-c18724ccc00d")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 215.9 220.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "86119666-f576-5207-840f-93373702f488")
+		(property "Reference" "#PWR02042"
+			(at 215.9 225.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 215.9 223.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 215.9 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 215.9 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 215.9 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "57b9f3c2-d699-5145-af6c-08ca303a0763")
+		)
+		(instances
+			(project "gb-link-usb"
+				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
+					(reference "#PWR02042")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 215.9 220.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "338c888f-58f9-5553-a31b-5ecf3c3a4276")
+		(property "Reference" "#PWR02043"
+			(at 215.9 225.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 215.9 223.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 215.9 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 215.9 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 215.9 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9dfe918d-19d1-5622-af92-62010c433944")
+		)
+		(instances
+			(project "gb-link-usb"
+				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
+					(reference "#PWR02043")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(no_connect
+		(at 228.6 215.9)
+		(uuid "a6ac0968-4d60-56fb-8a2f-381267f09fd8")
+	)
+	(label "LINK_SI"
+		(at 228.6 200.66 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify left)
+		)
+		(uuid "a7bd78a7-4c76-52e9-a40d-9262570c5105")
+	)
+	(label "LINK_SO"
+		(at 203.2 215.9 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify right)
+		)
+		(uuid "ce1cbc74-7a6b-5392-ac84-f2cfbdb0b88a")
+	)
+	(label "LINK_SCK"
+		(at 203.2 200.66 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify right)
+		)
+		(uuid "440c461f-3bdd-5cdc-a0eb-ed141d5c1c61")
+	)
+	(symbol
+		(lib_id "Power_Protection:TPD4E05U06DQA")
+		(at 215.9 208.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fe162511-3937-510b-9176-215840603974")
+		(property "Reference" "U105"
+			(at 215.9 196.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TPD4E05U06DQAR"
+			(at 215.9 220.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SON:USON-10_2.5x1.0mm_P0.5mm"
+			(at 215.9 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 215.9 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 215.9 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C138714"
+			(at 215.9 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fa841e0c-b6ac-57a2-86e7-d64c44ca99fb")
+		)
+		(pin "2"
+			(uuid "bbd2993b-234b-5468-8ee9-3998e4328e97")
+		)
 		(pin "4"
-			(uuid "ed3d53df-10b1-5a64-afda-b7f64b0c9170")
-		)
-		(pin "5"
-			(uuid "8fbff3c6-0674-56f5-bc19-55516476a454")
-		)
-		(pin "3"
-			(uuid "2814a25f-50ab-5f0c-808b-aa0c8ef79bae")
-		)
-		(pin "8"
-			(uuid "efd426e2-3d1c-53f1-8532-35f204b6ae4d")
-		)
-		(pin "6"
 			(uuid "9aad17e0-b716-5c0f-b22c-87c3d0bb9f48")
 		)
-		(pin "7"
+		(pin "5"
 			(uuid "f770023e-4559-56b4-b151-14dbd7d96b74")
 		)
-		(pin "9"
+		(pin "3"
 			(uuid "2b7b4bde-85d0-5323-bc75-0a68fe694f65")
 		)
+		(pin "8"
+			(uuid "ee5b8929-ae42-55fd-97ec-1102e6a7c2ee")
+		)
+		(pin "6"
+			(uuid "d2cc8438-f768-524d-b843-9b944b6c16cf")
+		)
+		(pin "7"
+			(uuid "93f4dbbe-b1f9-52ee-b5d8-a0198e9843f4")
+		)
+		(pin "9"
+			(uuid "3a00f23f-9a66-5bbf-87c0-74d2516c1118")
+		)
 		(pin "10"
-			(uuid "57b9f3c2-d699-5145-af6c-08ca303a0763")
+			(uuid "475ae497-4c81-580e-bb3c-39c9ee5189d1")
 		)
 		(instances
 			(project "gb-link-usb"
@@ -8464,15 +8770,15 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 147.32 200.66 0)
+		(at 274.32 200.66 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9dfe918d-19d1-5622-af92-62010c433944")
-		(property "Reference" "#PWR02042"
-			(at 147.32 205.66 0)
+		(uuid "fb31ac49-6181-598d-9a40-3a3dd1f7c5bc")
+		(property "Reference" "#PWR02044"
+			(at 274.32 205.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8481,7 +8787,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 147.32 203.66 0)
+			(at 274.32 203.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8490,7 +8796,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 147.32 200.66 0)
+			(at 274.32 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8499,7 +8805,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 147.32 200.66 0)
+			(at 274.32 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8508,7 +8814,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 147.32 200.66 0)
+			(at 274.32 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8517,19 +8823,19 @@
 			)
 		)
 		(pin "1"
-			(uuid "d2cc8438-f768-524d-b843-9b944b6c16cf")
+			(uuid "7cfbf998-ed2a-59a2-8f58-1d9b2de456d9")
 		)
 		(instances
 			(project "gb-link-usb"
 				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
-					(reference "#PWR02042")
+					(reference "#PWR02044")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(label "LINK_SCK"
-		(at 147.32 203.2 180)
+		(at 274.32 203.2 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8537,19 +8843,19 @@
 			)
 			(justify right)
 		)
-		(uuid "93f4dbbe-b1f9-52ee-b5d8-a0198e9843f4")
+		(uuid "1cf9b593-0350-5db9-b772-34e532d439ac")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 147.32 205.74 0)
+		(at 274.32 205.74 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3a00f23f-9a66-5bbf-87c0-74d2516c1118")
-		(property "Reference" "#PWR02043"
-			(at 147.32 210.74 0)
+		(uuid "b9b96f08-e32a-5ff1-a3a7-e180e6d9aebf")
+		(property "Reference" "#PWR02045"
+			(at 274.32 210.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8558,7 +8864,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 147.32 208.74 0)
+			(at 274.32 208.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8567,7 +8873,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 147.32 205.74 0)
+			(at 274.32 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8576,7 +8882,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 147.32 205.74 0)
+			(at 274.32 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8585,7 +8891,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 147.32 205.74 0)
+			(at 274.32 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8594,19 +8900,19 @@
 			)
 		)
 		(pin "1"
-			(uuid "ce1cbc74-7a6b-5392-ac84-f2cfbdb0b88a")
+			(uuid "e65820b4-932e-5233-b007-7292f46848f0")
 		)
 		(instances
 			(project "gb-link-usb"
 				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
-					(reference "#PWR02043")
+					(reference "#PWR02045")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(label "LINK_SO"
-		(at 147.32 208.28 180)
+		(at 274.32 208.28 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8614,10 +8920,10 @@
 			)
 			(justify right)
 		)
-		(uuid "440c461f-3bdd-5cdc-a0eb-ed141d5c1c61")
+		(uuid "f2be77f3-5694-5e02-b959-0c6654495264")
 	)
 	(label "LINK_SI"
-		(at 147.32 210.82 180)
+		(at 274.32 210.82 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8625,11 +8931,11 @@
 			)
 			(justify right)
 		)
-		(uuid "fb31ac49-6181-598d-9a40-3a3dd1f7c5bc")
+		(uuid "977c45c0-b32b-50a6-a981-fd740743586b")
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x05")
-		(at 152.4 205.74 0)
+		(at 279.4 205.74 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -8637,7 +8943,7 @@
 		(dnp no)
 		(uuid "ea50d5bf-87c8-50e9-bd3a-d2e0bbe48e06")
 		(property "Reference" "J102"
-			(at 152.4 193.74 0)
+			(at 279.4 193.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8645,7 +8951,7 @@
 			)
 		)
 		(property "Value" "Link cable"
-			(at 152.4 217.74 0)
+			(at 279.4 217.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8653,7 +8959,7 @@
 			)
 		)
 		(property "Footprint" "Connector_Wire:SolderWire-0.15sqmm_1x05_P4mm_D0.5mm_OD1.5mm_Relief"
-			(at 152.4 205.74 0)
+			(at 279.4 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8662,7 +8968,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 152.4 205.74 0)
+			(at 279.4 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8671,7 +8977,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 152.4 205.74 0)
+			(at 279.4 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8680,7 +8986,7 @@
 			)
 		)
 		(property "LCSC" ""
-			(at 152.4 205.74 0)
+			(at 279.4 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8689,19 +8995,19 @@
 			)
 		)
 		(pin "1"
-			(uuid "338c888f-58f9-5553-a31b-5ecf3c3a4276")
+			(uuid "4312b13c-6be9-54e8-96b2-8e36215b8377")
 		)
 		(pin "2"
-			(uuid "a6ac0968-4d60-56fb-8a2f-381267f09fd8")
+			(uuid "74cb19de-000d-5272-8fdf-d144de069eb3")
 		)
 		(pin "3"
-			(uuid "a7bd78a7-4c76-52e9-a40d-9262570c5105")
+			(uuid "bc8e6117-f8f4-587d-98bf-7ed13e1f176e")
 		)
 		(pin "4"
-			(uuid "475ae497-4c81-580e-bb3c-39c9ee5189d1")
+			(uuid "a8d1d7c3-8f69-5fed-bf03-d6afa3ba4670")
 		)
 		(pin "5"
-			(uuid "4312b13c-6be9-54e8-96b2-8e36215b8377")
+			(uuid "42389a87-7331-5f03-a4f1-ffaf600cd7b2")
 		)
 		(instances
 			(project "gb-link-usb"
@@ -8714,15 +9020,15 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 212.09 200.66 0)
+		(at 339.09 200.66 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "74cb19de-000d-5272-8fdf-d144de069eb3")
-		(property "Reference" "#PWR02044"
-			(at 212.09 205.66 0)
+		(uuid "0526cb82-a60c-58d5-a01c-5b017c82389c")
+		(property "Reference" "#PWR02046"
+			(at 339.09 205.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8731,7 +9037,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 212.09 203.66 0)
+			(at 339.09 203.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8740,7 +9046,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 212.09 200.66 0)
+			(at 339.09 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8749,7 +9055,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 212.09 200.66 0)
+			(at 339.09 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8758,7 +9064,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 212.09 200.66 0)
+			(at 339.09 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8767,19 +9073,19 @@
 			)
 		)
 		(pin "1"
-			(uuid "1cf9b593-0350-5db9-b772-34e532d439ac")
+			(uuid "67e910e4-767c-5388-8e87-1f297cd27487")
 		)
 		(instances
 			(project "gb-link-usb"
 				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
-					(reference "#PWR02044")
+					(reference "#PWR02046")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(label "LED_A"
-		(at 219.71 200.66 0)
+		(at 346.71 200.66 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8787,11 +9093,11 @@
 			)
 			(justify left)
 		)
-		(uuid "b9b96f08-e32a-5ff1-a3a7-e180e6d9aebf")
+		(uuid "f1ab23b2-336e-5597-86a6-2176bb682983")
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 215.9 200.66 0)
+		(at 342.9 200.66 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8799,7 +9105,7 @@
 		(dnp no)
 		(uuid "254cc473-cc6e-5426-a57a-e7958594336b")
 		(property "Reference" "D101"
-			(at 215.9 188.66 0)
+			(at 342.9 188.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8807,7 +9113,7 @@
 			)
 		)
 		(property "Value" "green"
-			(at 215.9 212.66 0)
+			(at 342.9 212.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8815,7 +9121,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
-			(at 215.9 200.66 0)
+			(at 342.9 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8824,7 +9130,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 215.9 200.66 0)
+			(at 342.9 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8833,7 +9139,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 215.9 200.66 0)
+			(at 342.9 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8842,7 +9148,7 @@
 			)
 		)
 		(property "LCSC" "C2297"
-			(at 215.9 200.66 0)
+			(at 342.9 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8851,10 +9157,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "7cfbf998-ed2a-59a2-8f58-1d9b2de456d9")
+			(uuid "cb8251bb-db00-5a18-aa57-36589588f7ec")
 		)
 		(pin "2"
-			(uuid "bc8e6117-f8f4-587d-98bf-7ed13e1f176e")
+			(uuid "ab4d79d2-3f58-5e13-99e9-34fb96ffc105")
 		)
 		(instances
 			(project "gb-link-usb"
@@ -8867,7 +9173,7 @@
 	)
 	(global_label "GPIO21"
 		(shape passive)
-		(at 279.4 199.39 90)
+		(at 25.4 250.19 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8875,9 +9181,9 @@
 			)
 			(justify left)
 		)
-		(uuid "a8d1d7c3-8f69-5fed-bf03-d6afa3ba4670")
+		(uuid "5f80343a-6dcb-55ac-93b5-258b1240b36c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 279.4 199.39 0)
+			(at 25.4 250.19 0)
 			(effects
 				(font
 					(size 1.0 1.0)
@@ -8887,7 +9193,7 @@
 		)
 	)
 	(label "LED_A"
-		(at 279.4 207.01 270)
+		(at 25.4 257.81 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8895,11 +9201,11 @@
 			)
 			(justify right)
 		)
-		(uuid "42389a87-7331-5f03-a4f1-ffaf600cd7b2")
+		(uuid "fc1f97bb-5fa6-5552-a4d6-5745e615009c")
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 279.4 203.2 0)
+		(at 25.4 254.0 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8907,7 +9213,7 @@
 		(dnp no)
 		(uuid "c6b0741b-7a05-5d14-a510-752e8243bf94")
 		(property "Reference" "R109"
-			(at 279.4 191.2 0)
+			(at 25.4 242.0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8915,7 +9221,7 @@
 			)
 		)
 		(property "Value" "100"
-			(at 279.4 215.2 0)
+			(at 25.4 266.0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8923,7 +9229,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 279.4 203.2 0)
+			(at 25.4 254.0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8932,7 +9238,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 279.4 203.2 0)
+			(at 25.4 254.0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8941,7 +9247,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 279.4 203.2 0)
+			(at 25.4 254.0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8950,7 +9256,7 @@
 			)
 		)
 		(property "LCSC" "C25076"
-			(at 279.4 203.2 0)
+			(at 25.4 254.0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8959,10 +9265,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "e65820b4-932e-5233-b007-7292f46848f0")
+			(uuid "ec12f56e-f733-55d8-8087-775bbf115fee")
 		)
 		(pin "2"
-			(uuid "f2be77f3-5694-5e02-b959-0c6654495264")
+			(uuid "4f3c2e8a-297b-53d6-83ba-f40d42103606")
 		)
 		(instances
 			(project "gb-link-usb"
@@ -8975,15 +9281,15 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 25.4 248.92000000000002 0)
+		(at 25.4 287.02 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "977c45c0-b32b-50a6-a981-fd740743586b")
+		(uuid "2eec5d7d-85f0-5bb3-b011-6da00b98b9fa")
 		(property "Reference" "#FLG0200"
-			(at 25.4 243.92 0)
+			(at 25.4 282.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8992,7 +9298,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 25.4 245.92 0)
+			(at 25.4 284.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9000,7 +9306,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 25.4 248.92 0)
+			(at 25.4 287.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9009,7 +9315,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 25.4 248.92 0)
+			(at 25.4 287.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9018,7 +9324,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 25.4 248.92 0)
+			(at 25.4 287.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9027,7 +9333,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "cb8251bb-db00-5a18-aa57-36589588f7ec")
+			(uuid "76381319-841a-58cd-915d-58ce57cb8a24")
 		)
 		(instances
 			(project "gb-link-usb"
@@ -9039,7 +9345,7 @@
 		)
 	)
 	(label "VBUS"
-		(at 25.4 248.92000000000002 270)
+		(at 25.4 287.02 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9047,19 +9353,19 @@
 			)
 			(justify right)
 		)
-		(uuid "0526cb82-a60c-58d5-a01c-5b017c82389c")
+		(uuid "a2b80083-a059-5902-9243-b5bf80d4b760")
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 50.8 248.92000000000002 0)
+		(at 50.8 287.02 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "67e910e4-767c-5388-8e87-1f297cd27487")
+		(uuid "9304b8fe-8254-5cd1-ae7d-e0821f23b7f2")
 		(property "Reference" "#FLG0201"
-			(at 50.8 243.92 0)
+			(at 50.8 282.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9068,7 +9374,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 50.8 245.92 0)
+			(at 50.8 284.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9076,7 +9382,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 50.8 248.92 0)
+			(at 50.8 287.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9085,7 +9391,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 50.8 248.92 0)
+			(at 50.8 287.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9094,7 +9400,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 50.8 248.92 0)
+			(at 50.8 287.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9103,7 +9409,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "ab4d79d2-3f58-5e13-99e9-34fb96ffc105")
+			(uuid "6bc10596-38c3-513f-9677-b505e549eeae")
 		)
 		(instances
 			(project "gb-link-usb"
@@ -9115,7 +9421,7 @@
 		)
 	)
 	(label "GND"
-		(at 50.8 248.92000000000002 270)
+		(at 50.8 287.02 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9123,7 +9429,7 @@
 			)
 			(justify right)
 		)
-		(uuid "f1ab23b2-336e-5597-86a6-2176bb682983")
+		(uuid "c4294e0a-f357-5614-b69d-ed1deaf3834d")
 	)
 	(sheet_instances
 		(path "/"

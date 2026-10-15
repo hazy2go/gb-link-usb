@@ -63,6 +63,43 @@ def hand():
     print('hand-routed segments:', n)
 
 
+def zero():
+    """Freerouting leaves near-zero-length segments (< 1 um) at T-joints: move every track end that sits on the
+    crumb's first end onto its second end, then drop the crumb (connectivity stays exact)."""
+    b = pcbnew.LoadBoard(PCB)
+    segs = [t for t in b.GetTracks() if t.Type() == pcbnew.PCB_TRACE_T]
+    anchors = [p for fp in b.GetFootprints() for p in fp.Pads()] + \
+              [v for v in b.GetTracks() if v.Type() == pcbnew.PCB_VIA_T]
+    dead = []
+    for c in segs:
+        a, z = c.GetStart(), c.GetEnd()
+        if c.IsLocked() or (a - z).EuclideanNorm() >= 1000:
+            continue
+        # crumbs on a pad or via are harmless; moving ends there could pull a track off its pad
+        if any(o.GetNetCode() == c.GetNetCode() and (o.HitTest(a) or o.HitTest(z)) for o in anchors):
+            continue
+        for t in segs:
+            if t is c or t.GetNetCode() != c.GetNetCode() or t.GetLayer() != c.GetLayer():
+                continue
+            if t.GetStart() == a:
+                t.SetStart(z)
+            if t.GetEnd() == a:
+                t.SetEnd(z)
+        dead.append(c)
+    for c in dead:
+        b.Remove(c)
+    b.Save(PCB)
+    print('removed near-zero segments:', len(dead))
+
+
+def clean():
+    """Route tidy-up from the WiFi cart (route_clean.py): duplicates, crumbs, pull-tight, merges, stubs.
+    Raspberry Pi's own copper (the reference board) is never touched."""
+    import pcb_build
+    subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'route_clean.py'),
+                    PCB, pcb_build.REF_PCB], check=True)
+
+
 def tidy():
     """Remove vias that end up connected on one layer only (Freerouting leftovers)."""
     b = pcbnew.LoadBoard(PCB)
@@ -192,7 +229,7 @@ def main(passes, attempts=6):
                        stdout=log, stderr=subprocess.STDOUT)
         if not os.path.exists(SES):
             continue
-        for step in ('importses', 'tidy', 'fill'):
+        for step in ('importses', 'zero', 'tidy', 'clean', 'fill'):
             subprocess.run(me + [step], check=True, capture_output=True)
         n = drc_open()
         print(f'attempt {attempt}: {n} open connections / DRC errors')
@@ -205,7 +242,7 @@ def main(passes, attempts=6):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] in ('hand', 'prep', 'prep2', 'export', 'importses', 'tidy', 'fill'):
+    if len(sys.argv) > 1 and sys.argv[1] in ('hand', 'prep', 'prep2', 'export', 'importses', 'zero', 'tidy', 'clean', 'fill'):
         globals()[sys.argv[1]]()
     else:
         main(int(sys.argv[1]) if len(sys.argv) > 1 else 30)

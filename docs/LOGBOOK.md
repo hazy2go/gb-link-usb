@@ -105,3 +105,8 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Other direction: Pico drives 3.3 V highs into the DMG's SCK/SIN inputs. Whether the DMG reads 3.3 V as high reliably: not checked (verify). Can't damage anything; worst case it is not recognised.
 - Answers PLAN.md open question "Does the RP2350 tolerate 5 V on its inputs?": yes, when powered (datasheet).
 - Wire order: back to the measured map (red = plug pin 2 = GB SOUT to GP1, orange = pin 3 = GB SIN to GP2), because the earlier swap test was invalid (the shifter passed nothing either way).
+
+## 2026-10-15 First light, half: PC to Game Boy works (no shifter)
+- Direct wiring: green to GP0, red to GP1, orange to GP2, blue to GND. Pico powered before the GB.
+- `tools/linktest.py` sent 01 10 20 7F A0 FE. **GB screen: last byte FE, counter 0006.** So the Pico's 3.3 V clock and data are read correctly by the DMG (answers the 3.3 V "verify" above: works on this unit), and orange = GB SIN (plug pin 3) is confirmed.
+- Pico received all FF: GB to Pico (red, GP1) not working yet. Line reads high (GP1 pull-up), so likely red not connected (wrap/row). Checking continuity plug hole 2 to Pico pin 2.

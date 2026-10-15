@@ -10136,17 +10136,6 @@
 	)
 	(wire
 		(pts
-			(xy 175.26 138.43)
-			(xy 160.02 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "12375c0d-2e05-4889-9df1-87a466918d73")
-	)
-	(wire
-		(pts
 			(xy 264.16 135.89)
 			(xy 243.84 135.89)
 		)
@@ -10243,17 +10232,6 @@
 			(type default)
 		)
 		(uuid "1b721132-da30-4f7f-81c8-7ce6b51a7818")
-	)
-	(wire
-		(pts
-			(xy 212.09 185.42)
-			(xy 212.09 200.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1bbded82-2d94-49af-b970-c60ff6115efd")
 	)
 	(wire
 		(pts
@@ -10510,17 +10488,6 @@
 	)
 	(wire
 		(pts
-			(xy 243.84 156.21)
-			(xy 259.08 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3d1bfcb0-6c0b-4d85-bbb8-cfd17e2f2a85")
-	)
-	(wire
-		(pts
 			(xy 86.36 43.18)
 			(xy 85.09 43.18)
 		)
@@ -10606,6 +10573,17 @@
 			(type default)
 		)
 		(uuid "452bbac9-9905-4390-8c50-28dea4401a9b")
+	)
+	(wire
+		(pts
+			(xy 175.26 171.45)
+			(xy 160.02 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "46b3625a-7215-4ebc-ab8e-7e2d4031e3db")
 	)
 	(wire
 		(pts
@@ -10716,17 +10694,6 @@
 			(type default)
 		)
 		(uuid "4f357418-5086-4b44-bfa4-4517aa29e882")
-	)
-	(wire
-		(pts
-			(xy 175.26 140.97)
-			(xy 160.02 140.97)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "50cfd71d-cf51-4b5b-9169-de9b809a5f4b")
 	)
 	(wire
 		(pts
@@ -11225,17 +11192,6 @@
 	)
 	(wire
 		(pts
-			(xy 175.26 143.51)
-			(xy 160.02 143.51)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "860afa29-7e70-4780-a5fa-3ec902c8e73d")
-	)
-	(wire
-		(pts
 			(xy 205.74 29.21)
 			(xy 217.17 29.21)
 		)
@@ -11332,6 +11288,17 @@
 			(type default)
 		)
 		(uuid "8d5e9eda-fae5-4858-a80e-6ceeff2cdc62")
+	)
+	(wire
+		(pts
+			(xy 194.31 185.42)
+			(xy 194.31 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8da05908-f3cf-457d-b3b9-3f63eb76c6c2")
 	)
 	(wire
 		(pts
@@ -11599,17 +11566,6 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 185.42)
-			(xy 214.63 200.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "abc1c384-52dd-4401-a837-971169167a86")
-	)
-	(wire
-		(pts
 			(xy 227.33 185.42)
 			(xy 227.33 208.28)
 		)
@@ -11673,6 +11629,17 @@
 			(type default)
 		)
 		(uuid "b5afccca-0967-4a6c-9ef5-5f0f6ca5504e")
+	)
+	(wire
+		(pts
+			(xy 243.84 166.37)
+			(xy 259.08 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6902215-764b-4bee-8167-f968cfdc58b2")
 	)
 	(wire
 		(pts
@@ -11772,17 +11739,6 @@
 			(type default)
 		)
 		(uuid "befea419-501f-4542-adb3-5c35865eda85")
-	)
-	(wire
-		(pts
-			(xy 175.26 146.05)
-			(xy 160.02 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bfd0a9bb-e230-4275-9396-628fdf87f63c")
 	)
 	(wire
 		(pts
@@ -11962,6 +11918,17 @@
 	)
 	(wire
 		(pts
+			(xy 196.85 185.42)
+			(xy 196.85 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d89e6729-6251-4de8-a44f-9291a36fd934")
+	)
+	(wire
+		(pts
 			(xy 44.45 128.27)
 			(xy 58.42 128.27)
 		)
@@ -12102,6 +12069,17 @@
 			(type default)
 		)
 		(uuid "e992e68a-e0d3-437a-91c6-7d0d205dd698")
+	)
+	(wire
+		(pts
+			(xy 191.77 185.42)
+			(xy 191.77 200.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea0de029-d44a-4d2a-b2e3-f7e4277f93d5")
 	)
 	(wire
 		(pts
@@ -12422,47 +12400,13 @@
 		)
 		(uuid "19743f36-e9a6-4e99-a337-4623b7a936ee")
 	)
-	(global_label "GPIO2"
-		(shape passive)
-		(at 160.02 143.51 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "19841331-2dfb-4512-8037-0c0541480f3a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.02 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
+	(no_connect
+		(at 175.26 143.51)
+		(uuid "ac15ac4c-f486-51d8-81bd-b6be84fa0d3d")
 	)
-	(global_label "GPIO1"
-		(shape passive)
-		(at 160.02 140.97 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1bc542ec-027b-49d8-9a77-9418dfd24d62")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.02 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
+	(no_connect
+		(at 175.26 140.97)
+		(uuid "f56c86a0-83f1-530c-bf06-e6b86b7b144c")
 	)
 	(label "QSPI_SD2"
 		(at 48.26 140.97 0)
@@ -12484,9 +12428,13 @@
 		)
 		(uuid "346bfcc9-6a4b-44e7-826f-b74db4e16e4d")
 	)
-	(global_label "GPIO0"
+	(no_connect
+		(at 175.26 138.43)
+		(uuid "38e50889-5e20-597b-9679-4b6c505dde0d")
+	)
+	(global_label "GPIO14"
 		(shape passive)
-		(at 160.02 138.43 0)
+		(at 196.85 200.66 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12494,9 +12442,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "45e602eb-e965-4a3e-98fb-02ef1f150d34")
+		(uuid "493df916-65b7-4537-9d24-ff7d7c33a98d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.02 138.43 0)
+			(at 196.85 200.66 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12504,10 +12452,6 @@
 				(hide yes)
 			)
 		)
-	)
-	(no_connect
-		(at 196.85 185.42)
-		(uuid "ac15ac4c-f486-51d8-81bd-b6be84fa0d3d")
 	)
 	(label "RUN"
 		(at 247.65 215.9 0)
@@ -12549,47 +12493,13 @@
 		)
 		(uuid "58739658-449f-4c3a-b66b-121630964125")
 	)
-	(global_label "SWCLK"
-		(shape passive)
-		(at 212.09 200.66 90)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5a7291c4-75ad-4daf-9829-37581971c580")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 212.09 200.66 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
+	(no_connect
+		(at 212.09 185.42)
+		(uuid "bf112410-2557-5239-a98d-56b694257135")
 	)
-	(global_label "GPIO25"
-		(shape passive)
-		(at 259.08 156.21 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6e033011-f1e8-4aa4-beac-57688e11dec0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 259.08 156.21 180)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
+	(no_connect
+		(at 243.84 156.21)
+		(uuid "2147c29e-f00c-536f-8022-6e1649773e3f")
 	)
 	(label "QSPI_SD3"
 		(at 48.26 144.78 0)
@@ -12603,11 +12513,11 @@
 	)
 	(no_connect
 		(at 243.84 158.75)
-		(uuid "f56c86a0-83f1-530c-bf06-e6b86b7b144c")
+		(uuid "c6025a45-6d47-5990-a8c2-6b11d192a9b3")
 	)
 	(no_connect
 		(at 175.26 151.13)
-		(uuid "38e50889-5e20-597b-9679-4b6c505dde0d")
+		(uuid "e8b404c0-24e3-5276-a4c2-caba94ad4eee")
 	)
 	(label "XOUT"
 		(at 148.59 224.79 180)
@@ -12621,7 +12531,7 @@
 	)
 	(no_connect
 		(at 175.26 153.67)
-		(uuid "bf112410-2557-5239-a98d-56b694257135")
+		(uuid "d5a1e02a-cac1-5981-853d-fcfa4b4ec8c0")
 	)
 	(label "QSPI_SD2"
 		(at 193.04 107.95 270)
@@ -12635,7 +12545,7 @@
 	)
 	(no_connect
 		(at 243.84 171.45)
-		(uuid "2147c29e-f00c-536f-8022-6e1649773e3f")
+		(uuid "db4f82bc-26b2-568b-8d3c-cedc69fb5e06")
 	)
 	(global_label "USB_D-"
 		(shape passive)
@@ -12660,7 +12570,7 @@
 	)
 	(no_connect
 		(at 175.26 163.83)
-		(uuid "c6025a45-6d47-5990-a8c2-6b11d192a9b3")
+		(uuid "b4652ffc-0b4b-52c3-9c67-c1309244bee7")
 	)
 	(label "~{USB_BOOT}"
 		(at 27.94 154.94 90)
@@ -12684,7 +12594,7 @@
 	)
 	(no_connect
 		(at 175.26 168.91)
-		(uuid "e8b404c0-24e3-5276-a4c2-caba94ad4eee")
+		(uuid "7b58d6e5-d01d-5d2a-8b62-4b46c6dfca4b")
 	)
 	(label "VREG_AVDD"
 		(at 261.62 118.11 0)
@@ -12698,23 +12608,40 @@
 	)
 	(no_connect
 		(at 224.79 185.42)
-		(uuid "d5a1e02a-cac1-5981-853d-fcfa4b4ec8c0")
+		(uuid "d7649cce-7541-51e0-b72e-84dd30753802")
 	)
 	(no_connect
 		(at 175.26 166.37)
-		(uuid "db4f82bc-26b2-568b-8d3c-cedc69fb5e06")
+		(uuid "77d8dc3f-e431-5bed-a663-9d3b56c67c0e")
 	)
 	(no_connect
 		(at 243.84 168.91)
-		(uuid "b4652ffc-0b4b-52c3-9c67-c1309244bee7")
+		(uuid "8176b017-d7f4-5609-9633-4900bdc5e123")
 	)
-	(no_connect
-		(at 191.77 185.42)
-		(uuid "7b58d6e5-d01d-5d2a-8b62-4b46c6dfca4b")
+	(global_label "GPIO12"
+		(shape passive)
+		(at 191.77 200.66 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ae2b376f-3248-4c3b-94e2-de6df4e0967f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 191.77 200.66 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 	)
 	(no_connect
 		(at 243.84 163.83)
-		(uuid "d7649cce-7541-51e0-b72e-84dd30753802")
+		(uuid "943148ce-42bd-502d-9a76-94a21b8f7656")
 	)
 	(label "QSPI_SD1"
 		(at 190.5 107.95 270)
@@ -12746,29 +12673,9 @@
 		)
 		(uuid "c60412ef-94af-47a0-b29c-cb5687b1b1cb")
 	)
-	(no_connect
-		(at 194.31 185.42)
-		(uuid "77d8dc3f-e431-5bed-a663-9d3b56c67c0e")
-	)
-	(no_connect
-		(at 222.25 185.42)
-		(uuid "8176b017-d7f4-5609-9633-4900bdc5e123")
-	)
-	(no_connect
-		(at 243.84 140.97)
-		(uuid "943148ce-42bd-502d-9a76-94a21b8f7656")
-	)
-	(no_connect
-		(at 243.84 143.51)
-		(uuid "c5bf8d82-f5b6-5a90-b111-c4ae51c2a9e1")
-	)
-	(no_connect
-		(at 243.84 146.05)
-		(uuid "beb44d3f-c60d-567c-adf7-6e8357299946")
-	)
-	(global_label "GPIO3"
+	(global_label "GPIO13"
 		(shape passive)
-		(at 160.02 146.05 0)
+		(at 194.31 200.66 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12776,9 +12683,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "deb955b2-50b9-4720-9e37-6a416e96081c")
+		(uuid "c6e23b48-d450-4317-8534-696beef41fa5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.02 146.05 0)
+			(at 194.31 200.66 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12788,8 +12695,45 @@
 		)
 	)
 	(no_connect
-		(at 175.26 171.45)
+		(at 222.25 185.42)
+		(uuid "c5bf8d82-f5b6-5a90-b111-c4ae51c2a9e1")
+	)
+	(no_connect
+		(at 243.84 140.97)
+		(uuid "beb44d3f-c60d-567c-adf7-6e8357299946")
+	)
+	(no_connect
+		(at 243.84 143.51)
 		(uuid "7346c4f4-b732-5336-8747-5d182d7cdb5f")
+	)
+	(no_connect
+		(at 243.84 146.05)
+		(uuid "2343f7c7-3e63-5398-bdde-e350bbe112dc")
+	)
+	(no_connect
+		(at 175.26 146.05)
+		(uuid "738b4ff4-64d3-58f8-967e-edfc1fb9d339")
+	)
+	(global_label "GPIO11"
+		(shape passive)
+		(at 160.02 171.45 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e1915aea-529f-4811-9a6f-2c9a4d000b8d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 160.02 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 	)
 	(label "QSPI_SD1"
 		(at 48.26 137.16 0)
@@ -12811,19 +12755,35 @@
 		)
 		(uuid "e7cb81b6-761a-4d6f-9d3c-7201e74d80e9")
 	)
-	(global_label "SWD"
+	(no_connect
+		(at 214.63 185.42)
+		(uuid "e94a4cb7-6706-53ff-986c-97e98f6f2628")
+	)
+	(no_connect
+		(at 175.26 158.75)
+		(uuid "07ffe030-9a86-5828-bcc7-63de37771790")
+	)
+	(no_connect
+		(at 175.26 156.21)
+		(uuid "949cb780-593d-565e-b0ad-b430a670abcc")
+	)
+	(no_connect
+		(at 199.39 185.42)
+		(uuid "3420a0f6-ba36-59c3-b83b-aa02296d5543")
+	)
+	(global_label "GPIO21"
 		(shape passive)
-		(at 214.63 200.66 90)
+		(at 259.08 166.37 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
-		(uuid "eb732122-ae95-4cb4-abb9-72245b5c659b")
+		(uuid "f85d4236-f75e-4cfc-9dd2-348bcb51c0ed")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 214.63 200.66 90)
+			(at 259.08 166.37 180)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12833,24 +12793,8 @@
 		)
 	)
 	(no_connect
-		(at 175.26 158.75)
-		(uuid "2343f7c7-3e63-5398-bdde-e350bbe112dc")
-	)
-	(no_connect
-		(at 175.26 156.21)
-		(uuid "738b4ff4-64d3-58f8-967e-edfc1fb9d339")
-	)
-	(no_connect
-		(at 199.39 185.42)
-		(uuid "e94a4cb7-6706-53ff-986c-97e98f6f2628")
-	)
-	(no_connect
-		(at 243.84 166.37)
-		(uuid "07ffe030-9a86-5828-bcc7-63de37771790")
-	)
-	(no_connect
 		(at 219.71 185.42)
-		(uuid "949cb780-593d-565e-b0ad-b430a670abcc")
+		(uuid "c51cce36-22ee-5f67-97e7-52c31a60af14")
 	)
 	(label "QSPI_SD3"
 		(at 200.66 107.95 270)
@@ -12864,7 +12808,7 @@
 	)
 	(no_connect
 		(at 243.84 161.29)
-		(uuid "3420a0f6-ba36-59c3-b83b-aa02296d5543")
+		(uuid "4b180de8-8455-5fab-b2ed-04aa37ed902a")
 	)
 	(label "RUN"
 		(at 217.17 200.66 90)
@@ -16212,570 +16156,6 @@
 			(project "RPI-RP2350A-MINIMAL_R4-S1"
 				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8"
 					(reference "C17")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RPI_DB:Mechanical | Mounting_Holes/RP-01HF5R-LCTEJS")
-		(at 21.59 261.62 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "00000000-0000-0000-0000-00005ef4c292")
-		(property "Reference" "MH1"
-			(at 24.13 260.35 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "NPTH FD2.75mm SM3.15mm KO6mm"
-			(at 24.13 262.89 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RPI_COMPILED:none_mh_npth_fd2p75mm_sm3p15mm_ko6mm"
-			(at 21.59 261.62 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Mechanical\\Mounting_Holes\\NONE_MH_NPTH_FD2P75MM_SM3P15MM_KO6MM\\datasheets"
-			(at 21.59 261.62 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Mounting Hole, NPTH, Finished Dia=2.75mm, Soldermask Dia=3.15mm, Keep Out Dia=6mm"
-			(at 21.59 261.62 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "part_uid" "RP-01HF5R-LCTEJS"
-			(at 21.59 261.62 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "manufacturer" "None"
-			(at 21.59 261.62 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "manufacturer_pn" "MH_NPTH_FD2P75MM_SM3P15MM_KO6MM"
-			(at 21.59 261.62 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "packaging" ""
-			(at 21.59 261.62 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "packaging_qty" ""
-			(at 21.59 261.62 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "size" "FD2.75mm SM3.15mm KO6mm"
-			(at 21.59 261.62 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(instances
-			(project "RPI-RP2350A-MINIMAL_R4-S1"
-				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8"
-					(reference "MH1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RPI_DB:Mechanical | Mounting_Holes/RP-01HF5R-LCTEJS")
-		(at 21.59 266.7 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "00000000-0000-0000-0000-00005ef4cf1f")
-		(property "Reference" "MH2"
-			(at 24.13 265.43 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "NPTH FD2.75mm SM3.15mm KO6mm"
-			(at 24.13 267.97 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RPI_COMPILED:none_mh_npth_fd2p75mm_sm3p15mm_ko6mm"
-			(at 21.59 266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Mechanical\\Mounting_Holes\\NONE_MH_NPTH_FD2P75MM_SM3P15MM_KO6MM\\datasheets"
-			(at 21.59 266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Mounting Hole, NPTH, Finished Dia=2.75mm, Soldermask Dia=3.15mm, Keep Out Dia=6mm"
-			(at 21.59 266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "part_uid" "RP-01HF5R-LCTEJS"
-			(at 21.59 266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "manufacturer" "None"
-			(at 21.59 266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "manufacturer_pn" "MH_NPTH_FD2P75MM_SM3P15MM_KO6MM"
-			(at 21.59 266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "packaging" ""
-			(at 21.59 266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "packaging_qty" ""
-			(at 21.59 266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "size" "FD2.75mm SM3.15mm KO6mm"
-			(at 21.59 266.7 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(instances
-			(project "RPI-RP2350A-MINIMAL_R4-S1"
-				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8"
-					(reference "MH2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RPI_DB:Mechanical | Mounting_Holes/RP-01HF5R-LCTEJS")
-		(at 21.59 271.78 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "00000000-0000-0000-0000-00005ef4d323")
-		(property "Reference" "MH3"
-			(at 24.13 270.51 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "NPTH FD2.75mm SM3.15mm KO6mm"
-			(at 24.13 273.05 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RPI_COMPILED:none_mh_npth_fd2p75mm_sm3p15mm_ko6mm"
-			(at 21.59 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Mechanical\\Mounting_Holes\\NONE_MH_NPTH_FD2P75MM_SM3P15MM_KO6MM\\datasheets"
-			(at 21.59 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Mounting Hole, NPTH, Finished Dia=2.75mm, Soldermask Dia=3.15mm, Keep Out Dia=6mm"
-			(at 21.59 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "part_uid" "RP-01HF5R-LCTEJS"
-			(at 21.59 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "manufacturer" "None"
-			(at 21.59 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "manufacturer_pn" "MH_NPTH_FD2P75MM_SM3P15MM_KO6MM"
-			(at 21.59 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "packaging" ""
-			(at 21.59 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "packaging_qty" ""
-			(at 21.59 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "size" "FD2.75mm SM3.15mm KO6mm"
-			(at 21.59 271.78 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(instances
-			(project "RPI-RP2350A-MINIMAL_R4-S1"
-				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8"
-					(reference "MH3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "RPI_DB:Mechanical | Mounting_Holes/RP-01HF5R-LCTEJS")
-		(at 21.59 276.86 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "00000000-0000-0000-0000-00005ef4d57b")
-		(property "Reference" "MH4"
-			(at 24.13 275.59 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "NPTH FD2.75mm SM3.15mm KO6mm"
-			(at 24.13 278.13 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RPI_COMPILED:none_mh_npth_fd2p75mm_sm3p15mm_ko6mm"
-			(at 21.59 276.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "file:///C:\\rpi-pdb\\parts\\Mechanical\\Mounting_Holes\\NONE_MH_NPTH_FD2P75MM_SM3P15MM_KO6MM\\datasheets"
-			(at 21.59 276.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Mounting Hole, NPTH, Finished Dia=2.75mm, Soldermask Dia=3.15mm, Keep Out Dia=6mm"
-			(at 21.59 276.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "part_uid" "RP-01HF5R-LCTEJS"
-			(at 21.59 276.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "manufacturer" "None"
-			(at 21.59 276.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "manufacturer_pn" "MH_NPTH_FD2P75MM_SM3P15MM_KO6MM"
-			(at 21.59 276.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "packaging" ""
-			(at 21.59 276.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "packaging_qty" ""
-			(at 21.59 276.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "size" "FD2.75mm SM3.15mm KO6mm"
-			(at 21.59 276.86 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(instances
-			(project "RPI-RP2350A-MINIMAL_R4-S1"
-				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8"
-					(reference "MH4")
 					(unit 1)
 				)
 			)

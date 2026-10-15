@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Turn Raspberry Pi's RP2350A minimal schematic into our root sheet (idempotent on the original file).
 
-- removes the connectors we don't use (micro-USB J1, headers J2/J3, SWD J4) and R9 (optional
-  second-memory link on GPIO0, which is our SCK pin)
+- removes the connectors we don't use (micro-USB J1, headers J2/J3, SWD J4), R9 (optional
+  second-memory link on GPIO0, which is our SCK pin) and the mounting holes MH1-4
 - removes wires and labels left dangling by that, repeatedly
 - unused GPIOs: label + stub removed, a no-connect flag on the RP2350 pin
 - signals used by the Link sheet become global labels
@@ -12,8 +12,8 @@ import sys, uuid
 from sexp import parse, dump, find, first, Str
 from schgeom import symbol_pins
 
-REMOVE = {'J1', 'J2', 'J3', 'J4', 'R9'}
-GLOBAL = {'GPIO0', 'GPIO1', 'GPIO2', 'GPIO3', 'GPIO25', 'USB_D+', 'USB_D-', 'SWCLK', 'SWD'}
+REMOVE = {'J1', 'J2', 'J3', 'J4', 'R9', 'MH1', 'MH2', 'MH3', 'MH4'}   # MH: mounting holes, the dongle has none
+GLOBAL = {'GPIO11', 'GPIO12', 'GPIO13', 'GPIO14', 'GPIO21', 'USB_D+', 'USB_D-'}
 _NS = uuid.UUID('9b1c7e30-2f4a-4c8e-8d1b-6a5f0e2c3d47')
 _n = [0]
 
@@ -97,7 +97,7 @@ def main(src, dst):
                       ['effects', ['font', ['size', 1.27, 1.27]], ['hide', 'yes']]]]
                 out.append(g)
                 continue
-            if name.startswith('GPIO'):
+            if name.startswith('GPIO') or name in ('SWCLK', 'SWD'):    # unused: no pads on rev A
                 lp = P(first(c, 'at'))
                 for w in wires:
                     a, b = [P(xy) for xy in find(first(w, 'pts'), 'xy')]

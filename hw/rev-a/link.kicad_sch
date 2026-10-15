@@ -3478,129 +3478,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:TestPoint"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.762)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "TP"
-				(at 0 6.858 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "TestPoint"
-				(at 0 5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 5.08 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 5.08 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "test point"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "test point tp"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Pin* Test*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "TestPoint_0_1"
-				(circle
-					(center 0 3.302)
-					(radius 0.762)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "TestPoint_1_1"
-				(pin passive line
-					(at 0 0 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:PWR_FLAG"
 			(power global)
 			(pin_numbers
@@ -5293,7 +5170,7 @@
 			)
 		)
 	)
-	(global_label "GPIO0"
+	(global_label "GPIO12"
 		(shape passive)
 		(at 269.24 53.34 180)
 		(fields_autoplaced yes)
@@ -5325,7 +5202,7 @@
 		)
 		(uuid "f3338296-6b48-5f86-8045-0fff409a1888")
 	)
-	(global_label "GPIO3"
+	(global_label "GPIO11"
 		(shape passive)
 		(at 269.24 58.42 180)
 		(fields_autoplaced yes)
@@ -5500,7 +5377,7 @@
 			)
 		)
 	)
-	(global_label "GPIO3"
+	(global_label "GPIO11"
 		(shape passive)
 		(at 342.9 41.91 90)
 		(fields_autoplaced yes)
@@ -5795,7 +5672,7 @@
 			)
 		)
 	)
-	(global_label "GPIO1"
+	(global_label "GPIO13"
 		(shape passive)
 		(at 15.24 121.92 180)
 		(fields_autoplaced yes)
@@ -6179,7 +6056,7 @@
 			)
 		)
 	)
-	(global_label "GPIO2"
+	(global_label "GPIO14"
 		(shape passive)
 		(at 78.74 121.92 180)
 		(fields_autoplaced yes)
@@ -8967,7 +8844,7 @@
 			)
 		)
 	)
-	(global_label "GPIO25"
+	(global_label "GPIO21"
 		(shape passive)
 		(at 279.4 199.39 90)
 		(fields_autoplaced yes)
@@ -9075,54 +8952,17 @@
 			)
 		)
 	)
-	(global_label "SWCLK"
-		(shape passive)
-		(at 342.9 200.66 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.0 1.0)
-			)
-			(justify right)
-		)
-		(uuid "cb8251bb-db00-5a18-aa57-36589588f7ec")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 342.9 200.66 0)
-			(effects
-				(font
-					(size 1.0 1.0)
-				)
-				(hide yes)
-			)
-		)
-	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 342.9 200.66 0)
+		(lib_id "power:PWR_FLAG")
+		(at 25.4 248.92000000000002 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d37a790a-60c7-523e-b0b9-5271d4e5d2f3")
-		(property "Reference" "TP101"
-			(at 342.9 188.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "SWCLK"
-			(at 342.9 212.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 342.9 200.66 0)
+		(uuid "977c45c0-b32b-50a6-a981-fd740743586b")
+		(property "Reference" "#FLG0200"
+			(at 25.4 243.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9130,168 +8970,16 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 342.9 200.66 0)
+		(property "Value" "PWR_FLAG"
+			(at 25.4 245.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 342.9 200.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" ""
-			(at 342.9 200.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "977c45c0-b32b-50a6-a981-fd740743586b")
-		)
-		(instances
-			(project "gb-link-usb"
-				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
-					(reference "TP101")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(global_label "SWD"
-		(shape passive)
-		(at 25.4 251.46 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.0 1.0)
-			)
-			(justify right)
-		)
-		(uuid "67e910e4-767c-5388-8e87-1f297cd27487")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 25.4 251.46 0)
-			(effects
-				(font
-					(size 1.0 1.0)
-				)
-				(hide yes)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 25.4 251.46 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2f0112ff-4db9-5c07-b3bb-b9b3df62f78c")
-		(property "Reference" "TP102"
-			(at 25.4 239.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "SWD"
-			(at 25.4 263.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 25.4 251.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 25.4 251.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 25.4 251.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" ""
-			(at 25.4 251.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0526cb82-a60c-58d5-a01c-5b017c82389c")
-		)
-		(instances
-			(project "gb-link-usb"
-				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
-					(reference "TP102")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 88.9 251.46 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f1ab23b2-336e-5597-86a6-2176bb682983")
-		(property "Reference" "#PWR02045"
-			(at 88.9 256.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 88.9 254.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
 			)
 		)
 		(property "Footprint" ""
-			(at 88.9 251.46 0)
+			(at 25.4 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9300,7 +8988,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 251.46 0)
+			(at 25.4 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9309,7 +8997,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 88.9 251.46 0)
+			(at 25.4 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9318,44 +9006,56 @@
 			)
 		)
 		(pin "1"
-			(uuid "ec12f56e-f733-55d8-8087-775bbf115fee")
+			(uuid "cb8251bb-db00-5a18-aa57-36589588f7ec")
 		)
 		(instances
 			(project "gb-link-usb"
 				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
-					(reference "#PWR02045")
+					(reference "#FLG0200")
 					(unit 1)
 				)
 			)
 		)
 	)
+	(label "VBUS"
+		(at 25.4 248.92000000000002 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.0 1.0)
+			)
+			(justify right)
+		)
+		(uuid "0526cb82-a60c-58d5-a01c-5b017c82389c")
+	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 88.9 251.46 0)
+		(lib_id "power:PWR_FLAG")
+		(at 50.8 248.92000000000002 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "2e8ee887-dbd2-5519-81bb-fb125fbcad2d")
-		(property "Reference" "TP103"
-			(at 88.9 239.46 0)
+		(uuid "67e910e4-767c-5388-8e87-1f297cd27487")
+		(property "Reference" "#FLG0201"
+			(at 50.8 243.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 50.8 245.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "GND"
-			(at 88.9 263.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 88.9 251.46 0)
+		(property "Footprint" ""
+			(at 50.8 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9364,7 +9064,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 251.46 0)
+			(at 50.8 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9373,16 +9073,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 88.9 251.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" ""
-			(at 88.9 251.46 0)
+			(at 50.8 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9396,147 +9087,6 @@
 		(instances
 			(project "gb-link-usb"
 				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
-					(reference "TP103")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 25.4 279.4 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5f80343a-6dcb-55ac-93b5-258b1240b36c")
-		(property "Reference" "#FLG0200"
-			(at 25.4 274.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 25.4 276.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 25.4 279.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 25.4 279.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 25.4 279.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4f3c2e8a-297b-53d6-83ba-f40d42103606")
-		)
-		(instances
-			(project "gb-link-usb"
-				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
-					(reference "#FLG0200")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(label "VBUS"
-		(at 25.4 279.4 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.0 1.0)
-			)
-			(justify right)
-		)
-		(uuid "fc1f97bb-5fa6-5552-a4d6-5745e615009c")
-	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 50.8 279.4 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2eec5d7d-85f0-5bb3-b011-6da00b98b9fa")
-		(property "Reference" "#FLG0201"
-			(at 50.8 274.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 50.8 276.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 50.8 279.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 50.8 279.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 50.8 279.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "76381319-841a-58cd-915d-58ce57cb8a24")
-		)
-		(instances
-			(project "gb-link-usb"
-				(path "/94683f5c-9cd9-448e-be96-9792537b5cb8/7d2e4b91-3c5a-4e8f-b6d0-9a1c2e3f4b58"
 					(reference "#FLG0201")
 					(unit 1)
 				)
@@ -9544,7 +9094,7 @@
 		)
 	)
 	(label "GND"
-		(at 50.8 279.4 270)
+		(at 50.8 248.92000000000002 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9552,7 +9102,7 @@
 			)
 			(justify right)
 		)
-		(uuid "a2b80083-a059-5902-9243-b5bf80d4b760")
+		(uuid "f1ab23b2-336e-5597-86a6-2176bb682983")
 	)
 	(sheet_instances
 		(path "/"

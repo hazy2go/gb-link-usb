@@ -12,6 +12,9 @@ Sister project of the [WiFi Game Boy Cartridge (Rev B)](https://github.com/hazy2
 3. **Online link play:** two Game Boys in different places, linked over the internet (Tetris, Pokémon trades/battles).
 4. **Final product:** our own small PCB (RP2040/RP2350 + level shifter + link plug + USB-C), JLC-assembled, in a 3D-printed case. No soldering for the user.
 
+## Print to PNG (no setup)
+Double-click **`GB Printer.command`** in this folder (first time: right-click > Open). It waits for the Pico, saves every print to `~/Pictures/GameBoy Prints` (normal size and 4x), and plays a sound per print. Leave the window open while printing. Needs the printer firmware on the Pico and Node.js.
+
 ## How it works
 ```
 Game Boy link port (5 V, SPI-like: SCK, SOUT, SIN)

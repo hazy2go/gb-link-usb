@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" width="1000" height="400">
+<rect width="1000" height="400" rx="20" fill="#F4F6EF"/>
+<text x="200" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="650" fill="#1D2420" text-anchor="middle">Link cable plug</text>
+<text x="200" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#5D6A62" text-anchor="middle">looking into the holes</text>
+<path d="M80 110 h240 v70 l-34 46 h-172 l-34 -46 z" fill="#2E3136" stroke="#1B1D20" stroke-width="2" stroke-linejoin="round"/>
+<text x="740" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="650" fill="#1D2420" text-anchor="middle">Pico 2 W</text>
+<text x="740" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#5D6A62" text-anchor="middle">USB at the top, left pins</text>
+<rect x="700" y="96" width="150" height="270" rx="8" fill="#1F6B45"/>
+<rect x="757" y="84" width="36" height="22" rx="3" fill="#C9CED3" stroke="#8D949B"/>
+<rect x="790" y="250" width="48" height="48" rx="4" fill="#26292C"/>
+<circle cx="720" cy="128" r="7" fill="#D8B45A"/>
+<text x="736" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#EAF3EC">GP0</text>
+<text x="688" y="132" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#5D6A62" text-anchor="middle">1</text>
+<circle cx="720" cy="162" r="7" fill="#D8B45A"/>
+<text x="736" y="167" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#EAF3EC">GP1</text>
+<text x="688" y="166" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#5D6A62" text-anchor="middle">2</text>
+<circle cx="720" cy="196" r="7" fill="#D8B45A"/>
+<text x="736" y="201" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#EAF3EC">GND</text>
+<text x="688" y="200" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#5D6A62" text-anchor="middle">3</text>
+<circle cx="720" cy="230" r="7" fill="#D8B45A"/>
+<text x="736" y="235" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#EAF3EC">GP2</text>
+<text x="688" y="234" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#5D6A62" text-anchor="middle">4</text>
+<circle cx="720" cy="264" r="7" fill="#D8B45A"/>
+<text x="736" y="269" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#EAF3EC">GP3</text>
+<text x="688" y="268" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#5D6A62" text-anchor="middle">5</text>
+<circle cx="720" cy="298" r="7" fill="#D8B45A"/>
+<text x="736" y="303" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#EAF3EC">GP4</text>
+<text x="688" y="302" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#5D6A62" text-anchor="middle">6</text>
+<circle cx="720" cy="332" r="7" fill="#D8B45A"/>
+<text x="736" y="337" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#EAF3EC">GP5</text>
+<text x="688" y="336" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#5D6A62" text-anchor="middle">7</text>
+<path d="M150 195 C 270 195, 360 128, 450 128 L 713 128" fill="none" stroke="#1B1D20" stroke-opacity="0.18" stroke-width="9" stroke-linecap="round"/>
+<path d="M150 195 C 270 195, 360 128, 450 128 L 713 128" fill="none" stroke="#2E9E44" stroke-width="5" stroke-linecap="round"/>
+<rect x="458" y="115" width="196" height="26" rx="13" fill="#FFFFFF" stroke="#2E9E44" stroke-width="1.5"/>
+<text x="472" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#1D2420"><tspan font-weight="700">SCK</tspan>  clock</text>
+<path d="M270 145 C 390 145, 360 162, 450 162 L 713 162" fill="none" stroke="#1B1D20" stroke-opacity="0.18" stroke-width="9" stroke-linecap="round"/>
+<path d="M270 145 C 390 145, 360 162, 450 162 L 713 162" fill="none" stroke="#D93025" stroke-width="5" stroke-linecap="round"/>
+<rect x="458" y="149" width="196" height="26" rx="13" fill="#FFFFFF" stroke="#D93025" stroke-width="1.5"/>
+<text x="472" y="167" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#1D2420"><tspan font-weight="700">SOUT</tspan>  data from Game Boy</text>
+<path d="M130 145 C 250 145, 360 196, 450 196 L 713 196" fill="none" stroke="#1B1D20" stroke-opacity="0.18" stroke-width="9" stroke-linecap="round"/>
+<path d="M130 145 C 250 145, 360 196, 450 196 L 713 196" fill="none" stroke="#2B63D9" stroke-width="5" stroke-linecap="round"/>
+<rect x="458" y="183" width="196" height="26" rx="13" fill="#FFFFFF" stroke="#2B63D9" stroke-width="1.5"/>
+<text x="472" y="201" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#1D2420"><tspan font-weight="700">GND</tspan>  ground</text>
+<path d="M200 195 C 320 195, 360 230, 450 230 L 713 230" fill="none" stroke="#1B1D20" stroke-opacity="0.18" stroke-width="9" stroke-linecap="round"/>
+<path d="M200 195 C 320 195, 360 230, 450 230 L 713 230" fill="none" stroke="#F08A1C" stroke-width="5" stroke-linecap="round"/>
+<rect x="458" y="217" width="196" height="26" rx="13" fill="#FFFFFF" stroke="#F08A1C" stroke-width="1.5"/>
+<text x="472" y="235" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#1D2420"><tspan font-weight="700">SIN</tspan>  data to Game Boy</text>
+<text x="200" y="262" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#5D6A62" text-anchor="middle">1 (5 V) and 4 (SD): not used</text>
+<text x="200" y="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#5D6A62" text-anchor="middle">Wire colours differ between cables:</text>
+<text x="200" y="318" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#5D6A62" text-anchor="middle">find yours with a continuity beep.</text>
+<text x="500.0" y="384" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#8E3A2F" text-anchor="middle">Power order: Pico on USB first, then switch the Game Boy on.</text>
+<circle cx="130" cy="145" r="15" fill="#151719" stroke="#2B63D9" stroke-width="4"/>
+<text x="130" y="150" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">6</text>
+<circle cx="200" cy="145" r="15" fill="#151719" stroke="#6B6E73" stroke-width="1.5"/>
+<text x="200" y="150" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#8A8D92" text-anchor="middle">4</text>
+<circle cx="270" cy="145" r="15" fill="#151719" stroke="#D93025" stroke-width="4"/>
+<text x="270" y="150" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+<circle cx="150" cy="195" r="15" fill="#151719" stroke="#2E9E44" stroke-width="4"/>
+<text x="150" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+<circle cx="200" cy="195" r="15" fill="#151719" stroke="#F08A1C" stroke-width="4"/>
+<text x="200" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+<circle cx="250" cy="195" r="15" fill="#151719" stroke="#6B6E73" stroke-width="1.5"/>
+<text x="250" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#8A8D92" text-anchor="middle">1</text>
+</svg>

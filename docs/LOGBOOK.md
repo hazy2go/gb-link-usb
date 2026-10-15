@@ -154,3 +154,6 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 ## 2026-10-15 Repo made public
 - Hazy asked to make the repo public so others can use the printer emulator. Checked first: no keys/passwords/captures/photos in any commit. README rewritten with full setup instructions.
 - Still open (Hazy to decide): license (proposed MIT, firstlight/ stays GPL-3), a v0.1 release with the prebuilt .uf2.
+
+## 2026-10-16 README polish
+- New README layout (hero banner, badges, quick start with wiring diagram and breadboard render, printing, troubleshooting, how it works, layout, development, roadmap). Images in docs/img: hero.svg and wiring.svg (drawn), breadboard.png and web-app.png (screenshots of our pages), sample-print.png (a test image sent through the full printer protocol and decoded by our code; labelled as such). The first real print is not used: it shows people, and the repo is public. Preview checked with GitHub's Markdown renderer.

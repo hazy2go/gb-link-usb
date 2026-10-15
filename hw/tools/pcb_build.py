@@ -343,6 +343,13 @@ def step_finish():
 
     # 4. new footprints
     on_board = {fp.GetReference(): fp for fp in board.GetFootprints()}
+    for ref, fp in on_board.items():                    # RPi core parts: value + LCSC from our schematic
+        c = comps.get(ref)
+        if c and c['fields'].get('LCSC'):
+            fp.SetValue(c['value'])
+            fp.SetField('LCSC', c['fields']['LCSC'])
+            f = fp.GetField('LCSC')
+            f.SetVisible(False); f.SetLayer(pcbnew.F_Fab)
     for ref, c in comps.items():
         if ref.startswith('#') or not c['footprint'] or ref in on_board:
             continue
@@ -379,6 +386,9 @@ def step_finish():
     print('pads given their schematic net:', changed)
     for pad in on_board['J101'].Pads():          # USB-C VBUS pads (tiny) and shield (at the edge): solid to their pours
         if pad.GetNetname() == 'VBUS' or pad.GetNumber() == 'SH':
+            pad.SetLocalZoneConnection(pcbnew.ZONE_CONNECTION_FULL)
+    for pad in on_board['J102'].Pads():          # cable GND/shield pads: solid (traces between the pads left one thermal spoke)
+        if pad.GetNetname() == 'GND':
             pad.SetLocalZoneConnection(pcbnew.ZONE_CONNECTION_FULL)
 
     # silkscreen: designators moved to the fab layer (on a board this dense they only overlap); a few useful labels instead

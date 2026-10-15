@@ -6,6 +6,7 @@
 - removes wires and labels left dangling by that, repeatedly
 - unused GPIOs: label + stub removed, a no-connect flag on the RP2350 pin
 - signals used by the Link sheet become global labels
+- JLC part numbers (LCSC field) for the RPi core parts (LOGBOOK 2026-10-16: JLC stock, RPi's part advice)
 Usage: edit_root.py IN.kicad_sch OUT.kicad_sch
 """
 import sys, uuid
@@ -14,6 +15,21 @@ from schgeom import symbol_pins
 
 REMOVE = {'J1', 'J2', 'J3', 'J4', 'R9', 'MH1', 'MH2', 'MH3', 'MH4'}   # MH: mounting holes, the dongle has none
 GLOBAL = {'GPIO11', 'GPIO12', 'GPIO13', 'GPIO14', 'GPIO21', 'USB_D+', 'USB_D-'}
+# LCSC numbers for the core parts, checked on JLC 2026-10-16 (hw/tools/jlc_search.py). (value, lcsc)
+# None keeps RPi's value. RPi's hardware design guide asks for exactly the ABM8-272-T3 crystal and the
+# polarity-marked AOTA-B201610S3R3-101-T inductor; both kept.
+LCSC = {
+    'U1': (None, 'C42411118'), 'U2': (None, 'C26537'), 'U3': (None, 'C97521'),
+    'X1': ('ABM8-272-T3', 'C20625731'), 'L1': ('AOTA-B201610S3R3-101-T', 'C42411119'),
+    'SW1': ('SKRPABE010', 'C115360'), 'SW2': ('SKRPABE010', 'C115360'),   # Wurth 434133025816 out of stock; Alps J-lead 4.2x3.2, 1.6 N like the Wurth
+    'C1': (None, 'C15850'), 'C5': (None, 'C15850'), 'C19': (None, 'C15850'),          # 10u 0805 25 V X5R
+    'C3': (None, 'C1548'), 'C4': (None, 'C1548'),                                      # 15p 0402 C0G
+    'C6': (None, 'C23733'), 'C7': (None, 'C23733'), 'C9': (None, 'C23733'),            # 4.7u 0402 6.3 V X5R
+    'R1': (None, 'C25744'), 'R2': (None, 'C11702'), 'R4': (None, 'C11702'), 'R6': (None, 'C11702'),
+    'R3': (None, 'C25105'), 'R7': (None, 'C25100'), 'R8': (None, 'C25100'), 'R10': (None, 'C17168'),
+}
+LCSC.update({f'C{n}': (None, 'C1525') for n in (2, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18)})   # 100n 0402 X7R 16 V
+NOT_PARTS = {'PCB1', 'SBREV1', 'VARIANT1'}    # RPi's BOM directive symbols: not placed parts
 _NS = uuid.UUID('9b1c7e30-2f4a-4c8e-8d1b-6a5f0e2c3d47')
 _n = [0]
 
@@ -112,6 +128,30 @@ def main(src, dst):
                 continue
         out.append(c)
     sch[:] = [c for c in out if id(c) not in removed]
+
+    for c in sch:
+        if not (isinstance(c, list) and c[0] == 'symbol' and first(c, 'lib_id') is not None):
+            continue
+        ref = ref_of(c)
+        if ref in NOT_PARTS:
+            ib = first(c, 'in_bom')
+            if ib is not None:
+                ib[1] = 'no'
+        if ref not in LCSC:
+            continue
+        value, lcsc = LCSC[ref]
+        props = [p for p in find(c, 'property')]
+        if value:
+            next(p for p in props if p[1] == 'Value')[2] = Str(value)
+        old = next((p for p in props if p[1] == 'LCSC'), None)
+        if old is not None:
+            old[2] = Str(lcsc)
+        else:
+            ds = next(p for p in props if p[1] == 'Datasheet')
+            new = [x for x in ds]
+            new[1], new[2] = Str('LCSC'), Str(lcsc)
+            new = [x for x in new if not (isinstance(x, list) and x and x[0] == 'uuid')]
+            c.insert(c.index(ds) + 1, new)
     open(dst, 'w').write(dump(sch) + '\n')
     print(f'removed {sorted(REMOVE)}; wrote {dst}')
 

@@ -1,0 +1,48 @@
+LOOK D101   C2297      green                JLC part "0805G (Green)" 2 pins vs our 2
+      pin 1    JLC "A"  ours "K_1"  net GND
+      pin 2    JLC "K"  ours "A_2"  net /Link/LED_A
+LOOK J101   C165948    TYPE-C-31-M-12       JLC part "TYPE-C-31-M-12" 16 pins vs our 17
+      pin 1    JLC "EH"  ours "" net 
+      pin 2    JLC "EH"  ours "" net 
+      pin 3    JLC "EH"  ours "" net 
+      pin 4    JLC "EH"  ours "" net 
+      pin A1   JLC "None"  ours "GND_A1" net GND
+      pin A4   JLC "None"  ours "VBUS_A4" net VBUS
+      pin A6   JLC "DP1"  ours "D+_A6"  net USB_D+
+      pin A7   JLC "DN1"  ours "D-_A7"  net USB_D-
+      pin A9   JLC "None"  ours "VBUS_A9" net VBUS
+      pin B1   JLC "None"  ours "GND_B1" net GND
+      pin B4   JLC "None"  ours "VBUS_B4" net VBUS
+      pin B6   JLC "DP2"  ours "D+_B6"  net USB_D+
+      pin B7   JLC "DN2"  ours "D-_B7"  net USB_D-
+      pin B9   JLC "None"  ours "VBUS_B9" net VBUS
+      pin SH   JLC "None"  ours "SHIELD_SH" net GND
+      pin A12  JLC "None"  ours "GND_A12" net GND
+      pin B12  JLC "None"  ours "GND_B12" net GND
+      pin A4B9 JLC "VBUS"  ours "" net 
+      pin B4A9 JLC "VBUS"  ours "" net 
+      pin A1B12 JLC "GND"  ours "" net 
+      pin B1A12 JLC "GND"  ours "" net 
+ok   SW1    C115360    SKRPABE010           JLC part "SKRPABE010" 4 pins vs our 4
+ok   SW2    C115360    SKRPABE010           JLC part "SKRPABE010" 4 pins vs our 4
+LOOK U1     C42411118  RP2350A              JLC part "RP2350A_C42411118" 61 pins vs our 61
+      pin 60   JLC "QSPI_SS"  ours "QSPI_~{SS}_60"  net /QSPI_SS
+LOOK U2     C26537     NCP1117ST33T3G       JLC part "NCP1117ST33T3G" 4 pins vs our 4
+      pin 1    JLC "ADJ/GND"  ours "GND_1"  net GND
+      pin 2    JLC "OUTPUT"  ours "OUT_2"  net +3V3
+      pin 3    JLC "INPUT"  ours "IN_3"  net VBUS
+      pin 4    JLC "TAB"  ours "OUT_4"  net +3V3
+LOOK U3     C97521     W25Q128JVSIQ         JLC part "W25Q128JVSIQTR" 8 pins vs our 8
+      pin 1    JLC "CS#"  ours "~{CS}_1"  net /FLASH_SS
+      pin 8    JLC "VCC"  ours "VCC_8"  net +3V3
+ok   U101   C7519      USBLC6-2SC6          JLC part "USBLC6-2SC6" 6 pins vs our 6
+LOOK U102   C7843      SN74LVC1T45DBVR      JLC part "SN74LVC1T45DBVR" 6 pins vs our 6
+      pin 3    JLC "A"  ours "A_3"  net GPIO12
+LOOK U103   C7843      SN74LVC1T45DBVR      JLC part "SN74LVC1T45DBVR" 6 pins vs our 6
+      pin 3    JLC "A"  ours "A_3"  net GPIO13
+LOOK U104   C7843      SN74LVC1T45DBVR      JLC part "SN74LVC1T45DBVR" 6 pins vs our 6
+      pin 3    JLC "A"  ours "A_3"  net GPIO14
+ok   U105   C138714    TPD4E05U06DQAR       JLC part "TPD4E05U06DQAR_C138714" 10 pins vs our 10
+LOOK X1     C20625731  ABM8-272-T3          JLC part "ABM8-272-T3_C20625731" 4 pins vs our 4
+      pin 2    JLC "GND"  ours "2_2"  net GND
+      pin 4    JLC "GND"  ours "4_4"  net GND

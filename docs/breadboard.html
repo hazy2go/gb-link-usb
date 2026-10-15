@@ -44,7 +44,7 @@ code { font-family: var(--font-mono); font-size: 13px; }
 
 <div class="wrap">
   <h1>GB Link Breadboard</h1>
-  <p class="sub">Pico 2 W, BSS138 level shifter and the cut DMG-04, using the pin map we measured. Hover a wire in the list to highlight it. Hole names are column letter + row number, e.g. <code>j3</code>.</p>
+  <p class="sub">Pico 2 W wired straight to the cut DMG-04, no level shifter. This is the wiring that passed first light (1000 bytes, 0 errors). Hover a wire in the list to highlight it. Hole names are column letter + row number, e.g. <code>a3</code>.</p>
 
   <div class="grid">
     <figure><svg id="bb" role="img" aria-label="Breadboard wiring diagram"></svg></figure>
@@ -55,39 +55,23 @@ code { font-family: var(--font-mono); font-size: 13px; }
         <p>USB end at the top. Left pins in column <b>c</b>, right pins in column <b>h</b>, rows 3 to 22. That leaves columns a, b and i, j free for jumpers.</p>
       </li>
       <li>
-        <h2>Level shifter</h2>
-        <p>Rows 26 to 31, straddling the gap: LV pins in column <b>d</b>, HV pins in column <b>g</b>. Pin order differs between modules: follow the printed labels, keep LV on the left and HV on the right.</p>
+        <h2>Link cable to the Pico</h2>
+        <p>Each wire goes into a free hole on the left (a or b) of its Pico pin's row.</p>
+        <table>
+          <tr data-w="green" tabindex="0"><td><span class="sw" style="background:#2e9e44"></span>green, plug 5, clock</td><td class="h">a3, pin 1 GP0</td></tr>
+          <tr data-w="red" tabindex="0"><td><span class="sw" style="background:#d93025"></span>red, plug 2, data from GB</td><td class="h">b4, pin 2 GP1</td></tr>
+          <tr data-w="blue" tabindex="0"><td><span class="sw" style="background:#2b63d9"></span>blue, plug 6, GND</td><td class="h">a5, pin 3 GND</td></tr>
+          <tr data-w="orange" tabindex="0"><td><span class="sw" style="background:#f08a1c"></span>orange, plug 3, data to GB</td><td class="h">b6, pin 4 GP2</td></tr>
+        </table>
+        <p style="margin-top:8px">Shield: twisted and taped, not connected. Nothing else is wired: no shifter, no power rails.</p>
       </li>
       <li>
-        <h2>Power</h2>
-        <table>
-          <tr data-w="vbus" tabindex="0"><td><span class="sw" style="background:#d6336c"></span>VBUS (pin 40) to HV</td><td class="h">j3 → j28</td></tr>
-          <tr data-w="v33" tabindex="0"><td><span class="sw" style="background:#e8b500"></span>3V3 OUT (pin 36) to LV</td><td class="h">i7 → c28</td></tr>
-          <tr data-w="gndr" tabindex="0"><td><span class="sw" style="background:#222"></span>GND (pin 38) to HV GND</td><td class="h">j5 → j29</td></tr>
-          <tr data-w="gndl" tabindex="0"><td><span class="sw" style="background:#222"></span>GND (pin 3) to LV GND</td><td class="h">a5 → a29</td></tr>
-        </table>
-      </li>
-      <li>
-        <h2>Signals</h2>
-        <table>
-          <tr data-w="gp0" tabindex="0"><td><span class="sw" style="background:#8a4fd8"></span>GP0 (pin 1) to LV1</td><td class="h">a3 → a26</td></tr>
-          <tr data-w="gp1" tabindex="0"><td><span class="sw" style="background:#1aa3a3"></span>GP1 (pin 2) to LV2</td><td class="h">b4 → b27</td></tr>
-          <tr data-w="gp2" tabindex="0"><td><span class="sw" style="background:#9a6a3c"></span>GP2 (pin 4) to LV3</td><td class="h">b6 → b30</td></tr>
-        </table>
-      </li>
-      <li>
-        <h2>Link cable</h2>
-        <table>
-          <tr data-w="green" tabindex="0"><td><span class="sw" style="background:#2e9e44"></span>green, clock (SCK)</td><td class="h">→ i26 (HV1)</td></tr>
-          <tr data-w="red" tabindex="0"><td><span class="sw" style="background:#d93025"></span>red, data from GB</td><td class="h">→ i27 (HV2)</td></tr>
-          <tr data-w="blue" tabindex="0"><td><span class="sw" style="background:#2b63d9"></span>blue, GND</td><td class="h">→ i29 (GND row)</td></tr>
-          <tr data-w="orange" tabindex="0"><td><span class="sw" style="background:#f08a1c"></span>orange, data to GB</td><td class="h">→ i30 (HV3)</td></tr>
-        </table>
-        <p style="margin-top:8px">Shield: twisted and taped, not connected.</p>
+        <h2>Why no level shifter</h2>
+        <p>The Pico 2's RP2350 pins take up to 5.5 V while the Pico is powered (datasheet, FT pins), and the DMG reads the Pico's 3.3 V fine. This only holds for the Pico 2, not the original Pico.</p>
       </li>
       <li class="warn">
-        <h2>Before USB goes in</h2>
-        <p>Nothing from the Game Boy side may touch row 7 or row 28 left (3.3 V). Power rails are not used. Send a photo first, then plug in.</p>
+        <h2>Power order</h2>
+        <p>Pico USB in first, then the Game Boy on. Game Boy off first, then USB out. 5 V into an unpowered Pico is not allowed.</p>
       </li>
     </ol>
   </div>
@@ -147,16 +131,6 @@ code { font-family: var(--font-mono); font-size: 13px; }
   for (const [r, s] of Object.entries(picoL)) text(s, X('c') + 7, Y(+r) + 3, { 'font-size': 8, 'font-family': mono, fill: silk });
   for (const [r, s] of Object.entries(picoR)) text(s, X('h') - 7, Y(+r) + 3, { 'text-anchor': 'end', 'font-size': 8, 'font-family': mono, fill: silk });
 
-  // level shifter: LV pins d26..d31, HV pins g26..g31
-  el('rect', { x: X('d') - 0.7 * P, y: Y(26) - 0.8 * P, width: X('g') - X('d') + 1.4 * P, height: 6.6 * P, rx: 3, fill: css('--pcb-shift') });
-  const lv = ['LV1', 'LV2', 'LV', 'GND', 'LV3', 'LV4'], hv = ['HV1', 'HV2', 'HV', 'GND', 'HV3', 'HV4'];
-  lv.forEach((s, i) => {
-    el('rect', { x: X('d') - 3.5, y: Y(26 + i) - 3.5, width: 7, height: 7, rx: 1.5, fill: css('--pin') });
-    el('rect', { x: X('g') - 3.5, y: Y(26 + i) - 3.5, width: 7, height: 7, rx: 1.5, fill: css('--pin') });
-    text(s, X('d') + 7, Y(26 + i) + 3, { 'font-size': 7.5, 'font-family': mono, fill: silk });
-    text(hv[i], X('g') - 7, Y(26 + i) + 3, { 'text-anchor': 'end', 'font-size': 7.5, 'font-family': mono, fill: silk });
-  });
-
   // wires: arc between two holes, bow = sideways bulge in px (negative = left)
   const hole = (s) => ({ x: X(s[0]), y: Y(+s.slice(1)) });
   function wire(id, color, from, to, bow, label) {
@@ -169,20 +143,12 @@ code { font-family: var(--font-mono); font-size: 13px; }
     for (const p of [a, b]) el('circle', { cx: p.x, cy: p.y, r: 3, fill: color, stroke: '#0008', 'stroke-width': 1 }, g);
     const t = el('title', {}, g); t.textContent = label;
   }
-  wire('gp0', '#8a4fd8', 'a3', 'a26', -3.6 * P, 'GP0 to LV1');
-  wire('gndl', '#222222', 'a5', 'a29', -2.6 * P, 'GND to LV GND');
-  wire('gp1', '#1aa3a3', 'b4', 'b27', -1.9 * P, 'GP1 to LV2');
-  wire('gp2', '#9a6a3c', 'b6', 'b30', -1.2 * P, 'GP2 to LV3');
-  wire('v33', '#e8b500', 'i7', 'c28', -1.0 * P, '3V3 OUT to LV');
-  wire('vbus', '#d6336c', 'j3', 'j28', 3.2 * P, 'VBUS to HV');
-  wire('gndr', '#222222', 'j5', 'j29', 2.2 * P, 'GND to HV GND');
-
-  // link cable from the bottom right
-  const jx = X('j') + 2.6 * P, jy = H - 0.6 * P;
+  // link cable from the bottom left, straight to the Pico's left pins
+  const jx = X('a') - 2.2 * P, jy = H - 0.6 * P;
   el('rect', { x: jx - 9, y: jy - 2.6 * P, width: 18, height: 2.6 * P + 10, rx: 6, fill: '#3b3f44' });
-  text('to Game Boy', jx - 14, jy - 0.6 * P, { 'text-anchor': 'end', 'font-size': 9, 'font-family': mono, fill: css('--hole') });
-  const cable = [['green', '#2e9e44', 'i26', -5], ['red', '#d93025', 'i27', -2], ['blue', '#2b63d9', 'i29', 2], ['orange', '#f08a1c', 'i30', 5]];
-  for (const [id, c, to, dx] of cable) wire(id, c, { x: jx + dx, y: jy - 2.4 * P }, to, 1.4 * P, `${id} wire to ${to}`);
+  text('to Game Boy', jx + 14, jy - 0.6 * P, { 'font-size': 9, 'font-family': mono, fill: css('--hole') });
+  const cable = [['green', '#2e9e44', 'a3', -5, -2.2], ['red', '#d93025', 'b4', -2, -1.6], ['blue', '#2b63d9', 'a5', 2, -1.0], ['orange', '#f08a1c', 'b6', 5, -0.4]];
+  for (const [id, c, to, dx, bow] of cable) wire(id, c, { x: jx + dx, y: jy - 2.4 * P }, to, bow * P, `${id} wire to ${to}`);
 
   // hover a row in the list -> highlight its wire
   const setFocus = (id) => {

@@ -10,3 +10,7 @@ Every decision, check and result, in order. Dated headings, short "why". Correct
 - Bought a second DMG-04 (¥1,400, used) so one can be cut and the printer setup stays complete.
 - Prior art surveyed (GitHub, 2026-10-15): stacksmashing/gb-link-firmware is the closest base (Pico + PIO + WebUSB); mofosyne's printer emulator is the protocol reference. See README credits.
 - Parts ordered: Pico 2 WH, breadboard kit, BSS138 level shifters (PLAN.md).
+
+## 2026-10-15 Cut DMG-04: four inner wires
+- Hazy cut one DMG-04. Inner wires: **orange, red, blue, green** (4 wires). Shield / bare drain wire: not reported yet (ask).
+- Colors are not standardised, so the pin mapping is still unknown. Likely set for 4 wires: SCK, SOUT, SIN, GND (VCC and SD often not carried by link cables) (verify by continuity).

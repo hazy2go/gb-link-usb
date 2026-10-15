@@ -187,3 +187,10 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Base: Raspberry Pi RP2350A minimal design R4 (MIT), copied to hw/reference/. Keeps the RP2350 switcher/crystal/flash layout.
 - JLC stock checked (hw/tools/jlc_search.py): RP2350A 6,312; 74LVC1T45 348k; USB-C TYPE-C-31-M-12 380k; USBLC6 31k; TPD4E05U06 243k; crystal C9002 basic. W25Q16JVUXIQ out of stock (2): using W25Q128JVSIQ C97521 (basic part, 67k).
 - New pin: GP3 = SCK direction for the translator. Spec in docs/PCB.md.
+
+## 2026-10-16 PCB rev A: schematic done
+- `hw/tools/add_sheet.py` rebuilds everything: `edit_root.py` turns the RPi RP2350A minimal schematic into our root (removes micro-USB J1, headers J2/J3, SWD J4, and R9 = optional GPIO0-to-flash link, since GPIO0 is our SCK; strips dangling wires/labels/power symbols; unused GPIOs get no-connect flags; GPIO0-3, GPIO25, USB_D+/-, SWCLK, SWD become global labels). `gen_sheet.py` (adapted from the WiFi cart) generates the Link sheet from `hw/rev-a/link.json`: USB-C + CC 5.1k + USBLC6, 3x 74LVC1T45 (VCCB = VBUS), 33R series, 100k idle pull-ups, TPD4E05U06 ESD, cable pads (shield, SCK, GND, SOUT, SIN), LED, SWD test pads.
+- Fix in the copied `sexp.py`: it decoded `\n` in strings into real newlines and KiCad 10 refused to load the file; strings are now kept raw (round trip checked).
+- Checks: ERC identical to the untouched RPi design (2 off-grid warnings, U2 power-output pair, 2 regulator pins; all in the original). Netlist check: GPIO0-3, GPIO25, USB D+/D-, LINK_SCK/SO/SI, SWCLK/SWD each connect exactly the intended pins; VBUS reaches U2 and all VCCB pins.
+- Parts swapped for basic/in-stock: green LED C72043 out of stock -> KT-0805G C2297; 47R (extended) -> 33R C25105.
+- Next: PCB layout (keep the RPi core layout, add our parts, shrink the board).

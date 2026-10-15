@@ -223,38 +223,38 @@
     {
       "ref": "R104",
       "symbol": "Device:R",
-      "value": "33",
+      "value": "220",
       "footprint": "Resistor_SMD:R_0402_1005Metric",
-      "lcsc": "C25105",
+      "lcsc": "C25091",
       "pins": {
         "1": "B_SCK",
         "2": "LINK_SCK"
       },
-      "why": "Series resistor: softer edges into the cable (crosstalk) and ESD current limit"
+      "why": "Series resistor 220R: with the LVC1T45 (~20 ohm) it source-terminates the cable (no overshoot at the Game Boy in sim/link for 60-150 ohm cable, 0.3-2 m), softer edges (crosstalk), ESD current limit"
     },
     {
       "ref": "R105",
       "symbol": "Device:R",
-      "value": "33",
+      "value": "220",
       "footprint": "Resistor_SMD:R_0402_1005Metric",
-      "lcsc": "C25105",
+      "lcsc": "C25091",
       "pins": {
         "1": "B_SO",
         "2": "LINK_SO"
       },
-      "why": "Series resistor, Game Boy SOUT line"
+      "why": "Series resistor 220R, Game Boy SOUT line"
     },
     {
       "ref": "R106",
       "symbol": "Device:R",
-      "value": "33",
+      "value": "220",
       "footprint": "Resistor_SMD:R_0402_1005Metric",
-      "lcsc": "C25105",
+      "lcsc": "C25091",
       "pins": {
         "1": "B_SI",
         "2": "LINK_SI"
       },
-      "why": "Series resistor, Game Boy SIN line"
+      "why": "Series resistor 220R, Game Boy SIN line"
     },
     {
       "ref": "R107",
@@ -279,6 +279,30 @@
         "2": "LINK_SO"
       },
       "why": "Data from the Game Boy idles high when unplugged"
+    },
+    {
+      "ref": "C107",
+      "symbol": "Device:C",
+      "value": "100p",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "lcsc": "C1546",
+      "pins": {
+        "1": "B_SCK",
+        "2": "GND"
+      },
+      "why": "With R104 a 22 ns low-pass at the SCK translator input: keeps cable ringing below the LVC1T45's 6.5 V abs max even with a strong, fast Game Boy driver (sim/link). C0G."
+    },
+    {
+      "ref": "C108",
+      "symbol": "Device:C",
+      "value": "100p",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "lcsc": "C1546",
+      "pins": {
+        "1": "B_SO",
+        "2": "GND"
+      },
+      "why": "Same low-pass with R105 on the data line from the Game Boy (sim/link). C0G."
     },
     {
       "ref": "U105",

@@ -58,7 +58,7 @@ def main():
         x, y = pcbnew.ToMM(pt.x), pcbnew.ToMM(pt.y)
         return pcb_build.X0 + EDGE <= x <= pcb_build.X1 - EDGE and pcb_build.Y0 + EDGE <= y <= pcb_build.Y1 - EDGE
 
-    added, failed, seen = 0, [], set()
+    added, failed, seen, shared = 0, [], set(), []
     for fp in b.GetFootprints():
         ref = fp.GetReference()
         if ref not in pcb_build.PLACE:
@@ -98,9 +98,27 @@ def main():
                 if done:
                     break
             if not done:
-                failed.append(f'{ref}.{pad.GetNumber()}')
+                failed.append((ref, pad))
+    # second pass: pads with no room for a via of their own get a short trace to a GND via placed nearby
+    for ref, pad in failed[:]:
+        c = pad.GetPosition()
+        vias = sorted((v for v in KEEP if v.Type() == pcbnew.PCB_VIA_T), key=lambda v: (v.GetPosition() - c).EuclideanNorm())
+        for v in vias:
+            if (v.GetPosition() - c).EuclideanNorm() > mm(1.6):
+                break
+            tbox = seg_box(c, v.GetPosition(), mm(TRACK_W / 2))
+            if free(tbox, pad):
+                t = pcbnew.PCB_TRACK(b)
+                t.SetStart(c); t.SetEnd(v.GetPosition()); t.SetWidth(mm(TRACK_W)); t.SetLayer(pcbnew.F_Cu)
+                t.SetNet(gnd); t.SetLocked(True)
+                b.Add(t); KEEP.append(t)
+                obstacles.append((t.GetBoundingBox(), gnd.GetNetCode(), t))
+                shared.append(f'{ref}.{pad.GetNumber()}')
+                failed.remove((ref, pad))
+                break
+    failed = [f'{r}.{p.GetNumber()}' for r, p in failed]
     b.Save(PCB)
-    print('GND vias added:', added, ' no room:', failed)
+    print('GND vias added:', added, ' sharing a via:', shared, ' no room:', failed)
 
 
 if __name__ == '__main__':

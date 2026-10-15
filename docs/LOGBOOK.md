@@ -181,3 +181,9 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 
 ## 2026-10-16 Web page on GitHub Pages
 - `.github/workflows/pages.yml` runs the decoder tests and publishes web/ + the wiring drawing to https://hazy2go.github.io/gb-link-usb/ on push. First run: success; live page checked in headless Chrome (demo decodes: 12 packets). README points to the live page. Correction: the WiFi cart repo is at ~/wifi-game-boy-cartridge (CLAUDE.md said ~/projects/...).
+
+## 2026-10-16 PCB rev A: decisions and parts
+- Hazy chose: built-in link cable (one cut cable makes two boards), proper 5 V buffers (74LVC1T45 on USB 5 V, Ioff: safe in any power order).
+- Base: Raspberry Pi RP2350A minimal design R4 (MIT), copied to hw/reference/. Keeps the RP2350 switcher/crystal/flash layout.
+- JLC stock checked (hw/tools/jlc_search.py): RP2350A 6,312; 74LVC1T45 348k; USB-C TYPE-C-31-M-12 380k; USBLC6 31k; TPD4E05U06 243k; crystal C9002 basic. W25Q16JVUXIQ out of stock (2): using W25Q128JVSIQ C97521 (basic part, 67k).
+- New pin: GP3 = SCK direction for the translator. Spec in docs/PCB.md.

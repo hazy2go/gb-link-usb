@@ -137,3 +137,9 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Fix (firmware only): PIO glitch filter (an SCK edge counts only if the level still holds 1.6 us later; SM at 10 MHz; GB half-bit ~61 us), data-out pin slew SLOW + 2 mA drive, Schmitt trigger on SCK.
 - Result, printtest.gb: INIT replies `00 x8, 81 00`, STATUS replies `00 x8, 81 00`. Correct (photo from Hazy).
 - Note for the PCB: keep SCK away from SOUT/SIN or add a ground between them; the filter stays anyway.
+
+## 2026-10-15 FIRST PRINT: Game Boy -> Pico 2 W printer emulator -> PNG
+- With the glitch-filter firmware, the game printed without error ("printing" on screen, Hazy).
+- Capture: INIT, 9 x DATA (640 bytes), empty DATA, PRINT (4 bytes), then STATUS polls; 117 packets, 0 checksum errors.
+- `node tools/render.mjs`: one 160x144 image, a Pocket Camera photo with its frame, decoded correctly (palette assumption 0xE4 holds for this print). Saved locally as captures/first-print.png (captures/ is not committed).
+- Firmware, decoder, and status emulation confirmed on real hardware for this game. Still to try: other printer games (compression, multi-part prints), the live web page.

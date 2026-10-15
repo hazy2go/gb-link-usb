@@ -8,6 +8,7 @@
 ;          row15 20, row16 20, chart 128 (y 0 = top .. 47 = bottom).
 ; Text bytes are ASCII $20-$5F; bit 7 set = drawn inverted (white on black).
 ; Commands to the PC: 'H' hello, 'L'/'R' previous/next coin, 'B' range, 'A' refresh.
+; Build with -D DEBUG to show link counters on row 1 (frames started, bad sums, bad lengths).
 ;
 ; Tiles: 0-63 font, 64-127 inverted font, 128-223 chart (logo on the splash),
 ;        224-251 big digits (two tiles each). Screen layout in docs/SODAX.md.
@@ -59,6 +60,12 @@ wFrameReady: ds 1
 wX:          ds 1
 wY:          ds 1
 wPrev:       ds 1
+wDbgSync:    ds 1               ; frames started ($7E seen at the start state)
+wDbgBad:     ds 1               ; checksum mismatches
+wDbgLen:     ds 1               ; wrong type or length
+wDbgGotL:    ds 1               ; last bad frame: received sum
+wDbgGotH:    ds 1
+wDbgDirty:   ds 1               ; row 1 needs redrawing
 wBigTop:     ds 20
 wBigBot:     ds 20
 
@@ -173,7 +180,60 @@ MainLoop:
     ld a, [wFrameReady]
     and a
     call nz, Render
+IF DEF(DEBUG)                    ; debug build: link counters on row 1
+    ld a, [wDbgDirty]
+    and a
+    call nz, ShowDebug
+ENDC
     jr MainLoop
+
+; Row 1 (debug): frames started, bad checksums, bad length, last bad frame's
+; received sum vs computed sum. "S05 B01 L00 1234/1236"
+ShowDebug:
+    xor a
+    ld [wDbgDirty], a
+    call WaitVBlankStart
+    ld hl, MAP + 1 * 32
+    ld a, 'S' - $20
+    ld [hl+], a
+    ld a, [wDbgSync]
+    call HexAt
+    inc hl
+    ld a, 'B' - $20
+    ld [hl+], a
+    ld a, [wDbgBad]
+    call HexAt
+    inc hl
+    ld a, 'L' - $20
+    ld [hl+], a
+    ld a, [wDbgLen]
+    call HexAt
+    inc hl
+    ld a, [wDbgGotH]
+    call HexAt
+    ld a, [wDbgGotL]
+    call HexAt
+    ld a, '/' - $20
+    ld [hl+], a
+    ld a, [wRxSumH]
+    call HexAt
+    ld a, [wRxSumL]
+    jp HexAt
+
+HexAt:                          ; a -> two hex digit tiles at [hl+]
+    ld b, a
+    swap a
+    call .digit
+    ld a, b
+.digit:
+    and $0F
+    cp 10
+    jr c, .num
+    add 'A' - '0' - 10
+.num:
+    add '0' - $20
+    ld [hl+], a
+    ret
 
 ; ---------------------------------------------------------------- input
 ReadJoy:
@@ -241,29 +301,43 @@ ParseByte:
     dec a
     jr z, .s3
     dec a
-    jr z, .s4
+    jp z, .s4
     dec a
     jp z, .s5
     ; state 6: checksum high byte, then check everything
+    ld a, 1
+    ld [wDbgDirty], a
     ld a, [wRxSumH]
     cp c
-    jr nz, .reset
+    jr nz, .badsum
     ld a, [wRxGotL]
     ld b, a
     ld a, [wRxSumL]
     cp b
-    jr nz, .reset
+    jr nz, .badsum
     ld a, [wRxType]
     cp 1
-    jr nz, .reset
+    jr nz, .badlen
     ld a, [wRxLenL]
     cp LOW(P_LEN)
-    jr nz, .reset
+    jr nz, .badlen
     ld a, [wRxLenH]
     cp HIGH(P_LEN)
-    jr nz, .reset
+    jr nz, .badlen
     ld a, 1
     ld [wFrameReady], a
+    jr .reset
+.badsum:
+    ld a, c
+    ld [wDbgGotH], a
+    ld a, [wRxGotL]
+    ld [wDbgGotL], a
+    ld hl, wDbgBad
+    inc [hl]
+    jr .reset
+.badlen:
+    ld hl, wDbgLen
+    inc [hl]
 .reset:
     xor a
     ld [wRxState], a
@@ -272,6 +346,8 @@ ParseByte:
     ld a, c
     cp $7E
     ret nz
+    ld hl, wDbgSync
+    inc [hl]
     ld a, 1
     ld [wRxState], a
     ret
@@ -715,7 +791,7 @@ SplashLine1: TEXT20 "LIVE PRICES + QUOTES"
 SplashLine2: TEXT20 "  FROM THE SODAX API"
 SplashLine3: TEXT20 "WAITING FOR BRIDGE.."
 Loading:     TEXT20 "    LOADING...      "
-Footer:      TEXT20 "<>COIN B:RANGE A:NEW"
+Footer:      TEXT20 "<>COIN B:TIME A:LOAD"
 
 INCLUDE "font.inc"
 

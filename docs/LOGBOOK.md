@@ -110,3 +110,11 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Direct wiring: green to GP0, red to GP1, orange to GP2, blue to GND. Pico powered before the GB.
 - `tools/linktest.py` sent 01 10 20 7F A0 FE. **GB screen: last byte FE, counter 0006.** So the Pico's 3.3 V clock and data are read correctly by the DMG (answers the 3.3 V "verify" above: works on this unit), and orange = GB SIN (plug pin 3) is confirmed.
 - Pico received all FF: GB to Pico (red, GP1) not working yet. Line reads high (GP1 pull-up), so likely red not connected (wrap/row). Checking continuity plug hole 2 to Pico pin 2.
+
+## 2026-10-15 FIRST LIGHT: both directions work (no shifter)
+- Fault in the GB-to-Pico direction was simple: red was still in an old shifter row (29), not in Pico pin 2's row. Moved it; continuity plug hole 2 to Pico pin 2: beep.
+- `tools/linktest.py`: sent 01 10 20 7F A0 FE, expected 42 02 11 21 80 A1, **got 42 02 11 21 80 A1. PASS.**
+- Stress test: 1000 random bytes (0x0C skipped, CDC quirk), 20 ms apart, 24.4 s: **999 replies checked, 0 wrong, 0 missing.**
+- Final working wiring (direct, Pico 2 W only): green (plug 5, SCK) to GP0 / pin 1; red (plug 2, GB SOUT) to GP1 / pin 2; orange (plug 3, GB SIN) to GP2 / pin 4; blue (plug 6) to GND / pin 3; shield unconnected. The measured pin map was right all along.
+- Pico is clock master at ~9.2 kHz (calculated, not measured). Power rule: Pico on USB before the GB is on (RP2350 FT pins need IOVDD for 5 V).
+- Level shifter: parked until the headers can be soldered. Not needed for the RP2350 per datasheet; still wanted on our PCB for ESD/robustness (decide in stage 3).

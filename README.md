@@ -6,7 +6,8 @@
 
 <p align="center">
   <strong>Connect a Game Boy's link port to your computer over USB.</strong><br>
-  Print from a real Game Boy straight to PNG, with a Raspberry Pi Pico 2 W and one cut link cable.
+  Print from a real Game Boy straight to PNG, or watch live crypto prices from SODAX on it,<br>
+  with a Raspberry Pi Pico 2 W and one cut link cable.
 </p>
 
 <p align="center">
@@ -15,12 +16,14 @@
   <img alt="Pico SDK 2.3.1" src="https://img.shields.io/badge/Pico%20SDK-2.3.1-5d6a62">
   <img alt="Printer emulator: working" src="https://img.shields.io/badge/printer%20emulator-working-3a8a5c">
   <img alt="Tested on DMG" src="https://img.shields.io/badge/tested%20on-DMG-8e1b4e">
+  <img alt="SODAX live data: working" src="https://img.shields.io/badge/SODAX%20live%20data-working-a55c55">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
 </p>
 
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
   <a href="#printing">Printing</a> ·
+  <a href="#sodax-on-the-game-boy">SODAX</a> ·
   <a href="#troubleshooting">Troubleshooting</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="#roadmap">Roadmap</a>
@@ -31,6 +34,7 @@
 ## Highlights
 
 - **A Game Boy Printer that saves PNGs.** The Pico answers exactly like Nintendo's printer, so games print as usual, and every picture lands on your computer.
+- **Live SODAX market data on the Game Boy.** Prices, charts and real swap quotes from the [SODAX](https://sodax.com) API, drawn by our own Game Boy ROM.
 - **No level shifter, no soldering.** The Pico 2's RP2350 pins tolerate the Game Boy's 5 V signals, so four wires on a breadboard are enough.
 - **Double-click to use.** On a Mac, one launcher saves every print to `Pictures/GameBoy Prints`, with a sound. Any computer with Chrome or Edge can use the web page instead.
 - **Tested and documented.** The printer logic and the decoder have automated tests, and every hardware step, measurement and bug is written down in the [logbook](docs/LOGBOOK.md).
@@ -106,6 +110,29 @@ Open <http://localhost:8000> in Chrome or Edge, click **Connect Pico**, and prin
   <img src="docs/img/web-app.png" alt="The web page after decoding a print: buttons for Connect Pico, Save capture, Decode, Open file, Demo print, and the decoded 160 by 144 image" width="720">
 </p>
 
+## SODAX on the Game Boy
+
+<p align="center">
+  <img src="docs/img/sodax-splash.png" width="32%" alt="Splash screen with the SODAX logo">
+  <img src="docs/img/sodax-btc.png" width="32%" alt="BTC 24H: price, chart, low/high and a live solver quote">
+  <img src="docs/img/sodax-eth.png" width="32%" alt="ETH 30D: price, chart, low/high and a live solver quote">
+</p>
+<p align="center"><sub>Emulator screenshots with live data. Tested on a real DMG.</sub></p>
+
+Live prices, a 24H / 7D / 30D chart and a **real swap quote from the SODAX solver** for 9 coins (BTC, ETH, SOL, SODA, SUI, HYPE, AVAX, XLM, POL), on an original Game Boy.
+
+1. Put `sodax.gb` (from [Releases](../../releases)) on a flash cart such as an EverDrive.
+2. With the Pico on USB, double-click **`SODAX Bridge.command`** (or run `node tools/sodax-bridge.mjs`). Close the print tool first: one program uses the Pico at a time.
+3. Switch the Game Boy on and start `sodax.gb`.
+
+| Button | Action |
+|---|---|
+| ◄ ► (or ▲ ▼) | previous / next coin |
+| B | time range: 24H, 7D, 30D |
+| A or Start | load fresh data now (it also refreshes every 30 s) |
+
+Prices come from the SODAX oracle (`/oracle/candles`), quotes from the SODAX solver (`/intent/quote`), no API key needed. How the Game Boy, the Pico's bridge mode and the PC talk: [`docs/SODAX.md`](docs/SODAX.md).
+
 ## Troubleshooting
 
 | Problem | What to check |
@@ -113,6 +140,7 @@ Open <http://localhost:8000> in Chrome or Edge, click **Connect Pico**, and prin
 | The game reports a printer error | Wiring: beep each plug pin to its Pico pin. If your colours were mapped wrong, swap the two data wires (plug pins 2 and 3). Power order: Pico first. |
 | Stuck on `Waiting for the Pico...` | Is the printer firmware on the Pico? It should appear as **Pico** by Raspberry Pi. Try another USB cable, some are charge-only. |
 | A print did not save | See `gbprint.log` in the prints folder. Raw data of every session is kept in `raw/`; `node tools/render.mjs <file>` turns it into PNGs. |
+| SODAX screen stays on "waiting" | Is the bridge window open and saying "bridge mode on"? Is the Pico on firmware v0.2.0 or newer? Press A to request a screen. |
 | The web page cannot connect | Use Chrome or Edge on a desktop (Safari and Firefox have no Web Serial). Close the Mac tool first: only one program can use the Pico at a time. |
 
 ## How it works
@@ -141,10 +169,12 @@ firmware/         Pico 2 W firmware (C, Pico SDK): PIO link, printer emulator, U
   test/           host tests for the printer state machine
   firstlight/     patch used to run stacksmashing's firmware for the first wiring test
 web/              decoder library + web page (Web Serial)
-tools/            gbprint.mjs (Mac print tool), render.mjs, printcap.py, linktest.py
-rom/              Game Boy test ROMs: linktest.gb, printtest.gb (RGBDS)
+tools/            gbprint.mjs (Mac print tool), sodax-bridge.mjs + sodax.mjs (SODAX data),
+                  render.mjs, printcap.py, linktest.py
+rom/              Game Boy ROMs (RGBDS): sodax.gb, linktest.gb, printtest.gb; mkfont.py makes the font
 docs/             PROTOCOL.md, PLAN.md, LOGBOOK.md, breadboard drawing, images
-GB Printer.command   double-click launcher for the Mac print tool
+GB Printer.command    double-click launcher for the Mac print tool
+SODAX Bridge.command  double-click launcher for SODAX on the Game Boy
 ```
 
 ## Development
@@ -157,8 +187,9 @@ cmake -S firmware -B firmware/build -G Ninja && ninja -C firmware/build   # → 
 make -C firmware/test        # printer state machine (host, with sanitizers)
 cd web && npm test           # decoder
 
-# Game Boy test ROMs (RGBDS)
+# Game Boy ROMs (RGBDS)
 make -C rom
+node tools/sodax-bridge.mjs --dry   # print live SODAX screens without hardware
 ```
 
 `rom/printtest.gb` makes the Game Boy act like a printing game and shows on screen what the printer answers (`… 81 00` is correct). `rom/linktest.gb` echoes bytes for testing the link in the other direction. Details: [`firmware/README.md`](firmware/README.md).
@@ -168,7 +199,7 @@ make -C rom
 - [x] Wiring and first link test: 1,000 bytes both ways, 0 errors
 - [x] Game Boy Printer emulator: prints from a DMG saved as PNG
 - [ ] More printer games tested (compressed and multi-part prints)
-- [ ] General PC link: send live data to a Game Boy ROM
+- [x] General PC link: live SODAX market data on the Game Boy (bridge mode)
 - [ ] Online link play between two Game Boys
 - [ ] Own small PCB with USB-C and a case, so nobody has to cut a cable
 
@@ -177,6 +208,7 @@ make -C rom
 - [Pan Docs](https://gbdev.io/pandocs/): link port and printer documentation.
 - [mofosyne/arduino-gameboy-printer-emulator](https://github.com/mofosyne/arduino-gameboy-printer-emulator): the reference printer emulator. Our printer status behaviour follows it; the code is our own.
 - [stacksmashing/gb-link-firmware](https://github.com/stacksmashing/gb-link-firmware): Pico link firmware, used with a small patch for the first wiring test.
+- [SODAX](https://sodax.com): market data API and the official logo used on the splash screen (from [icon-project/sodax-sdks](https://github.com/icon-project/sodax-sdks), MIT).
 - [HerrZatacke/gb-printer-web](https://github.com/HerrZatacke/gb-printer-web) and [Raphael-Boichot/The-TinyGB-Printer](https://github.com/Raphael-Boichot/The-TinyGB-Printer): prior art for printer images.
 
 Sister project: [WiFi Game Boy Cartridge](https://github.com/hazy2go/wifi-game-boy-cartridge).

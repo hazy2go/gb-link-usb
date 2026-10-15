@@ -76,3 +76,10 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Pico pin 40 (VBUS) 4.7 V. Shifter HV first read 2.7 V: VBUS jumper not in the HV row (breadboard row mix-up), fixed: HV 4.8 V. LV ~3.3 V, LV1 ~3.3 V.
 - HV1 (and HV4) read ~2.8 V with HV at 4.8 V: module HV net unpowered, only leakage from the 3.3 V side through the MOSFET body diode (3.3 V - ~0.5 V). Cause: loose press-fit header pins not contacting the module pads. After reseating: HV1 4.8 V.
 - Lesson: press-fit headers are unreliable; solder the shifter headers before relying on it (PLAN.md already said so for permanent use).
+
+## 2026-10-15 First-light firmware on the Pico, dry run (GB not connected)
+- Flashed `gbusb.uf2` (copy to BOOTSEL drive). Enumerates as "USB to Game Boy Link Cable", VID 0xCAFE, CDC port /dev/cu.usbmodem11.
+- Dry run `tools/linktest.py`: replies arrive (USB + PIO work) but all **00**, expected FF (data line idle high). Pico pin 2 (GP1) ~0 V, shifter LV2 ~2 V, continuity pin 2 to LV2 OK. Pressing the module down: no change, so not the press-fit this time.
+- Cause: RP2350 GPIO default pull-down plus the E9 input leakage erratum (verify exact wording in the RP2350 datasheet errata) holds the node near 2 V against the shifter's 10k pull-up; reads as 0. RP2040 doesn't have this, so upstream never saw it.
+- Fix: `gpio_pull_up(PIN_SIN)` after PIO init (patch item 4). Result: replies **FF FF FF FF FF FF**. Correct for no GB.
+- For our own firmware: enable pull-ups (or disable pull-downs) on every input that goes through the BSS138 shifter.

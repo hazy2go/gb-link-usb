@@ -5,15 +5,16 @@ The Pico clocks out each byte we send and returns the byte the Game Boy sent at 
 linktest.gb answers with (previous byte it received + 1), starting with 0x42.
 Usage: python3 tools/linktest.py [/dev/cu.usbmodemXXXX]   (no extra packages needed)
 """
-import glob, os, select, sys, termios, time, tty
+import os, select, sys, termios, time, tty
+from picoport import find_port
 
 # Avoid any byte whose reply would be 0x0D: upstream CDC echo adds 0x0A after 0x0D.
 SEND = [0x01, 0x10, 0x20, 0x7F, 0xA0, 0xFE]
 EXPECT = [0x42] + [(b + 1) & 0xFF for b in SEND[:-1]]
 
-port = sys.argv[1] if len(sys.argv) > 1 else (sorted(glob.glob('/dev/cu.usbmodem*')) or [None])[0]
+port = sys.argv[1] if len(sys.argv) > 1 else find_port(0xCAFE)  # first-light firmware's USB ID
 if not port:
-    sys.exit('no /dev/cu.usbmodem* port: is the Pico plugged in and running the first-light firmware?')
+    sys.exit('first-light Pico not found: is it plugged in and running the first-light firmware?')
 fd = os.open(port, os.O_RDWR | os.O_NOCTTY)
 tty.setraw(fd)
 termios.tcflush(fd, termios.TCIOFLUSH)

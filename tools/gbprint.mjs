@@ -6,7 +6,7 @@
 // Usage: node tools/gbprint.mjs [--out <folder>] [--file <capture.bin>]
 //   --file decodes a saved capture instead of the Pico (for testing).
 import { execFileSync, spawn } from 'node:child_process';
-import { createReadStream, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
+import { createReadStream, existsSync, mkdirSync, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { parsePackets, assembleImages } from '../web/gbprinter.js';
@@ -62,8 +62,18 @@ if (file) {
   process.exit(0);
 }
 
+// Only ever open the Pico (Raspberry Pi USB vendor ID 0x2E8A), never another serial device.
+const PICO_VID = 0x2e8a;
 function findPort() {
-  return readdirSync('/dev').filter((f) => f.startsWith('cu.usbmodem')).map((f) => `/dev/${f}`)[0];
+  try {
+    const tree = execFileSync('ioreg', ['-r', '-c', 'IOUSBHostDevice', '-l', '-w0'], { encoding: 'utf8' });
+    for (const dev of tree.split(/^\+-o /m)) {
+      if (!dev.includes(`"idVendor" = ${PICO_VID}`)) continue;
+      const m = dev.match(/"IOCalloutDevice" = "([^"]+)"/);
+      if (m) return m[1];
+    }
+  } catch { /* ioreg missing: no port */ }
+  return null;
 }
 
 function connect() {

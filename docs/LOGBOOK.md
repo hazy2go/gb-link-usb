@@ -45,3 +45,10 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 
 - Pin names are as seen from the Game Boy end this plug goes into: red carries the Game Boy's SOUT (data from the GB), orange goes to the GB's SIN (data to the GB) (verify on first light; swapping in software is fine per mofosyne).
 - Shield vs blue (pin 6): **no continuity** (Hazy, multimeter). So the shield/shell is not tied to GND in this cable half; it floats. Leave it unconnected on the breadboard (insulated). Other cable half not mapped.
+
+## 2026-10-15 Parts arrived; first-light firmware builds
+- Pico 2 WH, breadboard kit, BSS138 shifters arrived.
+- stacksmashing/gb-link-firmware does **not** build unchanged on SDK 2.3.1: `tud_vendor_control_request_cb` is poisoned in current TinyUSB. Minimal patch (rename to `tud_vendor_control_xfer_cb`, act on SETUP stage only) in `firmware/firstlight/`. Builds for `pico2_w`: `gbusb.uf2`, 0 errors. So step 2 is "unchanged except one API rename".
+- Their pins (from source): GPIO0 = SCK (Pico is clock master), GPIO1 = in from GB SOUT, GPIO2 = out to GB SIN.
+- **Decision: shifter HV side powered from Pico VBUS (pin 40, 5 V from USB).** Why: our cable has no 5 V wire (pin 1 empty), and GB VCC must never go to the Pico's 3V3. LV side from Pico 3V3(OUT) (pin 36).
+- Note (verify): with the Pico on USB and the Game Boy off, the shifter's 10k pull-ups feed a little current into the GB's pins. Small (5 V / 10k = 0.5 mA per line), but turn the GB on before plugging the Pico in when possible.

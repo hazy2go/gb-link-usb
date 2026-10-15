@@ -194,3 +194,4 @@ Checked by Hazy with a multimeter, plug half we use, pins numbered looking into 
 - Checks: ERC identical to the untouched RPi design (2 off-grid warnings, U2 power-output pair, 2 regulator pins; all in the original). Netlist check: GPIO0-3, GPIO25, USB D+/D-, LINK_SCK/SO/SI, SWCLK/SWD each connect exactly the intended pins; VBUS reaches U2 and all VCCB pins.
 - Parts swapped for basic/in-stock: green LED C72043 out of stock -> KT-0805G C2297; 47R (extended) -> 33R C25105.
 - Next: PCB layout (keep the RPi core layout, add our parts, shrink the board).
+- Correction: the first Link sheet reused reference numbers of the RPi core (C10-C15, R10/R11); KiCad ERC did not flag it. Renumbered all Link parts to 101+ (J101 USB-C, J102 cable pads, U101 USBLC6, U102-U104 translators, U105 ESD, ...). Netlist now: 67 components, no duplicates (checked), nets re-verified. Duplicate-reference check added to the checks list.

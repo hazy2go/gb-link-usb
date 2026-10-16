@@ -256,3 +256,6 @@ A fresh agent reviewed schematic, board, firmware pins and fab files against the
 9. Docs: link.json "why" texts said GP14/GP15/U11-13; fixed (nets were right).
 10. Firmware: rev A build now declares the 16 MB flash (PICO_FLASH_SIZE_BYTES); GBC fast mode vs the 1.6 us glitch filter noted for later.
 Rebuild: ERC = RPi baseline, DRC 0 errors / 0 warnings / 0 unconnected, parity 0. Route audit: one detour on B_SI (19 mm for a 4 mm hop, behind 1k at 8 kHz: harmless; a retry routed worse, kept). BOM 27 lines / 57 parts, CPL all matched, heights PASS, case fit PASS, Gerbers re-rendered.
+
+## 2026-10-16 Order quantity: 2 boards
+- Hazy: order only 2 assembled boards. `make_fab.sh` now checks the BOM for 2 boards. All parts pass except L1: JLC stock read 4 again (9 an hour earlier; three reads now all 4). 2 boards use 2; our check adds a strict +5 attrition (4 < 7), JLC's own attrition shows at order time. ORDER.md and the CLAUDE.md checklist updated. PCB quantity stays JLC's minimum of 5, assembly 2.

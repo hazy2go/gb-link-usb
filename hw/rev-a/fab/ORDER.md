@@ -3,7 +3,7 @@
 **Not ordered. Ordering is Hazy's job.** Hold points first.
 
 ## Hold points
-1. **L1 inductor stock.** Raspberry Pi asks for exactly the Abracon AOTA-B201610S3R3-101-T (polarity-marked 3.3 uH; RP2350 datasheet: "The inductor must be marked for polarity ... we recommend the AOTA-B201610S3R3-101-T"; Hardware design with RP2350: the regulator misbehaves with the inductor the wrong way round). JLC has **9** (C42411119, 2026-10-16; was 4 earlier the same day), 5 boards need 10 with attrition. Options: order 4 boards now; JLC global sourcing / parts pre-order; or wait for stock. No substitute picked on purpose: unmarked 2016 inductors sit randomly oriented on the reel.
+1. **L1 inductor stock.** Raspberry Pi asks for exactly the Abracon AOTA-B201610S3R3-101-T (polarity-marked 3.3 uH; RP2350 datasheet: "The inductor must be marked for polarity ... we recommend the AOTA-B201610S3R3-101-T"; Hardware design with RP2350: the regulator misbehaves with the inductor the wrong way round). **Hazy orders 2 boards (2026-10-16).** JLC stock moves: 4, then 9, then 4 again the same day (C42411119). 2 boards use 2 inductors; JLC adds its own attrition in the BOM step, which must leave the total <= stock (our bom_check uses a stricter +5 rule and so reports 4 < 7). If the stock is short at order time: JLC global sourcing / parts pre-order; or wait for stock. No substitute picked on purpose: unmarked 2016 inductors sit randomly oriented on the reel.
 2. **L1 orientation in the preview.** JLC's footprint has its polarity marker (EasyEDA polarity layer) at pad 1, the same side as Raspberry Pi's silk dot, so the CPL keeps pad 1 on pad 1. JLC's footprint also has a silk dot at pad 2, which contradicts that (verify): in the placement preview the part's dot must sit on the board's silk dot, on **pad 1 (+1V1, the west pad, x = 101.3)**. Add an order note: "L1 polarity dot to pad 1 / silk dot". (The independent review saw the same: JLC's silk and document dots are at pad 2, only a tiny polarity-layer marker at pad 1.)
 3. **Cable.** Not part of the order: a link cable cut in half, soldered to the five pads (SH, SCK, GND, SO, SI; colours in LOGBOOK 2026-10-15). Wire gauge vs the 0.5 mm holes (verify on the cable).
 
@@ -24,7 +24,7 @@ Regenerate everything: `hw/tools/make_fab.sh` (after the board pipeline and a cl
 |---|---|---|
 | Layers | 2 | |
 | Size | 34.2 x 63.7 mm | from the board outline |
-| Qty | 5 | |
+| Qty | 5 (JLC's minimum PCB quantity; only 2 get assembled) | |
 | Thickness | 1.6 mm | default; nothing slots into anything |
 | Min via hole / diameter | 0.25 / 0.6 mm | RPi's core layout uses 0.25 mm vias, also inside the RP2350 exposed pad (verify JLC's 2-layer minimum at upload) |
 | Min track / clearance | 0.15 / 0.15 mm | |
@@ -36,7 +36,7 @@ Regenerate everything: `hw/tools/make_fab.sh` (after the board pipeline and a cl
 |---|---|
 | PCBA type | Standard or Economic (verify which JLC offers for QFN-60 0.4 mm) |
 | Side | Top |
-| Qty | 5 (or fewer, see hold point 1) |
+| Qty | **2** |
 | Confirm parts placement | **Yes** |
 
 Also checked before this order: routing tidy-up, part heights, link-line simulation (`sim/link`), independent Gerber render (`hw/rev-a/img/gerber_render.png`). See `hw/README.md`.

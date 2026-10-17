@@ -266,3 +266,9 @@ Rebuild: ERC = RPi baseline, DRC 0 errors / 0 warnings / 0 unconnected, parity 0
 - New PIO program `sck_period` (gb_link.pio, second state machine on pio0, full system clock): times SCK rising edge to rising edge; interval = 2n + 6 cycles exactly by construction. Core 1 keeps intervals within +-10% of the nominal 8192 Hz period (in-byte bits only; a glitch splits an interval into two short ones, both dropped) and reports every 8192 intervals: ppb = (nominal * n / sum - 1) * 1e9, i.e. Game Boy link clock vs nominal, measured against the Pico's crystal (constant offset per Pico).
 - Bridge mode 2 (`ESC GBBRIDG2`): like bridge mode, plus a side channel to the PC: GB byte $FD is sent as $FD $00; $FD $01 + int32 ppb + uint32 n is a heartbeat report. Bridge mode 1 (SODAX) unchanged.
 - Builds clean for breadboard and rev A. Not tested on hardware yet (verify): check with the DMG, and calibrate the bridge by timing a known clock (e.g. a PWM 8192 Hz from another Pico pin jumpered to SCK) which should read ~0 ppm plus the Pico's own crystal error.
+
+## 2026-10-17: heartbeat calibration
+
+- First DMG readings: -57.6 ppm cold, -56.1 ppm warm (Slow Horizons logbook). Worry: one cycle of error in the 2n+6 accounting would shift readings by 54.6 ppm, close to what we saw.
+- Calibration mode `ESC GBCALIB2` (breadboard build only, PIN_CAL = GP3, nothing wired): PIO `cal_square` makes an exact 8192 Hz square wave from clk_sys (20 cycles per period at a fractional divider; clk/8192/20 = 915 + 135/256 at 150 MHz, exactly representable), and the heartbeat timer measures that pin instead of SCK. Result: every full report **0.00 ppm** (the first report mixes SCK and the reference and is discarded). So the measurement chain is exact; the DMG offset (-56 ppm) is real, relative to this Pico's crystal (its own error is unknown but constant).
+- `node scripts/calibrate.mjs` in gb-seed-lab/server runs it.

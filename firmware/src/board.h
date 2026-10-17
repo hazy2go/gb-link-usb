@@ -16,4 +16,5 @@
 #define PIN_IN   1   // from GB SOUT
 #define PIN_OUT  2   // to GB SIN
 #define LED_CYW43 1  // the Pico 2 W's LED hangs off the wireless chip
+#define PIN_CAL  3   // unused: heartbeat calibration square wave (internal, nothing needs to be wired)
 #endif

@@ -93,3 +93,24 @@ static inline void sck_period_init(PIO pio, uint sm, uint offset, uint pin_sck) 
     pio_sm_set_enabled(pio, sm, true);
 }
 %}
+
+; Calibration: an exact 8192 Hz square wave from the Pico's own clock (20 cycles per period at a
+; fractional divider of clk_sys / 8192 / 20, e.g. 915 + 135/256 at 150 MHz). The heartbeat timer
+; measures it instead of the Game Boy; a correct measurement chain reads ~0 ppm.
+.program cal_square
+.wrap_target
+    set pins, 1 [9]
+    set pins, 0 [9]
+.wrap
+
+% c-sdk {
+static inline void cal_square_init(PIO pio, uint sm, uint offset, uint pin) {
+    pio_sm_config c = cal_square_program_get_default_config(offset);
+    sm_config_set_set_pins(&c, pin, 1);
+    sm_config_set_clkdiv(&c, (float)((double)clock_get_hz(clk_sys) / 8192.0 / 20.0));
+    pio_gpio_init(pio, pin);
+    pio_sm_set_consecutive_pindirs(pio, sm, pin, 1, true);
+    pio_sm_init(pio, sm, offset, &c);
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}

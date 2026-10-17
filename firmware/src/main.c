@@ -38,11 +38,16 @@
 // The PC sends this to switch to bridge mode.
 static const char BRIDGE_MAGIC[] = "\x1bGBBRIDGE";
 static const char BRIDGE2_MAGIC[] = "\x1bGBBRIDG2";
+static const char CALIB_MAGIC[] = "\x1bGBCALIB2";   // bridge mode 2, heartbeat measures PIN_CAL instead of SCK
 
 // Heartbeat (see sck_period in gb_link.pio)
 #define HB_WINDOW 8192                  // intervals per report, about 1.2 s of continuous link traffic
 typedef struct { int32_t ppb; uint32_t n; } heartbeat_t;
-static uint hb_sm;
+static uint hb_sm, hb_offset;
+#ifdef PIN_CAL
+static uint cal_sm = 99;
+#endif
+static void hb_measure(uint pin);
 static queue_t hb_queue;                // reports, core 1 -> core 0
 static volatile bool bridge2;           // bridge mode with the escaped side channel
 
@@ -124,6 +129,14 @@ static void core1_main(void) {
     }
 }
 
+// point the heartbeat timer at another pin (SCK normally, PIN_CAL for calibration)
+static void hb_measure(uint pin) {
+    pio_sm_set_enabled(pio, hb_sm, false);
+    pio_sm_clear_fifos(pio, hb_sm);
+    pio_sm_restart(pio, hb_sm);
+    sck_period_init(pio, hb_sm, hb_offset, pin);
+}
+
 int main(void) {
     stdio_init_all();
     stdio_set_translate_crlf(&stdio_usb, false);   // binary stream
@@ -140,7 +153,8 @@ int main(void) {
     offset = pio_add_program(pio, &gb_link_slave_program);
     gb_link_slave_init(pio, sm, offset, PIN_SCK, PIN_IN, PIN_OUT);
     hb_sm = pio_claim_unused_sm(pio, true);
-    sck_period_init(pio, hb_sm, pio_add_program(pio, &sck_period_program), PIN_SCK);
+    hb_offset = pio_add_program(pio, &sck_period_program);
+    sck_period_init(pio, hb_sm, hb_offset, PIN_SCK);
     queue_init(&hb_queue, sizeof(heartbeat_t), 16);
 
     queue_init(&rx_queue, sizeof(uint8_t), 16384);
@@ -149,7 +163,7 @@ int main(void) {
 
     uint32_t seen = 0;
     absolute_time_t led_off = nil_time;
-    size_t magic_pos = 0, magic2_pos = 0;
+    size_t magic_pos = 0, magic2_pos = 0, magic3_pos = 0;
     for (;;) {
         uint8_t b;
         while (queue_try_remove(&rx_queue, &b)) {
@@ -174,11 +188,20 @@ int main(void) {
                 magic_pos = (c == BRIDGE_MAGIC[magic_pos]) ? magic_pos + 1 : (c == BRIDGE_MAGIC[0]);
                 magic2_pos = (c == BRIDGE2_MAGIC[magic2_pos]) ? magic2_pos + 1 : (c == BRIDGE2_MAGIC[0]);
                 if (magic_pos == sizeof BRIDGE_MAGIC - 1) { bridge = true; bridge2 = false; magic_pos = magic2_pos = 0; }
-                if (magic2_pos == sizeof BRIDGE2_MAGIC - 1) { bridge = true; bridge2 = true; magic_pos = magic2_pos = 0; }
+                magic3_pos = (c == CALIB_MAGIC[magic3_pos]) ? magic3_pos + 1 : (c == CALIB_MAGIC[0]);
+                if (magic2_pos == sizeof BRIDGE2_MAGIC - 1) { bridge = true; bridge2 = true; magic_pos = magic2_pos = magic3_pos = 0; }
+#ifdef PIN_CAL
+                if (magic3_pos == sizeof CALIB_MAGIC - 1) {
+                    bridge = true; bridge2 = true; magic_pos = magic2_pos = magic3_pos = 0;
+                    if (cal_sm == 99) { cal_sm = pio_claim_unused_sm(pio, true); cal_square_init(pio, cal_sm, pio_add_program(pio, &cal_square_program), PIN_CAL); }
+                    hb_measure(PIN_CAL);
+                }
+#endif
             }
         }
         if (bridge && !stdio_usb_connected()) {        // PC closed the port: back to printer
             bridge = false; bridge2 = false;
+            hb_measure(PIN_SCK);   // leave calibration
             while (queue_try_remove(&tx_queue, &b)) {}
         }
         if (led) {

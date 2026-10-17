@@ -28,7 +28,7 @@
 
 // A gap this long on the link ends any half-received packet and re-aligns the
 // PIO to a byte boundary (the GB pauses far less than this inside a packet).
-#define IDLE_RESYNC_US 200000
+#define IDLE_RESYNC_US 100000   // also used while idle: the ROM pauses polling ~0.3 s every ~2 s for this
 
 // Debug: answer this byte to everything instead of the printer replies (0 = off).
 #ifndef DEBUG_FIXED_REPLY
@@ -50,6 +50,7 @@ static uint cal_sm = 99;
 static void hb_measure(uint pin);
 static queue_t hb_queue;                // reports, core 1 -> core 0
 static volatile bool bridge2;           // bridge mode with the escaped side channel
+static volatile bool hb_reset;          // core 0 changed the measured pin: core 1 drops its running sums
 
 static PIO pio;
 static uint sm, offset;
@@ -99,6 +100,7 @@ static void core1_main(void) {
     uint32_t hb_n = 0;
 
     for (;;) {
+        if (hb_reset) { hb_reset = false; hb_sum = 0; hb_n = 0; }
         while (!pio_sm_is_rx_fifo_empty(pio, hb_sm)) {
             uint32_t cyc = 2 * pio_sm_get(pio, hb_sm) + 6;
             if (cyc < lo || cyc > hi) continue;          // between bytes, or split by a glitch
@@ -122,6 +124,7 @@ static void core1_main(void) {
             idle = false;
         } else if (!idle && absolute_time_diff_us(last, get_absolute_time()) > IDLE_RESYNC_US
                    && gpio_get(PIN_SCK)) {
+            // a quiet link is a byte boundary: re-align the PIO (also recovers a Pico that started mid-byte)
             printer_abort_packet(&printer);
             link_start();
             idle = true;
@@ -135,6 +138,7 @@ static void hb_measure(uint pin) {
     pio_sm_clear_fifos(pio, hb_sm);
     pio_sm_restart(pio, hb_sm);
     sck_period_init(pio, hb_sm, hb_offset, pin);
+    hb_reset = true;
 }
 
 int main(void) {
@@ -183,13 +187,16 @@ int main(void) {
         while ((c = getchar_timeout_us(0)) >= 0) {
             if (bridge) {
                 uint8_t d = (uint8_t)c;
-                queue_add_blocking(&tx_queue, &d);
+                queue_try_add(&tx_queue, &d);   // never block: with the Game Boy off nothing drains this queue
             } else {
                 magic_pos = (c == BRIDGE_MAGIC[magic_pos]) ? magic_pos + 1 : (c == BRIDGE_MAGIC[0]);
                 magic2_pos = (c == BRIDGE2_MAGIC[magic2_pos]) ? magic2_pos + 1 : (c == BRIDGE2_MAGIC[0]);
                 if (magic_pos == sizeof BRIDGE_MAGIC - 1) { bridge = true; bridge2 = false; magic_pos = magic2_pos = 0; }
                 magic3_pos = (c == CALIB_MAGIC[magic3_pos]) ? magic3_pos + 1 : (c == CALIB_MAGIC[0]);
-                if (magic2_pos == sizeof BRIDGE2_MAGIC - 1) { bridge = true; bridge2 = true; magic_pos = magic2_pos = magic3_pos = 0; }
+                if (magic2_pos == sizeof BRIDGE2_MAGIC - 1) {
+                    while (queue_try_remove(&rx_queue, &b)) {}   // printer-mode leftovers would go out unescaped
+                    bridge = true; bridge2 = true; magic_pos = magic2_pos = magic3_pos = 0;
+                }
 #ifdef PIN_CAL
                 if (magic3_pos == sizeof CALIB_MAGIC - 1) {
                     bridge = true; bridge2 = true; magic_pos = magic2_pos = magic3_pos = 0;

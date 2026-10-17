@@ -61,3 +61,35 @@ static inline void gb_link_slave_init(PIO pio, uint sm, uint offset, uint pin_sc
     pio_sm_init(pio, sm, offset, &c);
 }
 %}
+
+; Heartbeat: times SCK from rising edge to rising edge at the full system clock, to measure the
+; Game Boy's crystal against the Pico's. Pushes n per interval; the interval is exactly 2n + 6
+; cycles (two cycles per loop pass, six for the edge handling below). No glitch filter: a glitch
+; splits an interval into two short ones, and the CPU keeps only intervals near the nominal bit time.
+; jmp pin = SCK
+
+.program sck_period
+.wrap_target
+    mov x, ~null        ; x = 0xFFFFFFFF
+high:
+    jmp pin hcount      ; SCK high: count
+    jmp low             ; SCK fell
+hcount:
+    jmp x-- high
+low:
+    jmp pin rise        ; SCK rose: interval done
+    jmp x-- low
+rise:
+    mov isr, ~x         ; = number of decrements
+    push noblock
+.wrap
+
+% c-sdk {
+static inline void sck_period_init(PIO pio, uint sm, uint offset, uint pin_sck) {
+    pio_sm_config c = sck_period_program_get_default_config(offset);
+    sm_config_set_jmp_pin(&c, pin_sck);
+    sm_config_set_clkdiv(&c, 1.0f);   // full system clock
+    pio_sm_init(pio, sm, offset, &c);
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}

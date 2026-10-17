@@ -259,3 +259,10 @@ Rebuild: ERC = RPi baseline, DRC 0 errors / 0 warnings / 0 unconnected, parity 0
 
 ## 2026-10-16 Order quantity: 2 boards
 - Hazy: order only 2 assembled boards. `make_fab.sh` now checks the BOM for 2 boards. All parts pass except L1: JLC stock read 4 again (9 an hour earlier; three reads now all 4). 2 boards use 2; our check adds a strict +5 attrition (4 < 7), JLC's own attrition shows at order time. ORDER.md and the CLAUDE.md checklist updated. PCB quantity stays JLC's minimum of 5, assembly 2.
+
+## 2026-10-17: heartbeat measurement + bridge mode 2 (for Slow Horizons)
+
+- Goal: measure each Game Boy's crystal offset live (an emulator runs exactly nominal), as evidence of real hardware for the Slow Horizons mint.
+- New PIO program `sck_period` (gb_link.pio, second state machine on pio0, full system clock): times SCK rising edge to rising edge; interval = 2n + 6 cycles exactly by construction. Core 1 keeps intervals within +-10% of the nominal 8192 Hz period (in-byte bits only; a glitch splits an interval into two short ones, both dropped) and reports every 8192 intervals: ppb = (nominal * n / sum - 1) * 1e9, i.e. Game Boy link clock vs nominal, measured against the Pico's crystal (constant offset per Pico).
+- Bridge mode 2 (`ESC GBBRIDG2`): like bridge mode, plus a side channel to the PC: GB byte $FD is sent as $FD $00; $FD $01 + int32 ppb + uint32 n is a heartbeat report. Bridge mode 1 (SODAX) unchanged.
+- Builds clean for breadboard and rev A. Not tested on hardware yet (verify): check with the DMG, and calibrate the bridge by timing a known clock (e.g. a PWM 8192 Hz from another Pico pin jumpered to SCK) which should read ~0 ppm plus the Pico's own crystal error.

@@ -109,7 +109,7 @@ import os
 here = os.path.dirname(os.path.abspath(__file__))
 sh = [int(c) for c in open(os.path.join(here, 'sodax-logo-shades.txt')).read().strip()]
 assert len(sh) == 128 * 48
-out.append('; Logo: official SODAX lockup (icon-project/sodax-sdks docs/sodax-lockup-light.svg, MIT), 128x48, 96 tiles')
+out.append('; Logo: official SODAX lockup (gosodax/sodax-sdks docs/sodax-lockup-light.svg, MIT), 128x48, 96 tiles')
 out.append('Logo:')
 for ty in range(6):
     for tx in range(16):

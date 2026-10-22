@@ -272,3 +272,6 @@ Rebuild: ERC = RPi baseline, DRC 0 errors / 0 warnings / 0 unconnected, parity 0
 - First DMG readings: -57.6 ppm cold, -56.1 ppm warm (Slow Horizons logbook). Worry: one cycle of error in the 2n+6 accounting would shift readings by 54.6 ppm, close to what we saw.
 - Calibration mode `ESC GBCALIB2` (breadboard build only, PIN_CAL = GP3, nothing wired): PIO `cal_square` makes an exact 8192 Hz square wave from clk_sys (20 cycles per period at a fractional divider; clk/8192/20 = 915 + 135/256 at 150 MHz, exactly representable), and the heartbeat timer measures that pin instead of SCK. Result: every full report **0.00 ppm** (the first report mixes SCK and the reference and is discarded). So the measurement chain is exact; the DMG offset (-56 ppm) is real, relative to this Pico's crystal (its own error is unknown but constant).
 - `node scripts/calibrate.mjs` in gb-seed-lab/server runs it.
+
+## 2026-10-22: SODAX logo source link
+- The SODAX SDK repo moved from icon-project/sodax-sdks to gosodax/sodax-sdks. Updated the logo credit in README.md, docs/SODAX.md and the rom/font.inc comment. The 2026-10 entry above keeps the old name as written then. Comment-only change in font.inc: ROM bytes unchanged.

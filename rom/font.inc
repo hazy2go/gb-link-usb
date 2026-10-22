@@ -82,7 +82,7 @@ BigFont:
     db $00,$30,$30,$7C,$7C,$B0,$B0,$78,$78,$2C,$2C,$F8,$F8,$30,$30,$00  ; '$'
     db $00,$00,$00,$00,$00,$00,$00,$FC,$FC,$00,$00,$00,$00,$00,$00,$00  ; '-'
 BigFontEnd:
-; Logo: official SODAX lockup (icon-project/sodax-sdks docs/sodax-lockup-light.svg, MIT), 128x48, 96 tiles
+; Logo: official SODAX lockup (gosodax/sodax-sdks docs/sodax-lockup-light.svg, MIT), 128x48, 96 tiles
 Logo:
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00

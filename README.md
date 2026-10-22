@@ -208,7 +208,7 @@ node tools/sodax-bridge.mjs --dry   # print live SODAX screens without hardware
 - [Pan Docs](https://gbdev.io/pandocs/): link port and printer documentation.
 - [mofosyne/arduino-gameboy-printer-emulator](https://github.com/mofosyne/arduino-gameboy-printer-emulator): the reference printer emulator. Our printer status behaviour follows it; the code is our own.
 - [stacksmashing/gb-link-firmware](https://github.com/stacksmashing/gb-link-firmware): Pico link firmware, used with a small patch for the first wiring test.
-- [SODAX](https://sodax.com): market data API and the official logo used on the splash screen (from [icon-project/sodax-sdks](https://github.com/icon-project/sodax-sdks), MIT).
+- [SODAX](https://sodax.com): market data API and the official logo used on the splash screen (from [gosodax/sodax-sdks](https://github.com/gosodax/sodax-sdks), MIT).
 - [HerrZatacke/gb-printer-web](https://github.com/HerrZatacke/gb-printer-web) and [Raphael-Boichot/The-TinyGB-Printer](https://github.com/Raphael-Boichot/The-TinyGB-Printer): prior art for printer images.
 
 Sister project: [WiFi Game Boy Cartridge](https://github.com/hazy2go/wifi-game-boy-cartridge).

@@ -44,4 +44,4 @@ rows 2-3   price, bold 8x16 digits       row 11     low / high
 row 4      change ▲/▼ + range tabs       rows 13-15 solver quote
 row 16     coin page dots                row 17     controls (inverted)
 ```
-Logo: the official SODAX lockup from `icon-project/sodax-sdks` (MIT), converted to 4 shades.
+Logo: the official SODAX lockup from `gosodax/sodax-sdks` (MIT), converted to 4 shades.

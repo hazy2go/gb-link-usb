@@ -275,3 +275,8 @@ Rebuild: ERC = RPi baseline, DRC 0 errors / 0 warnings / 0 unconnected, parity 0
 
 ## 2026-10-22: SODAX logo source link
 - The SODAX SDK repo moved from icon-project/sodax-sdks to gosodax/sodax-sdks. Updated the logo credit in README.md, docs/SODAX.md and the rom/font.inc comment. The 2026-10 entry above keeps the old name as written then. Comment-only change in font.inc: ROM bytes unchanged.
+
+## 2026-10-26: history rewrite, personal email removed
+- Found while preparing gb-seed-lab for release: 10 commits here had a personal email as author/committer. Hazy approved the same fix as gb-seed-lab: git-filter-repo 2.47.0 on a mirror clone, --mailmap to the GitHub no-reply address and --replace-text for the owner's addresses; verified 0 matches in 116 commits and both tags, force-pushed main, v0.1.0 and v0.2.0. No pull requests existed. Releases v0.1.0 and v0.2.0 still list all their assets (checked).
+- Backup of the old history: ~/Projects/gameboy/gb-link-usb-backup-20261026-2042.bundle (local only, contains the old email).
+- Other clones must re-clone or `git fetch && git reset --hard origin/main`; never push from an old clone.
